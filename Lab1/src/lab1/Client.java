@@ -18,6 +18,13 @@ public class Client {
     private String DNI;
     private ArrayList<Date> lastService;
     private ArrayList<String> opinion;
+    
+    public Client(String name, String DNI) {
+        this.name=name;
+        this.DNI=DNI;
+        this.lastService = new ArrayList<>();
+        this.opinion=new ArrayList<>();
+    }
 
     public Client(String name, String DNI,String opinion) {
         this.name=name;
@@ -41,7 +48,15 @@ public class Client {
         this.DNI=DNI;
     }
     
-    public boolean equals(String name, String DNI){
-        return this.name.equals(name) && DNI.equals(DNI);
+    public String getName(){
+        return name;
+    }
+    
+    public String getDNI(){
+        return DNI;
+    }
+    
+    public boolean equals(Client c){
+        return this.name.equals(c.getName()) && DNI.equals(c.getDNI());
     }
 }

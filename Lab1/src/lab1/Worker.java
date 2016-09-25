@@ -10,12 +10,20 @@ package lab1;
  *
  * @author abergaye8.alumnes
  */
-public abstract class Worker {
+public class Worker {
     private String name;
     private int age;
     private String address;
     private String city;
     private float wage;
+    
+    public Worker(String name){
+        this.name=name;
+        this.age=-1;
+        this.address="";
+        this.city="";
+        this.wage=-1;
+    }
     
     public Worker(String name,int age,String address,String city,float wage){
         this.name=name;
@@ -27,6 +35,10 @@ public abstract class Worker {
     
     public void setName(String name){
         this.name=name;
+    }
+    
+    public String getName(){
+        return name;
     }
     
     public void setAge(int age){
@@ -45,5 +57,7 @@ public abstract class Worker {
         this.wage=wage;
     }
     
-    public abstract void work();
+    public boolean equals(Worker w){
+        return this.name.equals(w.getName());
+    }
 }

@@ -20,11 +20,6 @@ public class Minor extends Worker{
     public void setTutor(String tutor){
         this.tutor=tutor;
     }
-
-    @Override
-    public void work() {
-        
-    }
 }
 
 

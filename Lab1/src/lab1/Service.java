@@ -7,11 +7,14 @@ package lab1;
 
 /**
  *
- * @author abergaye8.alumnes
+ * @author EVA-00
  */
-public class Adult extends Worker{
-    public Adult(String name,int age,String address,String city,float wage){
-        super(name, age, address, city, wage);
-    }   
+public class Service {
+    Worker w;
+    Client c;
     
+    public Service(Worker w, Client c){
+        this.w=w;
+        this.c=c;
+    }
 }
