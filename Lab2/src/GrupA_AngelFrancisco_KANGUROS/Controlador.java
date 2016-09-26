@@ -20,6 +20,7 @@ public class Controlador {
     public void addWorker(String name, int age, String address, String city, float wage) {
         if (data.isInWorker(name) == -1) {
             data.addWorker(name, age, address, city, wage);
+            data.printMostRequested("Worker");
         } else {
             System.out.println("Already exists");
         }
@@ -28,6 +29,7 @@ public class Controlador {
     public void addClient(String name, String DNI, String opinion, int birthday) {
         if (data.isInClient(name, DNI) == -1 && birthday <= 12 && birthday >= 1) {
             data.addClient(name, DNI, opinion, birthday);
+            data.printMostRequested("Client");
         } else {
             System.out.println("Already exists");
         }

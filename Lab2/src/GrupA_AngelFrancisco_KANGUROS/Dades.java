@@ -152,8 +152,8 @@ public class Dades {
                     max = w.getServices();
                 }
             }
-            max = -1;
             System.out.println(remove.getName() + ": " + max);
+            max = -1;
             temp.remove(remove);
         }
     }
@@ -169,8 +169,8 @@ public class Dades {
                     max = c.getServices();
                 }
             }
-            max = -1;
             System.out.println(remove.getName() + ": " + max);
+            max=-1;
             temp.remove(remove);
         }
     }
