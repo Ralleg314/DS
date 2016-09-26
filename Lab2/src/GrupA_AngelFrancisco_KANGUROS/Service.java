@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lab1;
+package GrupA_AngelFrancisco_KANGUROS;
 
 import java.util.Date;
 
@@ -12,17 +12,18 @@ import java.util.Date;
  * @author EVA-00
  */
 public class Service {
+
     Worker w;
     Client c;
     Date d;
-    
-    public Service(Worker w, Client c){
-        this.w=w;
-        this.c=c;
-        this.d=new Date();
+
+    public Service(Worker w, Client c) {
+        this.w = w;
+        this.c = c;
+        this.d = new Date();
     }
-    
-    public Date getDate(){
+
+    public Date getDate() {
         return d;
     }
 }
