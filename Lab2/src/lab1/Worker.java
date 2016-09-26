@@ -16,6 +16,7 @@ public class Worker {
     private String address;
     private String city;
     private float wage;
+    private int services;
     
     public Worker(String name){
         this.name=name;
@@ -23,6 +24,7 @@ public class Worker {
         this.address="";
         this.city="";
         this.wage=-1;
+        services=-1;
     }
     
     public Worker(String name,int age,String address,String city,float wage){
@@ -31,6 +33,7 @@ public class Worker {
         this.address=address;
         this.city=city;
         this.wage=wage;
+        services=0;
     }
     
     public void setName(String name){
@@ -57,7 +60,23 @@ public class Worker {
         this.wage=wage;
     }
     
+    public float getWage(){
+        return wage;
+    }
+    
+    public int getServices(){
+        return services;
+    }
+    
     public boolean equals(Worker w){
         return this.name.equals(w.getName());
     }
+    
+    public void newService(){
+        services++;
+    }
+    
+    public float work(float hour){
+        return 0;
+    };
 }

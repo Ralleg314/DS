@@ -30,6 +30,7 @@ public class Lab1 {
         String DNI;
         String opinion;
         String type;
+        int birthday;
         Scanner sc=new Scanner(System.in);
            
         int test;
@@ -87,7 +88,9 @@ public class Lab1 {
                             DNI=sc.next();
                             System.out.println("Opinion:");
                             opinion=sc.next();
-                            cont.addClient(name,DNI,opinion);
+                            System.out.println("Birthday:");
+                            birthday=sc.nextInt();
+                            cont.addClient(name,DNI,opinion,birthday);
                             break;
                         case 2:
                             System.out.println("Name:");

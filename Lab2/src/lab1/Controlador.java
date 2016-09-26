@@ -19,8 +19,8 @@ public class Controlador {
         else{System.out.println("Already exists");}
     }
     
-    public void addClient(String name, String DNI, String opinion){
-        if(data.isInClient(name,DNI)==-1)data.addClient(name, DNI,opinion);
+    public void addClient(String name, String DNI, String opinion, int birthday){
+        if(data.isInClient(name,DNI)==-1 && birthday<=12 && birthday>=1)data.addClient(name, DNI,opinion,birthday);
         else{System.out.println("Already exists");}
     }
     

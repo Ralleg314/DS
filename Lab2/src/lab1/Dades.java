@@ -7,7 +7,6 @@ package lab1;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import javafx.util.Pair;
 
 /**
  *
@@ -20,8 +19,10 @@ public class Dades {
     Scanner sc=new Scanner(System.in);
     
     public void addWorker(String name,int age,String address,String city,float wage){
-        if(age<18){
-            System.out.println("Tutor:"); 
+        if(age<16){
+            System.out.println("Too young");
+        }else if(age<18){
+            System.out.println("Tutor:");
             String tutor=sc.next();
             workers.add(new Minor(name,age,address,city,wage,tutor));
         }else{
@@ -29,8 +30,8 @@ public class Dades {
         }
     }
     
-    public void addClient(String name, String DNI, String opinion){
-        clients.add(new Client(name,DNI,opinion));
+    public void addClient(String name, String DNI, String opinion,int birthday){
+        clients.add(new Client(name,DNI,opinion,birthday));
     }
     
     public void updateWorker(int pos, String type){
@@ -84,6 +85,19 @@ public class Dades {
     }
     
     public void newService(int posw, int posc){
+        float hour;
+        if(workers.get(posw) instanceof Minor){
+            do{
+                System.out.println("Hours of work: (1-4)");
+                hour=sc.nextFloat();
+            }while(hour<0 || hour>4);
+        }else{
+            do{
+                System.out.println("Hours of work: (1-8)");
+                hour=sc.nextFloat();
+            }while(hour<0 || hour>8);
+        }
+        workers.get(posw).newService();
         services.add(new Service(workers.get(posw),clients.get(posc)));
     }
     
@@ -107,5 +121,50 @@ public class Dades {
             i++;
         }
         return -1;
+    }
+    
+    public void printMostRequested(String type){
+        switch(type){
+            case "Worker":
+                if(!workers.isEmpty())printWorker();
+                break;
+            case "Client":
+                if(!clients.isEmpty())printClient();
+                break;
+        }
+    }
+    
+    private void printWorker(){
+        ArrayList<Worker> temp=new ArrayList<> (workers);
+        int max=-1;
+        Worker remove=new Worker("temp");
+        while(!temp.isEmpty()){
+            for(Worker w:temp){
+                if(w.getServices()>max){
+                    remove=w;
+                    max=w.getServices();
+                }
+            }
+            max=-1;
+            System.out.println(remove.getName()+": "+max);
+            temp.remove(remove);
+        }
+    }
+    
+    private void printClient(){
+        ArrayList<Client> temp=new ArrayList<> (clients);
+        int max=-1;
+        Client remove=new Client("temp","temp");
+        while(!temp.isEmpty()){
+            for(Client c:temp){
+                if(c.getServices()>max){
+                    remove=c;
+                    max=c.getServices();
+                }
+            }
+            max=-1;
+            System.out.println(remove.getName()+": "+max);
+            temp.remove(remove);
+        }
     }
 }

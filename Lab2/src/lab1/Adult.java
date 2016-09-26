@@ -12,6 +12,11 @@ package lab1;
 public class Adult extends Worker{
     public Adult(String name,int age,String address,String city,float wage){
         super(name, age, address, city, wage);
-    }   
+    }
+    
+    @Override
+    public float work(float hour){
+        return this.getWage()*hour;
+    }
     
 }

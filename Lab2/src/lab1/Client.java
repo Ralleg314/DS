@@ -18,26 +18,32 @@ public class Client {
     private String DNI;
     private ArrayList<Date> lastService;
     private ArrayList<String> opinion;
+    private int birthday;
+    private int services;
     
     public Client(String name, String DNI) {
         this.name=name;
         this.DNI=DNI;
         this.lastService = new ArrayList<>();
         this.opinion=new ArrayList<>();
+        services=-1;
     }
 
-    public Client(String name, String DNI,String opinion) {
+    public Client(String name, String DNI,String opinion,int birthday) {
         this.name=name;
         this.DNI=DNI;
         this.lastService = new ArrayList<>();
         this.lastService.add(new Date());
         this.opinion=new ArrayList<>();
         this.opinion.add(opinion);
+        this.birthday=birthday;
+        services=1;
     }
 
     public void newService(String opinion){
         this.lastService.add(new Date());
         this.opinion.add(opinion);
+        services++;
     }
     
     public void setName(String name){
@@ -54,6 +60,14 @@ public class Client {
     
     public String getDNI(){
         return DNI;
+    }
+    
+    public int getBirthday(){
+        return birthday;
+    }
+    
+    public int getServices(){
+        return services;
     }
     
     public boolean equals(Client c){
