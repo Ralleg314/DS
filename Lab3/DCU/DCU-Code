@@ -1,0 +1,45 @@
+
+### Codigo de PlantText.com ###
+
+
+@startuml
+
+left to right direction
+title DCU TotSeries
+
+actor Usuari as user 
+
+Rectangle Sistema {
+
+usecase (UC1. Registrar client) as UC1
+usecase (UC1.1 Client VIP/Normal) as UC1.1
+
+
+usecase (UC2.3 Visualitzar resumen de series i altres detalls) as UC23
+
+usecase (UC3. Descarrega de capitols) as UC3
+
+usecase (UC4. Visualització d'un capítol) as UC4
+
+usecase (UC2. Catàleg de series) as UC2
+usecase (UC2.1. Visualitzar Capítol més visualitzat) as UC21
+usecase (UC2.2. Visualitzar Capítol millor valorat pels usuaris) as UC22
+
+
+}
+
+user - UC1
+UC1 <|-- UC1.1: <<extends>>
+user -- UC2
+UC2 <|-- UC21
+UC2 <|-- UC22
+UC2 <|-- UC23
+user - UC3
+UC3 .> UC2 : <<include>>
+
+user -- UC4
+UC4 .> UC2 : <<include>>
+
+
+
+@enduml 
