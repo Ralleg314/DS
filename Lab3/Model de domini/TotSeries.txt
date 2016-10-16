@@ -1,0 +1,62 @@
+@startuml
+
+title TotSeries - Class Diagram
+
+class TotSeries{
+    +Controlador
+}
+
+class Serie {
+  +Titol
+  +Descripció
+  +Número de temporades
+  +Valoració
+}
+
+class User {
+  +Nom
+  +Nacionalitat
+  +Data de naixament
+  +Contrasenya
+}
+
+class Director{
+    +Nom
+    +Nacionalitat
+}
+
+class Actor{
+    +Nom
+    +Nacionalitat
+}
+
+class Productora{
+    +Nom
+    +ID
+    +Any de creació
+}
+
+class Temporada{
+    +Número de temporada
+    +Número de episodis
+}
+
+class Episodi{
+    +Nom
+    +Duració
+    +Idioma
+    +Descripció
+    +Data d'emisió
+}
+
+TotSeries "1" *-down- "1...*" Serie: té
+TotSeries "1" *-down- "1...*" User: té
+
+Serie "1" *-down- "1" Director: té
+Serie "1" *-down- "1...*" Actor: té
+Serie "1" *-down- "1" Productora: té
+Serie "1" *-down- "1...*" Temporada: té
+
+Temporada "1" *-down- "1...*" Episodi: té
+
+@enduml
