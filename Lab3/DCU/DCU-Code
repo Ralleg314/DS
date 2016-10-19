@@ -1,44 +1,42 @@
-
-### Codigo de PlantText.com ###
-
-
-@startuml
+﻿@startuml
 
 left to right direction
 title DCU TotSeries
 
 actor Usuari as user 
+actor Temps as user2
+actor Administrador as user3
+actor Usuari_no_registrat as user4
 
 Rectangle Sistema {
 
-usecase (UC1. Registrar client) as UC1
+usecase (UC1. Registrar-se/Login) as UC1
 usecase (UC1.1 Client VIP/Normal) as UC1.1
-
-
-usecase (UC2.3 Visualitzar resumen de series i altres detalls) as UC23
-
-usecase (UC3. Descarrega de capitols) as UC3
-
-usecase (UC4. Visualització d'un capítol) as UC4
 
 usecase (UC2. Catàleg de series) as UC2
 usecase (UC2.1. Visualitzar Capítol més visualitzat) as UC21
 usecase (UC2.2. Visualitzar Capítol millor valorat pels usuaris) as UC22
 
+usecase (UC2.3 Visualitzar resum breu de series i altres detalls) as UC23
+usecase (UC3. Descarrega/Visualització de capitols) as UC3
 
+usecase (UC4 Realitzar pagament del import total) as UC4
 }
 
-user - UC1
+user -- UC1
 UC1 <|-- UC1.1: <<extends>>
-user -- UC2
-UC2 <|-- UC21
-UC2 <|-- UC22
-UC2 <|-- UC23
+UC1 -- UC2
+user4 - UC1
+
+user3 -- UC1.1
+
+UC2 -- UC21
+UC2 -- UC22
+UC2 -- UC23
 user - UC3
 UC3 .> UC2 : <<include>>
-
-user -- UC4
-UC4 .> UC2 : <<include>>
+user2 - UC4
+UC3 <|-- UC4: <<extends>>
 
 
 
