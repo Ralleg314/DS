@@ -8,25 +8,28 @@ actor Temps as user2
 actor Administrador as user3
 actor Usuari_no_registrat as user4
 
-Rectangle Sistema {
 
+Rectangle {
 usecase (UC1. Registrar-se/Login) as UC1
 usecase (UC1.1 Client VIP/Normal) as UC1.1
 
 usecase (UC2. Catàleg de series) as UC2
-usecase (UC2.1. Visualitzar Capítol més visualitzat) as UC21
-usecase (UC2.2. Visualitzar Capítol millor valorat pels usuaris) as UC22
+usecase (UC2.1. Mostrar Capítol més visualitzat) as UC21
+usecase (UC2.2. Mostrar Capítol millor valorat pels usuaris) as UC22
 
-usecase (UC2.3 Visualitzar resum breu de series i altres detalls) as UC23
+usecase (UC2.3 Mostrar resum breu de series i altres detalls) as UC23
 usecase (UC3. Descarrega/Visualització de capitols) as UC3
 
 usecase (UC4 Realitzar pagament del import total) as UC4
 }
 
 user -- UC1
+user4 -- UC1
+user -- UC2
+user4 -- UC2
 UC1 <|-- UC1.1: <<extends>>
 UC1 -- UC2
-user4 - UC1
+
 
 user3 -- UC1.1
 
