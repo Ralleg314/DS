@@ -1,46 +1,77 @@
 ﻿@startuml
 
-left to right direction
 title DCU TotSeries
 
-actor Usuari as user 
-actor Temps as user2
-actor Administrador as user3
-actor Usuari_no_registrat as user4
+left to right direction
 
+actor Usuari as Usuari 
+
+actor Temps as Temps
+
+actor Administrador as Admin
+
+actor Usuari_no_registrat as UsuariNR
 
 Rectangle {
 usecase (UC1. Registrar-se/Login) as UC1
-usecase (UC1.1 Client VIP/Normal) as UC1.1
+
+usecase (UC1.1 Gestió Client VIP/Normal) as UC1.1
 
 usecase (UC2. Catàleg de series) as UC2
-usecase (UC2.1. Mostrar Capítol més visualitzat) as UC21
+
+usecase (UC2.1. Mostrar preferències dels usuaris) as UC21
+
 usecase (UC2.2. Mostrar Capítol millor valorat pels usuaris) as UC22
 
 usecase (UC2.3 Mostrar resum breu de series i altres detalls) as UC23
+
+usecase (UC2.4 Selecció de Serie, Temporada i Episodi) as UC24
+
 usecase (UC3. Descarrega/Visualització de capitols) as UC3
 
+usecase (UC3.3 Valorar Capítol) as UC31
+
 usecase (UC4 Realitzar pagament del import total) as UC4
+
+usecase (UC5 Guardar/Esborrar dades dels usuaris) as UC5
+
+usecase (UC6 Tancar Sessió) as UC6
+
+usecase (UC7 Afegir/Treure Series,Temporades,Capitols) as UC7
 }
 
-user -- UC1
-user4 -- UC1
-user -- UC2
-user4 -- UC2
-UC1 <|-- UC1.1: <<extends>>
-UC1 -- UC2
+Usuari --> UC1
+
+Usuari ---> UC2
+
+Usuari ---> UC6
+
+UsuariNR --> UC1
+
+UsuariNR --> UC2
 
 
-user3 -- UC1.1
+Temps -> UC4
 
-UC2 -- UC21
-UC2 -- UC22
-UC2 -- UC23
-user - UC3
-UC3 .> UC2 : <<include>>
-user2 - UC4
-UC3 <|-- UC4: <<extends>>
+Admin -> UC1.1
 
+Admin -> UC5
 
+Admin --> UC6
+
+Admin --> UC7
+
+UC3 .> UC24 : <<include>>
+
+UC3 <|- UC31: <<extends>>
+
+UC2 --> UC21
+
+UC2 ---> UC22
+
+UC2 ---> UC23
+
+UC2 ---> UC24
 
 @enduml 
+
