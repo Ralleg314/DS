@@ -38,13 +38,13 @@ usecase (UC2.1. Mostrar preferències dels usuaris) as UC21
 
 usecase (UC2.2. Mostrar Capítol millor valorat pels usuaris) as UC22
 
-usecase (UC2.3 Mostrar resum breu de series i altres detalls) as UC23
+usecase (UC2.3 Selecció de Serie, Temporada i Episodi) as UC23
 
-usecase (UC2.4 Selecció de Serie, Temporada i Episodi) as UC24
+usecase (UC2.4 Mostrar resum breu de series i altres detalls) as UC24
 
 usecase (UC3. Descarrega/Visualització de capitols) as UC3
 
-usecase (UC3.3 Valorar Capítol) as UC31
+usecase (UC3.1 Valorar Capítol) as UC31
 
 usecase (UC4 Realitzar pagament del import total) as UC4
 
