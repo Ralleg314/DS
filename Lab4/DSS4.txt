@@ -1,0 +1,49 @@
+@startuml
+
+hide footbox
+skinparam sequenceParticipant underline
+skinparam  noteBackgroundColor aqua
+
+title Diagrama de Seqüència de Sistema per a UC4
+
+legend top left
+    DSS4 Registrar empleat
+end legend
+
+actor ":Usuari" as usuari
+participant ":Kanguros" as kanguros
+
+usuari  -> kanguros : registrarEmpleat(tipusEmpleat)
+note right of kanguros : Demanem a l'Usuari\ntipus d'empleat\na registrar
+
+|||
+
+alt tipusEmpleat == "jornada completa"
+
+|||
+
+usuari -> kanguros : registrarEmpleatJornadaCompleta() : Empleat
+note right : DSS4.1
+usuari <-- kanguros : empleat
+
+|||
+
+else tipusEmpleat == "per hores"
+
+|||
+
+usuari -> kanguros : registrarEmpleatPerHores() : Empleat
+note right : DSS4.2
+usuari <-- kanguros : empleat
+
+|||
+
+end
+
+|||
+
+usuari -> kanguros : visualitzarEmpleat(empleat) : InfoEmpleat
+note right : UC6
+usuari <-- kanguros : infoEmpleat
+
+@enduml
