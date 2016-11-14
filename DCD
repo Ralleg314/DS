@@ -1,0 +1,34 @@
+@startuml
+
+package java.util <<Folder>> {
+  class Timer
+  class Scanner
+}
+
+package Controlador <<Folder>> {
+  class Kanguros
+}
+
+package Model <<Folder>> {
+  class Servei
+  class Client
+  class Empleat
+  class Menor
+  class Major
+  class Direccio
+}
+
+package Vista <<Folder>> {
+  class Menu
+}
+
+Timer "1" <-up- "1" Kanguros
+Scanner "1" <-up- "1" Menu
+Kanguros "1"<--> "1" Menu
+Kanguros "1" -down-> "*" Client
+Kanguros "1" -down-> "*" Servei
+Kanguros "1" -down-> "*" Empleat
+
+
+
+@enduml
