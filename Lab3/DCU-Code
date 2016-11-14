@@ -1,0 +1,94 @@
+﻿@startuml
+
+title DCU TotSeries
+
+left to right direction
+
+actor Usuari as Usuari 
+
+actor Temps as Temps
+
+actor Administrador as Admin
+
+actor Usuari_no_registrat as UsuariNR
+@startuml
+
+title DCU TotSeries
+
+left to right direction
+
+actor Usuari as Usuari 
+
+actor Temps as Temps
+
+actor Administrador as Admin
+
+actor Usuari_no_registrat as UsuariNR
+
+Rectangle {
+usecase (UC1. Login) as UC1
+
+usecase (UC1.1 Registrar-se) as UC1.1
+
+usecase (UC1.2 Gestió Client VIP/Normal) as UC1.2
+
+usecase (UC2. Catàleg de series) as UC2
+
+usecase (UC2.1. Mostrar preferències dels usuaris) as UC21
+
+usecase (UC2.2. Mostrar Capítol millor valorat pels usuaris) as UC22
+
+usecase (UC2.3 Selecció de Serie, Temporada i Episodi) as UC23
+
+usecase (UC2.4 Mostrar resum breu de series i altres detalls) as UC24
+
+usecase (UC3. Descarrega/Visualització de capitols) as UC3
+
+usecase (UC3.1 Valorar Capítol) as UC31
+
+usecase (UC4 Realitzar pagament del import total) as UC4
+
+usecase (UC5 Guardar/Esborrar dades dels usuaris) as UC5
+
+usecase (UC6 Tancar Sessió) as UC6
+
+usecase (UC7 Afegir/Treure Series,Temporades,Capitols) as UC7
+}
+
+Usuari -- UC1
+
+Usuari -- UC2
+
+Usuari -- UC6
+
+UsuariNR -- UC1.1
+
+UsuariNR -- UC2
+
+
+Temps - UC4
+
+Admin -- UC1
+
+Admin -- UC1.2
+
+Admin -- UC5
+
+Admin - UC6
+
+Admin -- UC7
+
+UC3 <.. UC24 : <<include>>
+
+UC31 <. UC3: <<extends>>
+
+UC2 <... UC21: <<extends>>
+
+UC2 <... UC22: <<extends>>
+
+UC2 <... UC23: <<extends>>
+
+UC2 <... UC24: <<extends>>
+
+@enduml 
+
