@@ -48,47 +48,60 @@ usecase (UC3.1 Valorar Capítol) as UC31
 
 usecase (UC4 Realitzar pagament del import total) as UC4
 
-usecase (UC5 Guardar/Esborrar dades dels usuaris) as UC5
+usecase (UC5 Guardar dades dels usuaris) as UC5
+
+usecase (UC5.1 Esborrar dades dels usuaris) as UC5.1
 
 usecase (UC6 Tancar Sessió) as UC6
 
-usecase (UC7 Afegir/Treure Series,Temporades,Capitols) as UC7
+usecase (UC7 Afegir Series,Temporades,Capitols) as UC7
+
+usecase (UC7.1 Treure Series,Temporades,Capitols) as UC7.1
+
 }
 
-Usuari --> UC1
+Usuari -- UC1
 
-Usuari ---> UC2
+Usuari -- UC2
 
-Usuari ---> UC6
+Usuari -- UC6
 
-UsuariNR --> UC1.1
+UsuariNR -- UC1.1
 
-UsuariNR --> UC2
+UsuariNR -- UC2
 
 
-Temps -> UC4
+Temps - UC4
 
-Admin --> UC1
+Admin -- UC1
 
-Admin -> UC1.2
+Admin -- UC1.2
 
-Admin -> UC5
+Admin -- UC5
 
-Admin --> UC6
+Admin -- UC5.1
 
-Admin --> UC7
+Admin - UC6
 
-UC3 .> UC24 : <<include>>
+Admin -- UC7
 
-UC3 <|- UC31: <<extends>>
+Admin -- UC7.1
 
-UC2 --> UC21
+UC3 <.. UC24 : <<include>>
 
-UC2 ---> UC22
+UC31 <. UC3: <<extends>>
 
-UC2 ---> UC23
+UC2 <... UC21: <<extends>>
 
-UC2 ---> UC24
+UC2 <... UC22: <<extends>>
+
+UC2 <... UC23: <<extends>>
+
+UC2 <... UC24: <<extends>>
 
 @enduml 
+
+
+
+
 
