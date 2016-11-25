@@ -1,0 +1,18 @@
+@startuml
+
+hide footbox
+skinparam sequenceParticipant underline
+skinparam  noteBackgroundColor aqua
+
+legend top left
+    DSS2 Visualitzar catàleg
+end legend
+
+actor ":Usuari" as usuari
+participant ":Sistema" as sistema
+
+usuari  -> sistema : veureCataleg() : Cataleg
+usuari <--- sistema : Cataleg
+
+
+@enduml
