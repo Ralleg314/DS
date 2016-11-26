@@ -1,0 +1,33 @@
+@startuml
+
+hide footbox
+skinparam sequenceParticipant underline
+skinparam  noteBackgroundColor aqua
+
+legend top left
+    DSS3 Visualitzar capítol
+end legend
+
+actor ":Usuari_registrat" as usuari
+participant ":Sistema" as sistema
+
+
+
+loop estatCapitol!=PENDENT
+    usuari  -> sistema : visualitzarEpisodi(episodi): Estat_episodi
+    usuari <--- sistema : Estat_episodi
+end
+
+usuari <--- sistema : reproduirEpisodi()
+
+|||
+opt Estat_episodi==VIST
+    usuari  -> sistema : valorarEpisodi(episodi,valoracio): bool
+    usuari <--- sistema : bool
+else estatCapitol==noAcabat
+    usuari <--- sistema : missatge d'error
+end
+
+
+
+@enduml 

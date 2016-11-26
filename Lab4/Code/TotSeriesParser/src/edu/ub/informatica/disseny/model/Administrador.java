@@ -11,10 +11,21 @@ package edu.ub.informatica.disseny.model;
  */
 public class Administrador {
     private Afegir add;
+
+    /**
+     *
+     * @param usuari
+     * @return
+     */
     public boolean ferVip(Usuari_registrat usuari){
         return false;
     }
     
+    /**
+     *
+     * @param tipus
+     * @return
+     */
     public boolean afegir(String tipus){
         return false;
     }

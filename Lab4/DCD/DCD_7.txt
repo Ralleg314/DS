@@ -1,0 +1,147 @@
+@startuml
+title TotSeries
+skinparam classAttributeIconSize 0
+
+namespace java.util {
+    class Timer
+    class Scanner
+}
+
+namespace Vista {
+    class Menu {
+        + escriu(s : String) : void
+        + escriu(int : i) : void
+        + escriu(float : f) : void
+        +llegeixInt() :Int
+        +llegeixString() : String
+        +llegeixDataSistema() : Date
+    }
+}
+
+namespace Controlador {
+    class TotSeries {
+        + registrarUsuari() : void
+    }
+}
+namespace Model {
+    abstract class Usuari{
+        +veureCataleg()
+        +veureCapitolValorat(valorats : list<Episodi>)
+    }
+    
+    class Usuari_registrat {
+        - nom : String
+        - usuari : String
+        - nacionalitat : String
+        - naixement : Date
+        - contrasenya : String
+        - visualitzat
+        - VIP : bool
+        + visualitzarEpisodi(episodi : Episodi)
+        + valorarEpisodi(valoracio : float)
+    }
+    
+    class Usuari_no_registrat{
+    }
+    
+    class Administrador{
+        -nom : String
+        -usuari : String
+        -contrasenya :String
+        +ferVip(usuari : Usuari_registrat) : bool
+        +afegir(tipus : Sting) : bool
+    }
+    
+    enum Afegir{
+        +afegirSerie(serie : Serie) : bool
+        +afegirTemporada(temporada : Temporada) : bool
+        +afegirEpisodi(episodi : Episodi) : bool
+        +afegirArtista(artista : Artista) : bool
+        +afegirProductora(productora : Productora) : bool
+    }
+    
+    
+    enum Estat_episodi{
+        +VIST : bool
+        +REPRODUINT : bool
+        +PENDENT : bool
+    }
+    
+    class Episodi{
+        -nom : String
+        -duracio : float
+        -idioma : String
+        -descripcio : String
+        -emisio : Date
+        -valoracio : float
+        +reproduirEpisodi()
+    }
+    
+    class Temporada{
+        +numero :int
+        +episodis : int
+    }
+    
+    class Productora{
+        +nom : String
+        +ID : String
+        +creacio : Date
+    }
+    
+    class Serie{
+        +titol : String
+        +descripcio : String
+        +temporades : Inintt
+
+    }
+    
+    class Cataleg{
+    }
+    
+    
+    abstract class Artista{
+        +nom : String
+        +nacionalitat : Sring
+    }
+    
+    class Director{
+    }
+    
+    class Actor{
+    }
+    
+    
+    Cataleg *-- Serie
+    Serie *-- Productora
+    Serie *-- Temporada
+    Serie *-- Artista
+    Temporada *-- Episodi
+    Episodi <--> Estat_episodi
+    
+    
+    Usuari <|-- Usuari_registrat
+    Usuari <|-- Usuari_no_registrat
+    Usuari <-> Cataleg : veu
+    Administrador --> Usuari_registrat : dona VIP
+    Administrador --> Afegir
+    
+    Usuari_registrat --> Episodi : valora
+    Usuari_registrat --> Episodi : visualitza
+    
+    Afegir --> Cataleg : afegeix serie
+    Afegir --> Serie : afegeix temporada
+    Afegir --> Temporada : afegeix episodi
+    Afegir --> Artista : afegeix artista
+    Afegir --> Productora : afegeix productora
+    
+    Artista <|-- Actor
+    Artista <|-- Director
+}
+
+Controlador.TotSeries "1" --> "-usuari *" Model.Usuari : Consta
+Controlador.TotSeries "1" -->  Model.Cataleg : Consta
+Controlador.TotSeries "-ctrl 1" <-> "-menu 1" Vista.Menu : Veu 
+java.util.Timer "1" <- "-timer 1" Controlador.TotSeries : Usa
+java.util.Timer "1" -> "-timer 1" Model.Usuari_registrat : Cobra
+java.util.Scanner "-sc 1" <- "1" Vista.Menu : Usa 
+@enduml 

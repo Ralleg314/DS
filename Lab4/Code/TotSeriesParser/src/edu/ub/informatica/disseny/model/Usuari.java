@@ -10,6 +10,10 @@ package edu.ub.informatica.disseny.model;
  * @author ralleg
  */
 public abstract class Usuari {
+
+    /**
+     *
+     */
     public void veureCataleg(){
         
     }
