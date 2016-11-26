@@ -9,33 +9,56 @@ actor Usuari_No_Registrat as usuari
 activate usuari
 
 participant ":TotSeries" as TS
-participant ":Usuari" as us
-participant ":Menu" as menu
+participant "us:Usuari" as us
+participant ":Vista" as menu
 
-usuari -> TS: intentaRegistrar()
+usuari -> TS: ID= intentaRegistrar(nom)
 note right
-    trobat: boolean
-    trobat := False
-    Usuari: Usuari_no_Registrat
-    potRegistrar-se: True
+    ID: String
+    exiteix: boolean
+end note
+activate TS
+
+loop (us in lst_usuari) and (not existeix)
+TS -> us: existeix:= existeixUsuari(ID):boolean
+activate us
+us -> us: check ID == my_ID
+us --> TS: check
+deactivate us
+end
+
+opt existeix = false
+note over TS
+    nom: String
+    password: String
+    nacionalitat: String
+    naixement: Date
 end note
 
-opt trobat == false
-TS -> us: registrarUsuari(nom,nacionalitat,naixement,password)
-us -> menu: escriu(s: nom , s: nacionalitat, date: naixement, s: password)
-menu -> menu: llegeixString(nom,nacionalitat,password)
-menu -> menu: llegeixDateSystem(naixement)
-menu ---> us: new usuari registrat 
+TS -> us: create
+activate us
+us -> menu: escriu(s:String): nom, nacionalitat, password
+activate menu
+
+
+menu -> menu: nom=llegeixString(nom)
+menu -> menu: nacionalitat=llegeixString(nacionalitat)
+menu -> menu: password=llegeixString(password)
+menu -> menu: naixement=llegeixDateSistema()
+menu --> us
+deactivate menu
+
+TS <- us: registrarUsuari(nom,nacionalitat,naixement,password)
 us --> TS: Registre finalitzat
-TS ---> TS: Login automatic del usuari
-TS ---> usuari: Registrat
-else trobat == true 
-TS --> usuari: Err: Already registered 
+deactivate us
+TS --> usuari: Registrat
+
+else existeix = true 
+
+TS --> usuari: Err: Already registered
+deactivate TS
+deactivate usuari
 end
-activate TS #ffbbbb
-activate us #ffbbbb
-activate menu #ffbbbb
-
-
 
 @enduml
+
