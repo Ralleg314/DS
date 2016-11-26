@@ -1,0 +1,41 @@
+
+@startuml
+
+legend top 
+    DS1 Registrar Usuari
+end legend
+
+actor Usuari_No_Registrat as usuari
+activate usuari
+
+participant ":TotSeries" as TS
+participant ":Usuari" as us
+participant ":Menu" as menu
+
+usuari -> TS: intentaRegistrar()
+note right
+    trobat: boolean
+    trobat := False
+    Usuari: Usuari_no_Registrat
+    potRegistrar-se: True
+end note
+
+opt trobat == false
+TS -> us: registrarUsuari(nom,nacionalitat,naixement,password)
+us -> menu: escriu(s: nom , s: nacionalitat, date: naixement, s: password)
+menu -> menu: llegeixString(nom,nacionalitat,password)
+menu -> menu: llegeixDateSystem(naixement)
+menu ---> us: new usuari registrat 
+us --> TS: Registre finalitzat
+TS ---> TS: Login automatic del usuari
+TS ---> usuari: Registrat
+else trobat == true 
+TS --> usuari: Err: Already registered 
+end
+activate TS #ffbbbb
+activate us #ffbbbb
+activate menu #ffbbbb
+
+
+
+@enduml
