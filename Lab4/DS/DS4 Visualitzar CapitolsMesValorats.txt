@@ -1,0 +1,24 @@
+
+@startuml
+
+legend top 
+    DS4 Visualitzar CapitolsMesValorats
+end legend
+
+actor Usuari as usuari
+activate usuari
+
+participant ":TotSeries" as TS
+participant ":Catàleg" as cataleg
+
+usuari -> TS: VeureCapitolsMesValorats()
+activate TS
+TS -> cataleg: getLlistaCapitolsMesValorats(): llista
+activate cataleg
+cataleg --> TS: llista
+deactivate cataleg
+TS --> usuari: llista
+deactivate TS
+deactivate usuari
+
+@enduml
