@@ -1,0 +1,25 @@
+@startuml
+
+legend top 
+    DS2 Visualitzar Catàleg
+end legend
+
+actor Usuari as usuari
+activate usuari
+
+participant ":TotSeries" as TS
+participant ":Catàleg" as cataleg
+
+usuari ->TS: veureCataleg()
+activate TS
+
+TS -> cataleg: mostrarCataleg(): Catàleg
+activate cataleg
+cataleg --> TS: Catàleg 
+deactivate cataleg
+TS --> usuari: Catàleg
+deactivate TS
+deactivate usuari
+
+
+@enduml
