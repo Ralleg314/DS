@@ -35,16 +35,14 @@ object Usuari_no_registrat {
 }
 
 object Artista{
+    +Nom
+    +Nacionalitat
 }
 
 object Director{
-    +Nom
-    +Nacionalitat
 }
 
 object Actor{
-    +Nom
-    +Nacionalitat
 }
 
 object Productora{
