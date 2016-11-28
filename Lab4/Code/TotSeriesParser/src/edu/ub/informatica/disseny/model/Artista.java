@@ -9,6 +9,7 @@ package edu.ub.informatica.disseny.model;
  *
  * @author ralleg
  */
-public class Artista {
-    
+public abstract class Artista {
+    private String nom;
+    private String nacionalitat;
 }

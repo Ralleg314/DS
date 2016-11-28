@@ -9,6 +9,6 @@ package edu.ub.informatica.disseny.model;
  *
  * @author ralleg
  */
-public class Actor {
+public class Actor extends Artista{
     
 }

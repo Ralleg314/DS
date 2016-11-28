@@ -10,5 +10,12 @@ package edu.ub.informatica.disseny.model;
  * @author ralleg
  */
 public class Serie {
+    public String titol, descripcio;
+    public int temporades;
     
+    public Serie(String titol, int temporades, String descripcio){
+        this.titol=titol;
+        this.temporades=temporades;
+        this.descripcio=descripcio;
+    }
 }

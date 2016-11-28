@@ -17,4 +17,8 @@ public abstract class Usuari {
     public void veureCataleg(){
         
     }
+    
+    public void veureCapitolValorat(){
+        
+    }
 }

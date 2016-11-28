@@ -11,4 +11,24 @@ package edu.ub.informatica.disseny.model;
  */
 public class Afegir {
     
+    
+    public static boolean afegirSerie(Serie s){
+        return false;
+    }
+    
+    public static boolean afegirTemporada(Temporada t){
+        return false;
+    }
+    
+    public static boolean afegirEpisodi(Episodi e){
+        return false;
+    }
+    
+    public static boolean afegirArtista(Artista a){
+        return false;
+    }
+    
+    public static boolean afegirProductora(Productora p){
+        return false;
+    }
 }

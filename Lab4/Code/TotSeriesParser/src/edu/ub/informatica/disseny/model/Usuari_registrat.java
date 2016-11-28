@@ -5,10 +5,22 @@
  */
 package edu.ub.informatica.disseny.model;
 
+import java.util.Date;
+
 /**
  *
  * @author ralleg
  */
-public class Usuari_registrat {
+public class Usuari_registrat extends Usuari{
+    public String nom,usuari,nacionalitat,contrasenya;
+    public boolean VIP, visualitzat;
+    public Date naixement;
+    
+    public void visualitzarEpisodi(Episodi e){
+        
+    }
+    public void valorarEpisodi(int valoracio){
+        
+    }
     
 }
