@@ -15,6 +15,7 @@ public class Episodi {
     private String nom,idioma,descripcio;
     private float duracio, valoracio;
     private Date emisio;
+    private Estat_episodi estat;
     
     public Episodi(String nom, String idioma, String descripcio, float duracio, float valoracio){
         this.nom=nom;

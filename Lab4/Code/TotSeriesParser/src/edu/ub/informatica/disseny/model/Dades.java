@@ -5,12 +5,10 @@
  */
 package edu.ub.informatica.disseny.model;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author ralleg
+ * @author EVA-00
  */
-public class Cataleg {
-    private ArrayList<Serie> series;
+public class Dades {
+    
 }

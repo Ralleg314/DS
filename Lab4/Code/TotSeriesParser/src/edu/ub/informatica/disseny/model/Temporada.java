@@ -12,12 +12,12 @@ import java.util.ArrayList;
  * @author ralleg
  */
 public class Temporada {
-    public int numero,episodis;
-    public ArrayList eps;
+    private int numero,episodis;
+    private ArrayList<Episodi> eps;
     
     public Temporada(int numero, int episodis){
         this.numero=numero;
         this.episodis=episodis;
-        eps=new ArrayList<Episodi>(0);
+        eps=new ArrayList<>(0);
     }
 }

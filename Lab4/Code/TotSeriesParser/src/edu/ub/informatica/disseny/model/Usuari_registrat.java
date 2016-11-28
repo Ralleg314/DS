@@ -12,9 +12,9 @@ import java.util.Date;
  * @author ralleg
  */
 public class Usuari_registrat extends Usuari{
-    public String nom,usuari,nacionalitat,contrasenya;
-    public boolean VIP, visualitzat;
-    public Date naixement;
+    private String nom,usuari,nacionalitat,contrasenya;
+    private boolean VIP, visualitzat;
+    private Date naixement;
     
     public void visualitzarEpisodi(Episodi e){
         

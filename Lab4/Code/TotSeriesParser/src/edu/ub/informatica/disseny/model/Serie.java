@@ -5,17 +5,20 @@
  */
 package edu.ub.informatica.disseny.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ralleg
  */
 public class Serie {
-    public String titol, descripcio;
-    public int temporades;
+    private String titol, descripcio;
+    private int num_temp;
+    private ArrayList<Temporada> temporades;
     
     public Serie(String titol, int temporades, String descripcio){
         this.titol=titol;
-        this.temporades=temporades;
+        this.num_temp=temporades;
         this.descripcio=descripcio;
     }
 }
