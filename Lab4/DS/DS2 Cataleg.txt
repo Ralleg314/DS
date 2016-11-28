@@ -9,15 +9,42 @@ activate usuari
 
 participant ":TotSeries" as TS
 participant ":Catàleg" as cataleg
+participant ":Serie" as serie
+participant ":Temporada" as temporada
+participant ":Episodi" as episodi
 
 usuari ->TS: veureCataleg()
 activate TS
 
-TS -> cataleg: mostrarCataleg(): Catàleg
+TS -> cataleg: visualitzarCataleg(): Catàleg
 activate cataleg
-cataleg --> TS: Catàleg 
+loop
+    |||
+    cataleg ->serie : visualitzarSerie()
+    activate serie
+    loop
+        |||
+        serie ->temporada : visualitzarTemporada()
+        activate temporada
+        loop
+            |||
+            temporada -> episodi : visualitzarEpisodi()
+            activate episodi
+            episodi --> temporada : Episodi
+            deactivate episodi
+            |||
+        end
+        temporada --> serie : Temporada
+        deactivate temporada
+        |||
+    end
+    serie --> cataleg : Serie
+    deactivate serie
+    |||
+end
+cataleg --> TS : Cataleg
 deactivate cataleg
-TS --> usuari: Catàleg
+TS --> usuari
 deactivate TS
 deactivate usuari
 

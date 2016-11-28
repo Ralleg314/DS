@@ -16,17 +16,17 @@ participant ":Episodi" as cap
 participant ":Estat" as estat
 participant ":Vista" as vista
 
-usuari ->TS: veureCataleg()
+usuari ->TS: visualitzarEpisodi()
 activate TS
-TS -> cataleg: mostrarSeries()
+TS -> cataleg: visualitzarCataleg()
 activate cataleg
-cataleg -> serie: escollirSerie()
+cataleg --> TS : Cataleg
+TS -> serie: escollirSerie(serie : Serie)
 activate serie
-serie->temp: escollirTemporada()
+serie->temp: escollirTemporada(temporada : Temporada)
 activate temp
-temp->cap: seleccioCap()
+temp->cap: escollirEpisodi(episodi : Episodi)
 activate cap
-deactivate temp
 cap -> estat: getEstatEpisodi(): estatEpisodi
 estat --> cap: estatEpisodi
 activate estat
@@ -37,7 +37,7 @@ loop estatEpisodi != PENDENT
     estat --> cap: estatEpisodi
     deactivate estat
 end 
-cap -> usuari: ReproduirEpisodi()
+cap --> usuari: ReproduirEpisodi()
 deactivate cap
 opt estatEpisodi == Vist
 note over TS
