@@ -8,7 +8,7 @@ actor Usuari as usuari
 activate usuari
 
 participant ":TotSeries" as TS
-participant ":Catàleg" as cataleg
+participant ":Dades" as dades
 participant ":Serie" as serie
 participant ":Temporada" as temporada
 participant ":Episodi" as episodi
@@ -16,11 +16,11 @@ participant ":Episodi" as episodi
 usuari ->TS: veureCataleg()
 activate TS
 
-TS -> cataleg: visualitzarCataleg(): Catàleg
-activate cataleg
+TS -> dades: visualitzarCataleg(): Catàleg
+activate dades
 loop
     |||
-    cataleg ->serie : visualitzarSerie()
+    dades ->serie : visualitzarSerie()
     activate serie
     loop
         |||
@@ -38,12 +38,12 @@ loop
         deactivate temporada
         |||
     end
-    serie --> cataleg : Serie
+    serie --> dades : Serie
     deactivate serie
     |||
 end
-cataleg --> TS : Cataleg
-deactivate cataleg
+dades --> TS : Cataleg
+deactivate dades
 TS --> usuari
 deactivate TS
 deactivate usuari

@@ -9,7 +9,7 @@ actor Usuari as usuari
 activate usuari
 
 participant ":TotSeries" as TS
-participant ":Catàleg" as cataleg
+participant ":Dades" as dades
 participant ":Serie" as serie
 participant ":Temporada" as temp
 participant ":Episodi" as cap
@@ -18,12 +18,12 @@ participant ":Vista" as vista
 
 usuari ->TS: visualitzarEpisodi()
 activate TS
-TS -> cataleg: visualitzarCataleg()
-activate cataleg
-cataleg --> TS : Cataleg
-TS -> serie: escollirSerie(serie : Serie)
+TS -> dades: visualitzarCataleg()
+activate dades
+dades --> TS : Cataleg
+TS -> serie: escollirSerie(serie : Serie, temporada : Temporada, episodi : Episodi)
 activate serie
-serie->temp: escollirTemporada(temporada : Temporada)
+serie->temp: escollirTemporada(temporada : Temporada, episodi : Episodi)
 activate temp
 temp->cap: escollirEpisodi(episodi : Episodi)
 activate cap
@@ -61,7 +61,7 @@ TS --> usuari: EpisodiValorat
 else estatEpisodi==noAcabat
 TS --> usuari: Err: Impossible valorar.
 end
-deactivate cataleg
+deactivate dades
 deactivate TS
 deactivate usuari
 
