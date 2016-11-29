@@ -7,46 +7,43 @@ end legend
 actor Usuari as usuari
 activate usuari
 
+participant ":Menu" as menu
 participant ":TotSeries" as TS
 participant ":Dades" as dades
 participant ":Serie" as serie
-participant ":Temporada" as temporada
-participant ":Episodi" as episodi
 
-usuari ->TS: veureCataleg()
-activate TS
-
-TS -> dades: visualitzarCataleg(): Catàleg
-activate dades
-loop
+usuari -> menu
+activate menu
+menu ->menu : op=llegeixInt()
+opt op==2
     |||
-    dades ->serie : visualitzarSerie()
-    activate serie
-    loop
+    menu ->TS: visualitzarCataleg()
+    activate TS
+    
+    TS -> dades: visualitzarCataleg(): Catàleg
+    activate dades
+    loop series
         |||
-        serie ->temporada : visualitzarTemporada()
-        activate temporada
-        loop
-            |||
-            temporada -> episodi : visualitzarEpisodi()
-            activate episodi
-            episodi --> temporada : Episodi
-            deactivate episodi
-            |||
-        end
-        temporada --> serie : Temporada
-        deactivate temporada
+        dades ->serie : toString()
+        activate serie
+        serie --> dades : String
+        deactivate serie
         |||
     end
-    serie --> dades : Serie
-    deactivate serie
+    dades --> TS : cataleg=list<String>
+    deactivate dades
+    TS ---> menu : cataleg
+    deactivate TS
+    loop cataleg
+        |||
+        menu->menu : escriu(cataleg)
+        |||
+    end
+    deactivate menu
+    menu --> usuari
+    deactivate TS
+    deactivate usuari
     |||
 end
-dades --> TS : Cataleg
-deactivate dades
-TS --> usuari
-deactivate TS
-deactivate usuari
-
 
 @enduml

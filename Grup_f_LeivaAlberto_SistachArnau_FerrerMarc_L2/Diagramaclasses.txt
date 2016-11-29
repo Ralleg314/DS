@@ -1,0 +1,171 @@
+@startuml
+
+title  Diagrama de classes de disseny MOTORENT
+
+left to right direction
+header 
+Leiva, Ferrer i Sistach
+endheader
+
+center footer Disseny de Software 2015-16. Maria Salamo
+skinparam packageStyle rect
+
+Usuari<|--- Client
+Usuari<|--- Gerent
+Usuari<|--- Administrador
+
+class Vista{
++String demanarDNI()
++String demanarPassword()
++String demanarNom()
++String demanarCognom()
++int demanarTelefon()
++String demanarCorreu()
++int demanarDia()
++int demanarMes()
++int demanarAny()
++String demanarCarrer()
++int demanarNumero()
++String demanarPoblacio()
++String demanarProvincia()
++int demanarCP()
++int demanarCC()
++void mostrarMenuUsuari()
++void mostrarErrorRegistre()
++String demanarUsuari ()
++void mostrarErrorLogin()
++void escriureString(String)
++int demanarLocal()
++int demanarIDMoto()
++int demanarCodi()
++String demanarDesperfectes()
++String demanarEstatPintura()
++String demanarEstatRodes()
++String demanarEstatCarroseria()
++int demanarMesInforme()
++String imprimirInforme(String)
+
+}
+
+class Motorent{
+-desp:Boolean
+-void Registre()
+-void ferReserva()
+-void EntregarMoto()
+-void RetornarMoto()
+-Boolean comprovarDesperfectes(Moto)
+-void comprovarRetard(Reserva)
+-void veureMotos()
+-void gestionarLocal()
+-void generarInforme()
+}
+
+class Local{
+-Capacitat:Int
++ String generarString()
++ Boolean checkLocal(int)
++ String imprimirMotos(Local)
++ String imprimirLocal(Local)
++ Local seleccionarLocal()
++ Moto seleccionarMoto(Local)
++ Moto seleccionarMoto(int,int)
++ Reserva comprovarCodi(int)
++ Moto getMoto(Reserva)
++ void removeMoto(Moto)
+- void remove(Moto)
++ void addMoto(Moto)
+- void add(Moto)
++ void setDisponibilitat(Moto)
++ String getString(Local)
++ int getNumMotos()
++ Boolean checkCapacitat(Local,int)
+}
+class Adreca {
+-Carrer:String
+-Numero:Int
+-Poblacio: String
+-Provincia: String
+-CP:Int
+}
+class Moto {
+-Identificador:Int
+-Kilometres: Double
+-Disponible: Boolean
++String imprimirMoto(Moto)
++String generarString()
++Boolean checkIDMoto(int)
++Boolean IsDisponible(Moto)
++String getString(Moto)
+}
+class Reserva {
+-Codi: Int
+-Retard: Int
++Boolean comprovarcodi(int)
++Moto getMoto(Reserva)
++Data getDatadevolucio(Reserva)
++void apuntarFalta(Reserva)
++Boolean checkmonth(int)
++String imprimirReserva(Reserva)
++Boolean compmes(int)
+
+}
+class Data {
+-Dia: Int
+-Mes: Int
+-Any: Int
+}
+class Estat {
+-Pintura: String
+-Rodes: String
+-Carrosseria: String
+}
+class ComptaCorrent {
+-NumeroCompte: Int
+}
+class Usuari {
+-User: String
+-Password: String
++Boolean checkUser(String,String)
++Boolean existeix_usuari(String)
+}
+class Client {
+-Nom: String
+-Cognom: String
+-DNI: String
+-Faltes: Int
+-Correu: String
+-Tel: Int
+-Vip: Boolean
++Reserva crearReserva()
++void apuntarFalta()
++String getInforme(Client)
+}
+class Gerent {
+-Identificador: Int
+}
+class EspecifiacioMoto {
+-Marca:String
+-Model:String
+}
+
+Motorent "1"---"1" Vista: es comunica
+Local "1"--- "lst_moto 0..*" Moto: disposa
+Moto "1"---"1 estat" Estat: es troba
+Moto "*"---"1 esp" EspecifiacioMoto : te
+Motorent "1"--"lst_local *" Local: te
+Motorent "1"---"lst_usuari *" Usuari: disposa
+Local "1"---"lst_reserva *" Reserva: emmagatzema
+Reserva "1"---"dataR 1" Data: es va fer
+Reserva "1"---"dataD 1" Data: devolucio
+Reserva "1"---"dataRe 1" Data: recollida
+Gerent "1" --- "lo 1" Local: gestiona
+Client "1" --- "adr 1" Adreca: viu
+Client "1" --- "cc 1" ComptaCorrent: te
+Client "1" --- "lst_hist 0..*" Reserva: historial
+Reserva "1"---"m 1" Moto: te
+Local "1"---"adr 1" Adreca: es troba
+Reserva "1" --- "origen 1" Local: origen
+Reserva "1" --- "desti 1" Local: desti
+Client "1" --- "dataN 1" Data: va neixer
+Client "1" --- "dataIns 1" Data: va inscriure
+@enduml

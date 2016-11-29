@@ -1,0 +1,70 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 5.1: Retornar la moto al local desti
+activate ":Motorent"
+->":Motorent": comprovarDesperfectes(m:Moto)
+note right
+	desp :boolean
+	desp = True
+	has:String
+	pintura:String
+	rode:String
+	car:String
+end note
+":Motorent" -> ":Vista": has = demanarDesperfectes()
+activate ":Vista"
+":Vista"-> ":Vista": llegirString()
+":Motorent"<-- ":Vista": String
+deactivate ":Vista"
+alt has == "SI"
+":Motorent"-> ":Vista": pintura =demanarEstatPintura()
+activate ":Vista"
+":Vista"-> ":Vista": llegirString()
+":Motorent"<-- ":Vista": String
+deactivate ":Vista"
+
+":Motorent"-> ":Vista": rodes =demanarEstatRodes()
+activate ":Vista"
+":Vista"-> ":Vista": llegirString()
+":Motorent"<-- ":Vista": String
+deactivate ":Vista"
+
+":Motorent"-> ":Vista": car =demanarEstatCarroseria()
+activate ":Vista"
+":Vista"-> ":Vista": llegirString()
+":Motorent"<-- ":Vista": String
+deactivate ":Vista"
+
+":Motorent"->"l:Local": setDesperfectes(m,pintura,rodes,car)
+activate "l:Local"
+"l:Local"->"m:Moto": setDesperfectes(pintura,rodes,car)
+activate "m:Moto"
+"m:Moto"->"e:Estat": setPintura(pintura)
+activate "e:Estat"
+"e:Estat"->"e:Estat": my_pintura = pintura
+"m:Moto"<--"e:Estat"
+deactivate "e:Estat"
+
+"m:Moto"->"e:Estat": setRodes(rodes)
+activate "e:Estat"
+"e:Estat"->"e:Estat": my_rodes = rodes
+"m:Moto"<--"e:Estat"
+deactivate "e:Estat"
+
+"m:Moto"->"e:Estat": setCarrosseria(car)
+activate "e:Estat"
+"e:Estat"->"e:Estat": my_car = car
+"m:Moto"<--"e:Estat"
+deactivate "e:Estat"
+"l:Local"<--"m:Moto"
+deactivate "m:Moto"
+":Motorent"<--"l:Local"
+deactivate "l:Local"
+else has == "NO"
+note over ":Motorent"
+	desp = False
+end note
+end
+<--":Motorent": desp
+deactivate ":Motorent"
+@enduml

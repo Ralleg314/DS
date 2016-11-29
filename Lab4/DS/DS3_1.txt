@@ -1,0 +1,148 @@
+
+@startuml
+
+legend top 
+    DS3 Visualitzar Episodi
+end legend
+
+actor Usuari_registrat as usuari
+activate usuari
+
+participant "Menu" as menu
+participant ":TotSeries" as TS
+participant ":Dades" as dades
+participant ":Serie" as serie
+participant ":Temporada" as temp
+participant ":Episodi" as episodi
+participant ":Estat" as estat
+
+usuari -> menu
+activate menu
+menu -> menu : op=llegeixInt()
+opt op==3
+    |||
+    menu ->TS: visualitzarCataleg()
+    activate TS
+    TS ---> menu
+    deactivate TS
+    menu -> menu: s=llegeixInt()
+    opt s>0 && s<cataleg
+        |||
+        menu-> TS: visualitzarTemporades(s)
+        activate TS
+        TS -> dades :visualitzarTemporades(s)
+        activate dades
+        dades->serie: visualitzarTemporades()
+        activate serie
+        loop
+            serie-> temp: toString()
+            activate temp
+            temp---> serie: String
+            deactivate temp
+        end
+        serie---> dades: temporades=list<String>
+        deactivate serie
+        dades---> TS : temporades
+        deactivate dades
+        TS ---> menu: temporades
+        deactivate TS
+        loop temporades
+            |||
+            menu->menu: escriu(temporades)
+            |||
+        end
+        |||
+    else
+        |||
+        menu->menu: escriu("Serie no valida")
+        menu--->usuari
+        |||
+    end
+    
+    menu -> menu: t=llegeixInt()
+    opt t>0 && t<temporades
+        |||
+        menu-> TS: visualitzarEpisodis(s,t)
+        activate TS
+        TS -> dades :visualitzarEpisodis(s,t)
+        activate dades
+        dades->serie: visualitzarEpisodis(t)
+        activate serie
+        serie->temp: visualitzarEpisodis()
+        activate temp
+        loop
+            temp-> episodi: toString()
+            activate episodi
+            episodi---> temp: String
+            deactivate episodi
+        end
+        temp ---> serie: episodis=list<String>
+        deactivate temp
+        serie---> dades: episodis
+        deactivate serie
+        dades---> TS : temporades
+        deactivate dades
+        TS ---> menu: temporades
+        deactivate TS
+        loop temporades
+            |||
+            menu->menu: escriu(episodis)
+            |||
+        end
+        |||
+    else
+        |||
+        menu->menu: escriu("Temporada no valida")
+        menu--->usuari
+        |||
+    end
+    
+    menu -> menu : ep=llegeixInt()
+    opt ep>0 && ep<episodis
+        |||
+        menu ->TS :visualitzarEpisodi(s,t,ep)
+        TS -> serie: visualitzarEpisodi(s,t,ep)
+        activate serie
+        serie->temp: visualitzarEpisodi(t,ep)
+        activate temp
+        temp->episodi: visualitzarEpisodi(ep)
+        activate episodi
+        episodi -> estat: getEstatEpisodi(): estatEpisodi
+        activate estat
+        estat --> episodi: estatEpisodi
+        deactivate estat
+        opt estat==PENDENT
+            |||
+            episodi ->episodi: reproduir()
+            |||
+        end
+        loop estat!=VIST
+            |||
+            episodi -> estat: getEstatEpisodi(): estatEpisodi
+            activate estat
+            estat --> episodi: estatEpisodi
+            deactivate estat
+            |||
+        end
+        episodi --->temp :estatEpisodi
+        deactivate episodi
+        temp ---> serie :estatEpisodi
+        deactivate temp
+        serie---> dades :estatEpisodi
+        deactivate serie
+        dades---> TS :estatEpisodi
+        deactivate dades
+        TS ---> menu :estatEpisodi
+        deactivate TS
+        
+        |||
+    else
+        |||
+        menu->menu: escriu("Episodi no valid")
+        menu--->usuari
+        |||
+    end
+
+end
+
+@enduml

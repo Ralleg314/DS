@@ -1,0 +1,95 @@
+@startuml
+
+title  Model de Domini de MOTORENT
+
+left to right direction
+header 
+Leiva, Ferrer i Sistach
+endheader
+
+center footer Disseny de Software 2015-16. Maria Salamo
+skinparam packageStyle rect
+
+Usuari<|-- Client
+Usuari<|-- Gerent
+Usuari<|-- Administrador
+
+
+Local "1"--"0..*" Moto: te
+Gerent "1"--"1" Local: gestiona
+Motorent "1"--"*" Usuari: disposa
+Motorent "1"--"1" Usuari: treballa
+Client "1"--"1" Adreca: viu
+Client "1"--"1" Data: va neixer
+Client "1"--"1" Data: es va inscriure
+Client "1"--"1" ComptaCorrent: te
+Motorent "1"--"*" Local: disposa
+Local "1"--"1" Adreca: es troba
+Reserva "1"--"1" Data: es fa
+Reserva "1"--"1" Data: recollida
+Reserva "1"--"1" Data: devolucio
+Client "1"--"0..1" Reserva: realitza
+Client "1"--"*" Reserva: historial
+Reserva "0..1"--"1" Moto: te
+Reserva "1"--"2" Local: conte
+Reserva "*"--"1" Local: emmagatzema
+Moto "1"--"1" Estat: es troba
+Moto "*"--"1" EspecifiacioMoto: te
+
+class Motorent
+class Local{
+-Capacitat:Int
+}
+class Adreca {
+-Carrer:String
+-Numero:Int
+-Poblacio: String
+-Provincia: String
+-CP:Int
+}
+class Moto {
+-Identificador:Int
+-Kilometres: Double
+-Disponible: Boolean
+
+}
+class Reserva {
+-Codi: Int
+-Retard: Int
+}
+class Data {
+-Dia: Int
+-Mes: Int
+-Any: Int
+}
+class Estat {
+-Pintura: String
+-Rodes: String
+-Carrosseria: String
+}
+class ComptaCorrent {
+-NumeroCompta: Int
+}
+class Usuari {
+-User: String
+-Password: String
+}
+class Client {
+-Nom: String
+-Cognom: String
+-DNI: String
+-Faltes: Int
+-Correu: String
+-Tel: Int
+-Vip: Boolean
+}
+class Gerent {
+-Identificador: Int
+}
+class EspecifiacioMoto {
+-Marca:String
+-Model:String
+}
+@enduml
+
+

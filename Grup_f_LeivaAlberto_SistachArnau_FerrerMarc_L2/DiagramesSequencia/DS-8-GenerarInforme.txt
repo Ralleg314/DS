@@ -1,0 +1,60 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 8: Generar Informe al final de cada mes
+actor Administrador as user
+activate user
+user -> ":Motorent": generarInforme()
+activate ":Motorent"
+note right
+	mes:Int
+	p:String
+end note
+":Motorent"->":Vista":mes = demanarMesInforme()
+activate ":Vista"
+":Vista"->":Vista": llegirInt()
+":Motorent"<--":Vista": mes
+deactivate ":Vista"
+loop cl in lst_client
+":Motorent"->"cl:Clients" : p += getInforme(cl)
+activate "cl:Clients"
+note right
+	checkmes:boolean
+	p:String
+end note
+loop rs in lst_reserva
+"cl:Clients"->"rs:Reserva": checkmes = checkmonth(mes):boolean
+activate "rs:Reserva"
+"rs:Reserva"-> "dRealitzada:Data": cmes = compmes(mes):boolean
+activate "dRealitzada:Data"
+"dRealitzada:Data"->"dRealitzada:Data": check = mes == my_mes
+"rs:Reserva"<--"dRealitzada:Data": check
+deactivate "dRealitzada:Data"
+"cl:Clients"<--"rs:Reserva":cmes
+deactivate "rs:Reserva"
+note over "cl:Clients"
+    r = rs
+end note
+alt chekmes == True
+"cl:Clients"->"r:Reserva":p += imprimirReserva(r)
+activate "r:Reserva"
+"r:Reserva"-> "r:Reserva" : StringReserva()
+note right
+	Suposem que el metode StringReserva calcula en la classe reserva 
+	el cost de la reserva i l'imprimeix amb les altres dades
+end note
+"cl:Clients"<-- "r:Reserva" : String
+deactivate "r:Reserva"
+end
+end loop
+":Motorent"<--"cl:Clients" : String
+deactivate "cl:Clients"
+":Motorent" ->":Vista": imprimirInforme(p)
+activate ":Vista"
+":Vista" -> ":Vista" : escriu(String p) 
+":Vista" -> ":Motorent"
+deactivate ":Vista"
+end loop
+user <--":Motorent"
+deactivate ":Motorent"
+deactivate user
+@enduml

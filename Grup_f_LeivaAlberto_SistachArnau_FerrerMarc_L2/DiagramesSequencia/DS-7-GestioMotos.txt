@@ -1,0 +1,100 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 7: Gestio de motos d'un local
+actor Gerent as user
+activate user
+user -> ":Motorent": gestionarLocal()
+activate ":Motorent"
+note right
+    s:String
+    origen:Local
+    n:Int
+    capacitat:boolean
+    numLocalO:int
+    desti:Local
+    trobat:boolean
+    trobat = false
+    motoT:moto
+    idLocal:int
+end note
+":Motorent"->":Motorent":origen = seleccionarLocal()
+note right
+    Veure DS 3.1
+end note
+":Motorent"->"l:Local": numLocalO = getNumMotos(l)
+activate "l:Local"
+"l:Local"->"lst_moto:Collection<Moto>": Size()
+activate "lst_moto:Collection<Moto>"
+"l:Local"<--"lst_moto:Collection<Moto>": int
+deactivate "lst_moto:Collection<Moto>"
+"l:Local"-->":Motorent": int
+deactivate "l:Local"
+loop l in lst_local
+":Motorent"->"l:Local": n = getNumMotos(l)
+activate "l:Local"
+"l:Local"->"lst_moto:Collection<Moto>": Size()
+activate "lst_moto:Collection<Moto>"
+"l:Local"<--"lst_moto:Collection<Moto>": int
+deactivate "lst_moto:Collection<Moto>"
+"l:Local"-->":Motorent": int
+deactivate "l:Local"
+":Motorent"->"l:Local": capacitat = checkCapacitat(l,n)
+activate "l:Local"
+"l:Local"->"l:Local": check = n > (0.75 * capacitat)
+":Motorent"<--"l:Local": check
+deactivate "l:Local"
+opt capacitat == True
+":Motorent"->"l:Local": s += imprimirLocal(l)
+activate "l:Local"
+"l:Local"->"l:Local": generarString()
+":Motorent"<--"l:Local": String
+deactivate "l:Local"
+end
+end loop
+":Motorent" ->":Vista": escriureString(s)
+activate ":Vista"
+":Vista"->":Vista" : escriuString(s)
+":Motorent"<--":Vista"
+deactivate ":Vista"
+
+":Motorent" ->":Vista": idLocal = demanarLocal()
+activate ":Vista"
+":Vista"->":Vista" : llegirInt()
+":Motorent"<--":Vista": int
+deactivate ":Vista"
+
+loop l in lst_local and not trobat
+":Motorent"->"l:Local": trobat = checkLocal(idLocal)
+activate "l:Local"
+"l:Local"->"l:Local": check = idLocal == my_idLocal
+":Motorent"<--"l:Local": check
+deactivate "l:Local"
+note over ":Motorent"
+    desti = l
+end note
+end loop
+loop numLocal0 > 5
+":Motorent"->":Motorent":motoT = seleccionarMoto(desti)
+note right
+    Veure DS 3.2
+end note
+":Motorent"->"origen:Local": addMoto(motoT)
+activate "origen:Local"
+"origen:Local"->"origen:Local": add(MotoT)
+":Motorent"<--"origen:Local"
+deactivate "origen:Local"
+
+":Motorent"->"desti:Local": removeMoto(motoT)
+activate "desti:Local"
+"desti:Local"->"desti:Local": remove(MotoT)
+":Motorent"<--"desti:Local"
+deactivate "desti:Local"
+note over ":Motorent"
+    ++numLocalO
+end note
+end loop
+user <-- ":Motorent"
+deactivate ":Motorent"
+deactivate user
+
+@enduml

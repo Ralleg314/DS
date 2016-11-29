@@ -1,0 +1,43 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 6: Veure les motos que hiha en tots els locals
+actor Administrador as user
+activate user
+user ->":Motorent": veureMotos()
+activate ":Motorent"
+note right
+    ls : String
+end note
+loop l in lst_local
+":Motorent"-> "l:Locals": ls += getString(l)
+activate "l:Locals"
+note right
+    ms : String
+    disopnible : boolean
+end note
+loop m in lst_moto
+"l:Locals"->"m:Moto": disponible = IsDisponible(m):boolean
+activate "m:Moto"
+"m:Moto"->"m:Moto":disp = my_Disponible
+"l:Locals"<--"m:Moto": disp
+deactivate "m:Moto"
+alt disponible == True
+"l:Locals"->"m:Moto": sm += getString(m)
+activate "m:Moto"
+"m:Moto"->"m:Moto": getString()
+"l:Locals"<-- "m:Moto": String
+deactivate "m:Moto"
+end
+end loop
+":Motorent"<--"l:Locals": String
+deactivate "l:Locals"
+end loop
+":Motorent" -> ":Vista": escriureString(ls)
+activate ":Vista"
+":Vista"->":Vista": escriureString(ls)
+":Motorent"<--":Vista"
+deactivate ":Vista"
+user <- ":Motorent"
+deactivate ":Motorent"
+deactivate user
+@enduml

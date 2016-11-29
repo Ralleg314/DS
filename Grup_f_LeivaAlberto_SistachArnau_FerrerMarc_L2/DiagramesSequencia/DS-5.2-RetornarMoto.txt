@@ -1,0 +1,29 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 5.2: Retornar la moto al local desti
+activate ":Motorent"
+->":Motorent":comprovarRetard(r:Reserva)
+note right
+    actual : Data
+    DDevol : Data
+end note
+":Motorent"-> ":Vista": actual = LlegirData()
+activate ":Vista"
+":Vista"->":Vista": LlegirDataSistema()
+":Motorent"<--":Vista": data
+deactivate ":Vista"
+":Motorent"->"r:Reserva": DDevol = getDatadevolucio(r)
+activate "r:Reserva"
+"r:Reserva"->"r:Reserva": return my_DDevol
+":Motorent"<--"r:Reserva" :DDevol
+deactivate "r:Reserva"
+opt actual - DDevol > 0
+":Motorent"-> "r:Reserva": setRetard(actual,DDevol)
+activate "r:Reserva"
+"r:Reserva"->"r:Reserva": my_retard = actual - DDevol
+":Motorent"<--"r:Reserva"
+deactivate "r:Reserva"
+end
+<--":Motorent"
+deactivate ":Motorent"
+@enduml

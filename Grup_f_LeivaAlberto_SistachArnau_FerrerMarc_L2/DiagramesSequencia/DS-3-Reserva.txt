@@ -1,0 +1,178 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 3: Fer la reserva d'una moto
+actor Client as user
+activate user
+user ->":Motorent": ferReserva()
+activate ":Motorent"
+note right
+    origen:Local
+    desti:local 
+    dataRealitzacio:Data
+    dataRecollida: Data
+    dataDevolucio: Data
+    motoR:Moto
+end note
+":Motorent"->"cl:Client":r = crearReserva()
+activate "cl:Client"
+create "r:Reserva"
+"cl:Client"->"r:Reserva":create
+activate "r:Reserva"
+"cl:Client"<--"r:Reserva"
+deactivate "r:Reserva"
+":Motorent"<--"cl:Client"
+deactivate "cl:Client"
+":Motorent"->":Motorent":origen = seleccionarLocal()
+note right
+    DS 3.1
+end note
+":Motorent"->":Motorent":desti = seleccionarLocal()
+note right
+    DS 3.1
+end note
+":Motorent"->"r:Reserva": setLocalOrigent(origen)
+activate "r:Reserva"
+"r:Reserva"->"r:Reserva": my_localOrigen = origen
+":Motorent"<--"r:Reserva"
+deactivate "r:Reserva"
+
+":Motorent"->"r:Reserva": setLocalDesti(desti)
+activate "r:Reserva"
+"r:Reserva"->"r:Reserva": my_localDesti = desti
+":Motorent"<--"r:Reserva"
+deactivate "r:Reserva"
+
+":Motorent"->":Motorent":motoR = seleccionarMoto(origen)
+note right
+    DS 3.2
+end note
+
+":Motorent"->"r:Reserva": setMotoReservada(motoR)
+activate "r:Reserva"
+"r:Reserva"->"r:Reserva": my_moto = motoR
+":Motorent"<--"r:Reserva"
+deactivate "r:Reserva"
+
+":Motorent"->"origen:Local": setNoDisponible(motoR)
+activate "origen:Local"
+"origen:Local"->"motoR:Moto": setNoDisponible(motoR)
+activate "motoR:Moto"
+"motoR:Moto"->"motoR:Moto": my_Disponible = False
+"origen:Local"<--"motoR:Moto"
+deactivate "motoR:Moto"
+":Motorent"<--"origen:Local"
+deactivate "origen:Local"
+
+create "dataRecollida:Data"
+":Motorent"-> "dataRecollida:Data": create
+activate "dataRecollida:Data"
+":Motorent"<-- "dataRecollida:Data"
+deactivate "dataRecollida:Data"
+
+":Motorent"->":Vista": dia = demanarDia()
+activate ":Vista"
+":Vista"->":Vista":llegirInt()
+":Motorent"<--":Vista": Int
+deactivate ":Vista"
+":Motorent"-> "dataRecollida:Data": setDia(dia)
+activate "dataRecollida:Data"
+"dataRecollida:Data"->"dataRecollida:Data": my_dia = dia
+":Motorent"<-- "dataRecollida:Data"
+deactivate "dataRecollida:Data"
+
+":Motorent"->":Vista": mes = demanarMes()
+activate ":Vista"
+":Vista"->":Vista":llegirInt()
+":Motorent"<--":Vista": Int
+deactivate ":Vista"
+":Motorent"-> "dataRecollida:Data": setMes(mes)
+activate "dataRecollida:Data"
+"dataRecollida:Data"->"dataRecollida:Data": my_mes = mes
+":Motorent"<-- "dataRecollida:Data"
+deactivate "dataRecollida:Data"
+
+":Motorent"->":Vista": any = demanarAny()
+activate ":Vista"
+":Vista"->":Vista":llegirInt()
+":Motorent"<--":Vista": Int
+deactivate ":Vista"
+":Motorent"-> "dataRecollida:Data": setAny(any)
+activate "dataRecollida:Data"
+"dataRecollida:Data"->"dataRecollida:Data": my_any = any
+":Motorent"<-- "dataRecollida:Data"
+deactivate "dataRecollida:Data"
+
+create "dataDevolucio:Data"
+":Motorent"-> "dataDevolucio:Data": create
+activate "dataDevolucio:Data"
+":Motorent"<-- "dataDevolucio:Data"
+deactivate "dataDevolucio:Data"
+
+":Motorent"->":Vista": dia = demanarDia()
+activate ":Vista"
+":Vista"->":Vista":llegirInt()
+":Motorent"<--":Vista": Int
+deactivate ":Vista"
+":Motorent"-> "dataDevolucio:Data": setDia(dia)
+activate "dataDevolucio:Data"
+"dataDevolucio:Data"->"dataDevolucio:Data": my_dia = dia
+":Motorent"<-- "dataDevolucio:Data"
+deactivate "dataDevolucio:Data"
+
+":Motorent"->":Vista": mes = demanarMes()
+activate ":Vista"
+":Vista"->":Vista":llegirInt()
+":Motorent"<--":Vista": Int
+deactivate ":Vista"
+":Motorent"-> "dataDevolucio:Data": setMes(mes)
+activate "dataDevolucio:Data"
+"dataDevolucio:Data"->"dataDevolucio:Data": my_mes = mes
+":Motorent"<-- "dataDevolucio:Data"
+deactivate "dataDevolucio:Data"
+
+":Motorent"->":Vista": any = demanarAny()
+activate ":Vista"
+":Vista"->":Vista":llegirInt()
+":Motorent"<--":Vista": Int
+deactivate ":Vista"
+":Motorent"-> "dataDevolucio:Data": setAny(any)
+activate "dataDevolucio:Data"
+"dataDevolucio:Data"->"dataDevolucio:Data": my_any = any
+":Motorent"<-- "dataDevolucio:Data"
+deactivate "dataDevolucio:Data"
+
+":Motorent"->":Vista": dataRealitzacio = getDadaSistema()
+activate ":Vista"
+":Vista"->":Vista":LlegeixDataSistema()
+":Motorent"<--":Vista": Data
+deactivate ":Vista"
+
+":Motorent"->"r:Reserva": setDataRealitzacio(dataRealitzacio)
+activate "r:Reserva"
+"r:Reserva"->"r:Reserva": my_dataR = dataRealitzacio
+":Motorent"<--"r:Reserva"
+deactivate "r:Reserva"
+
+":Motorent"->"r:Reserva": setDataRecollida(dataRecollida)
+activate "r:Reserva"
+"r:Reserva"->"r:Reserva": my_dataRc = dataRecollida
+":Motorent"<--"r:Reserva"
+deactivate "r:Reserva"
+
+
+":Motorent"->"r:Reserva": setDataDevolucio(dataDevolucio)
+activate "r:Reserva"
+"r:Reserva"->"r:Reserva": my_dataD = dataDevolucio
+":Motorent"<--"r:Reserva"
+deactivate "r:Reserva"
+
+":Motorent"->"r:Reserva": codi = getCodi()
+activate "r:Reserva"
+"r:Reserva"->"r:Reserva": return my_Codi
+":Motorent"<--"r:Reserva": my_codi
+deactivate "r:Reserva"
+
+user <--":Motorent": codi
+deactivate ":Motorent"
+deactivate user
+@enduml

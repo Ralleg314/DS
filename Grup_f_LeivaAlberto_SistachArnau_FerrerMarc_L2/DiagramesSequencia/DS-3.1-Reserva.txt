@@ -1,0 +1,43 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 3.1: Fer la reserva d'una moto
+->":Motorent":seleccionarLocal()
+activate ":Motorent"
+note right
+    s:String
+    idLocal:int
+    trobat:boolean
+    trobat = False
+    local = Local
+end note
+loop l in lst_local
+":Motorent" -> "l:Local": s += imprimirLocal(l)
+activate "l:Local"
+"l:Local"->"l:Local":generarString()
+":Motorent"<--"l:Local": String
+deactivate "l:Local"
+end loop
+":Motorent"->":Vista": escriureString(s)
+activate ":Vista"
+":Vista"->":Vista":escriuString(s)
+":Motorent"<--":Vista"
+deactivate ":Vista"
+":Motorent"->":Vista": idLocal = demanarLocal()
+activate ":Vista"
+":Vista"->":Vista":llegirInt()
+":Motorent"<--":Vista": int
+deactivate ":Vista"
+
+loop l in lst_local and not trobat
+":Motorent"->"l:Local": trobat = checkLocal(idLocal)
+activate "l:Local"
+"l:Local"->"l:Local": check = idLocal == my_idLocal
+":Motorent"<--"l:Local": check
+deactivate "l:Local"
+note over ":Motorent"
+    local = l
+end note
+end loop
+<--":Motorent": local
+deactivate ":Motorent"
+@enduml

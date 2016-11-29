@@ -1,0 +1,64 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 2: Logar usuari en el sistema
+actor Persona as user
+activate user
+user->":Motorent":login()
+activate ":Motorent"
+note right
+    u : Usuari
+    existeix : boolean
+    existeix = False
+    UserID = String
+    password = String
+end note
+":Motorent" -> ":Vista": UserID = demanarUsuari()
+activate ":Vista"
+":Vista"->":Vista": llegirString()
+":Motorent"<--":Vista": UserID
+deactivate ":Vista"
+":Motorent" ->":Vista": password = demanarPassword()
+activate ":Vista"
+":Vista"->":Vista": password = llegirString()
+":Motorent"<--":Vista": password
+deactivate ":Vista"
+
+loop (us in lst_usuari) and (not existeix)
+":Motorent" -> "us:Usuari": existeix := checkUser(UserID,password):boolean
+activate "us:Usuari"
+"us:Usuari" -> "us:Usuari": check:= UserID == my_UserID \n&&\n password == My_Password
+"us:Usuari" --> ":Motorent": check
+note over ":Motorent"
+    u = us
+end note
+deactivate "us:Usuari"
+end
+alt existeix == True
+alt u instanceof Client
+":Motorent"->":Vista":mostrarMenuClient()
+activate ":Vista"
+":Motorent"<--":Vista"
+deactivate ":Vista"
+else u instance of Gerent
+":Motorent"->":Vista":mostrarMenuGerent()
+activate ":Vista"
+":Motorent"<--":Vista"
+deactivate ":Vista"
+else u instance of Admin
+":Motorent"->":Vista":mostrarMenuAdmin()
+activate ":Vista"
+":Motorent"<--":Vista"
+deactivate ":Vista"
+end
+else
+":Motorent"->":Vista":mostrarErrorLogin()
+activate ":Vista"
+":Vista"->":Vista": escriu(String("Usuari o password incorrecte"))
+":Motorent"<--":Vista"
+deactivate ":Vista"
+end
+
+":Motorent" --> user
+deactivate ":Motorent"
+deactivate user
+@enduml

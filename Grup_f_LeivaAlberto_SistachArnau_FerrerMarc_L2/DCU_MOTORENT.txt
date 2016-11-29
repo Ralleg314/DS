@@ -1,0 +1,93 @@
+﻿@startuml
+
+title Diagrama de casos d'ús de <b>MOTORENT</b>
+
+
+header
+Ferrer, Leiva, Sistach
+endheader
+
+center footer Disseny de Software 2015-16. Maria Salamo
+
+left to right direction 
+
+skinparam packageStyle rect
+
+actor Usuari as user <<Client>> #red
+
+actor Usuarinoregistrat as notuser <<Usuari no registrat>> 
+
+actor Gerent as gerent #lightgreen
+
+actor Administrador as administrador #lightblue
+
+actor Temps as temps #blue
+
+rectangle MOTORENT{
+
+(1. Registrar-se) as registre
+
+(2.Log In) as login
+
+(3. Donar-se de baixa) as baja
+
+(4. Reserva) as RES 
+
+(5. Modificar Local Destí) as MOD_LOCAL
+
+(6.Entregar Moto) as ent_m
+
+(7.Recollir Moto) as rec_m
+
+(8.Gestionar Local) as reg_local
+
+(9.Generar Informe Mensual) as gen_inf
+
+(10.Veure motos de tots els locals) as ver_moto
+
+(11.Escollir Local) as es_lc
+
+(12.Client Vip) as cl_vip
+
+'USUARI NO REGISTRAT'
+
+notuser -> registre
+
+'USUARI'
+
+user -> login
+
+user ->baja
+
+user -> RES 
+
+user -> MOD_LOCAL
+
+MOD_LOCAL <.. RES: extends
+
+RES ..> es_lc: includes
+
+MOD_LOCAL ..> es_lc: includes
+
+
+'GERENT'
+
+gerent -> ent_m
+
+gerent -> rec_m
+
+gerent -> reg_local
+
+reg_local ..> es_lc: includes
+
+'ADMINISTRADOR'
+
+administrador -> gen_inf
+
+administrador -> ver_moto
+
+'TEMPS'
+
+temps -> cl_vip
+}
+@enduml

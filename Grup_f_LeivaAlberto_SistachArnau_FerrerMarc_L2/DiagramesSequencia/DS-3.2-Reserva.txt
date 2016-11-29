@@ -1,0 +1,59 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 3.2: Fer la reserva d'una moto
+->":Motorent":seleccionarMoto(l:Local)
+activate ":Motorent"
+note right
+    moto:Moto
+    l:Local
+    s:String
+    idMoto:Int
+end note
+":Motorent"->"l:Local": s = imprimirMotos(l)
+activate "l:Local"
+note right
+    s:String
+end note
+loop m in lst_moto
+"l:Local" -> "m:Moto": s += imprimirMoto(m)
+activate "m:Moto"
+"m:Moto"->"m:Moto":generarString()
+"l:Local"<--"m:Moto": String
+deactivate "m:Moto"
+end loop
+":Motorent"<--"l:Local": s
+deactivate "l:Local"
+
+":Motorent"->":Vista": escriureString(s)
+activate ":Vista"
+":Vista"->":Vista":escriuString(s)
+":Motorent"<--":Vista"
+deactivate ":Vista"
+":Motorent"->":Vista": idMoto = demanarIDMoto()
+activate ":Vista"
+":Vista"->":Vista":llegirInt()
+":Motorent"<--":Vista": int
+deactivate ":Vista"
+
+":Motorent"->"l:Local": moto = seleccionarMoto(idMoto,l)
+activate "l:Local"
+note right
+    trobat:boolean
+    trobat= False
+    mt:Moto
+end note
+loop m in lst_moto and not trobat
+"l:Local"->"m:Moto": trobat = checkIDMoto(idMoto)
+activate "m:Moto"
+"m:Moto"->"m:Moto": check = idMoto == my_idMoto
+"l:Local"<--"m:Moto":check
+deactivate "m:Moto"
+note over "l:Local"
+    mt = m
+end note
+end loop
+":Motorent"<--"l:Local": mt
+deactivate "l:Local"
+<--":Motorent": moto
+deactivate ":Motorent"
+@enduml

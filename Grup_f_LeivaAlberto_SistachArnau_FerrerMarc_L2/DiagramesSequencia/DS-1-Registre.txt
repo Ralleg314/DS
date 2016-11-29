@@ -1,0 +1,57 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 1: Registrar un usuari en el sistema
+actor Persona as user
+activate user
+user ->":Motorent": Registre()
+note right
+	UserID:String
+	u : Usuari
+	existeix: boolean
+end note
+activate ":Motorent"
+":Motorent" ->":Vista": UserID = demanarUsuari()
+activate ":Vista"
+":Vista"-> ":Vista":llegirString()
+":Motorent"<--":Vista" :UserID
+deactivate ":Vista"
+loop (us in lst_usuari) and (not existeix)
+":Motorent" -> "us:Usuari": existeix := existeix_usuari(UserID):boolean
+activate "us:Usuari"
+"us:Usuari" -> "us:Usuari": check:= UserID == my_UserID
+"us:Usuari" --> ":Motorent": check
+deactivate "us:Usuari"
+end
+alt existeix = false
+
+create "u:Usuari" 
+":Motorent"->"u:Usuari" :create
+activate "u:Usuari"
+":Motorent"<--"u:Usuari": 
+deactivate "u:Usuari"
+
+":Motorent"->":Motorent": demanarDades(u)
+
+note right
+	DS 1.1
+end note
+
+":Motorent"->":Motorent": guardarUsuari(u)
+
+":Motorent" ->":Vista" : mostrarMenuUsuari()
+activate ":Vista"
+":Motorent" <-- ":Vista"
+deactivate ":Vista"
+
+else existeix == True
+
+":Motorent" ->":Vista" : mostrarError Registre()
+activate ":Vista"
+":Motorent" <-- ":Vista"
+deactivate ":Vista"
+
+end
+user <-- ":Motorent"
+deactivate ":Motorent"
+deactivate user
+@enduml

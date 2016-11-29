@@ -1,0 +1,63 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 4: Lliurar la moto reservada a un client
+actor Gerent as user
+activate user
+user ->":Motorent": EntregarMoto()
+activate ":Motorent"
+note right
+	c:Int
+	r:Reserva
+	m:Moto
+end note
+":Motorent"->":Vista": c=DemanarCodi()
+activate ":Vista"
+":Vista" -> ":Vista" : llegirint()
+":Vista" --> ":Motorent"
+deactivate ":Vista"
+":Motorent" -> "lo:Local": r = comprovarCodi(c)
+activate "lo:Local"
+note right
+	checkcodi:boolean
+	trobat:boolean
+	trobat = false
+	res:Reserva
+end note
+loop (re in lst_reserva) && (trobat = false)
+"lo:Local" -> "re:Reserva" : checkcodi= comprovarcodi(c):boolean
+activate "re:Reserva"
+"re:Reserva" -> "re:Reserva" : check = my_cody == c
+
+"re:Reserva" --> "lo:Local" : check
+deactivate "re:Reserva"
+opt check == True
+"lo:Local" -> "lo:Local": res = re && trobat= True
+end
+end loop
+
+"lo:Local" --> ":Motorent" : r
+deactivate "lo:Local"
+":Motorent"->"lo:Local":m = getMoto(r)
+activate "lo:Local"
+"lo:Local" ->"r:Reserva": m = getMoto(r)
+activate "r:Reserva"
+"r:Reserva" -> "r:Reserva": return my_moto
+"r:Reserva"-->"lo:Local": my_moto
+deactivate "r:Reserva"
+"lo:Local"->":Motorent": m
+deactivate "lo:Local"
+
+":Motorent"->"lo:Local": removeMoto(m)
+activate "lo:Local"
+"lo:Local"-> "m:Moto": remove(m)
+activate "m:Moto"
+"m:Moto"->"m:Moto": my_disponible = False
+"lo:Local"<--"m:Moto"
+deactivate "m:Moto"
+":Motorent"<--"lo:Local"
+deactivate "lo:Local"
+
+":Motorent" --> user
+deactivate ":Motorent"
+deactivate user
+@enduml

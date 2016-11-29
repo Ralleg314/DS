@@ -1,0 +1,247 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 1.1: Registrar un usuari en el sistema
+activate ":Motorent"
+->":Motorent":demanarDades(u:Usuari)
+note over ":Motorent"
+	d:Data
+	direccio: Adreça
+	cc:ComptaCorrent
+	username: String
+	password: String
+	nom: String
+	cognom:String
+	DNI:String
+	tel: Int
+	correu: String
+	dia: Int
+	mes: Int
+	any: Int
+	carrer: String
+	numero: Int
+	poblacio: String
+	provincia: String
+	cp: Int
+	numcc: Int
+end note
+":Motorent"->":Vista": username = demanarUser()
+activate ":Vista"
+":Vista"->":Vista": llegirString()
+":Motorent"<--":Vista" :username
+deactivate ":Vista"
+":Motorent" -> "u:Usuari": setUserName(username)
+activate "u:Usuari"
+"u:Usuari"->"u:Usuari" : my_username = username
+":Motorent"<-- "u:Usuari"
+deactivate "u:Usuari"
+
+":Motorent"->":Vista": password = demanarPassword()
+activate ":Vista"
+":Vista"->":Vista": llegirString()
+":Motorent"<--":Vista" :password
+deactivate ":Vista"
+":Motorent" -> "u:Usuari": setPassword(password)
+activate "u:Usuari"
+"u:Usuari"->"u:Usuari" : my_password = password
+":Motorent"<-- "u:Usuari"
+deactivate "u:Usuari"
+
+":Motorent"->":Vista": nom = demanarNom()
+activate ":Vista"
+":Vista"->":Vista": llegirString()
+":Motorent"<--":Vista" :nom
+deactivate ":Vista"
+":Motorent" -> "u:Usuari": setNom(nom)
+activate "u:Usuari"
+"u:Usuari"->"u:Usuari" : my_nom = nom
+":Motorent"<-- "u:Usuari"
+deactivate "u:Usuari"
+
+":Motorent"->":Vista": cognom = demanarCognom()
+activate ":Vista"
+":Vista"->":Vista": llegirString()
+":Motorent"<--":Vista" :cognom
+deactivate ":Vista"
+":Motorent" -> "u:Usuari": setCognom(cognom)
+activate "u:Usuari"
+"u:Usuari"->"u:Usuari" : my_cognom = cognom
+":Motorent"<-- "u:Usuari"
+deactivate "u:Usuari"
+
+":Motorent"->":Vista": DNI = demanarDNI()
+activate ":Vista"
+":Vista"->":Vista": llegirString()
+":Motorent"<--":Vista" :DNI
+deactivate ":Vista"
+":Motorent"->"u:Usuari": setDNI(DNI)
+activate "u:Usuari"
+"u:Usuari"->"u:Usuari" : my_DNI = DNI
+":Motorent"<-- "u:Usuari"
+deactivate "u:Usuari"
+
+":Motorent"->":Vista": tel = demanarTelefon()
+activate ":Vista"
+":Vista"->":Vista": llegirInt()
+":Motorent"<--":Vista" :tel
+deactivate ":Vista"
+":Motorent" -> "u:Usuari": setTelefon(tel)
+activate "u:Usuari"
+"u:Usuari"->"u:Usuari" : my_tel = tel
+":Motorent"<-- "u:Usuari"
+deactivate "u:Usuari"
+
+":Motorent"->":Vista": correu = demanarCorreu()
+activate ":Vista"
+":Vista"->":Vista": llegirString()
+":Motorent"<--":Vista" :correu
+deactivate ":Vista"
+":Motorent" -> "u:Usuari": setCorreu(correu)
+activate "u:Usuari"
+"u:Usuari"->"u:Usuari" : my_correu = correu
+":Motorent"<-- "u:Usuari"
+deactivate "u:Usuari"
+
+create "d:Data"
+":Motorent"-> "d:Data" :create
+activate "d:Data"
+":Motorent"<--"d:Data": 
+deactivate "d:Data"
+
+":Motorent"->":Vista": dia = demanarDia()
+activate ":Vista"
+":Vista"->":Vista": llegirInt()
+":Motorent"<--":Vista" :dia
+deactivate ":Vista"
+":Motorent" -> "d:Data": setDia(dia)
+activate "d:Data"
+"d:Data"->"d:Data" : my_dia = dia
+":Motorent"<-- "d:Data"
+deactivate "d:Data"
+
+":Motorent"->":Vista": mes = demanarMes()
+activate ":Vista"
+":Vista"->":Vista": llegirInt()
+":Motorent"<--":Vista" :mes
+deactivate ":Vista"
+":Motorent" -> "d:Data": setMes(mes)
+activate "d:Data"
+"d:Data"->"d:Data" : my_mes = mes
+":Motorent"<-- "d:Data"
+deactivate "d:Data"
+
+":Motorent"->":Vista": any = demanarAny()
+activate ":Vista"
+":Vista"->":Vista": llegirInt()
+":Motorent"<--":Vista" :any
+deactivate ":Vista"
+":Motorent" -> "d:Data": setAny(any)
+activate "d:Data"
+"d:Data"->"d:Data" : my_any = any
+":Motorent"<-- "d:Data"
+deactivate "d:Data"
+
+":Motorent" -> "u:Usuari": setDataN(d)
+activate "u:Usuari"
+"u:Usuari"->"u:Usuari" : my_data = d
+":Motorent"<-- "u:Usuari"
+deactivate "u:Usuari"
+
+create "a:Adreça"
+":Motorent"-> "a:Adreça" :create
+activate "a:Adreça"
+":Motorent"<--"a:Adreça": 
+deactivate "a:Adreça"
+
+":Motorent"->":Vista": carrer = demanarCarrer()
+activate ":Vista"
+":Vista"->":Vista": llegirString()
+":Motorent"<--":Vista" :carrer
+deactivate ":Vista"
+":Motorent" -> "a:Adreça": setCarrer(carrer)
+activate "a:Adreça"
+"a:Adreça"->"a:Adreça" : my_carrer = carrer
+":Motorent"<-- "a:Adreça"
+deactivate "a:Adreça"
+
+
+":Motorent"->":Vista": numero = demanarNumero()
+activate ":Vista"
+":Vista"->":Vista": llegirInt()
+":Motorent"<--":Vista" :numero
+deactivate ":Vista"
+":Motorent" -> "a:Adreça": setNumero(numero)
+activate "a:Adreça"
+"a:Adreça"->"a:Adreça" : my_numero = numero
+":Motorent"<-- "a:Adreça"
+deactivate "a:Adreça"
+
+
+":Motorent"->":Vista": poblacio = demanarPoblacio()
+activate ":Vista"
+":Vista"->":Vista": llegirString()
+":Motorent"<--":Vista" :poblacio
+deactivate ":Vista"
+":Motorent" -> "a:Adreça": setPoblacio(poblacio)
+activate "a:Adreça"
+"a:Adreça"->"a:Adreça" : my_poblacio = poblacio
+":Motorent"<-- "a:Adreça"
+deactivate "a:Adreça"
+
+
+":Motorent"->":Vista": provincia = demanarProvincia()
+activate ":Vista"
+":Vista"->":Vista": llegirString()
+":Motorent"<--":Vista" :provincia
+deactivate ":Vista"
+":Motorent" -> "a:Adreça": setProvincia(provincia)
+activate "a:Adreça"
+"a:Adreça"->"a:Adreça" : my_provincia = provincia
+":Motorent"<-- "a:Adreça"
+deactivate "a:Adreça"
+
+
+":Motorent"->":Vista": cp = demanarCP()
+activate ":Vista"
+":Vista"->":Vista": llegirInt()
+":Motorent"<--":Vista" :cp
+deactivate ":Vista"
+":Motorent" -> "a:Adreça": setCP(cp)
+activate "a:Adreça"
+"a:Adreça"->"a:Adreça" : my_cp = cp
+":Motorent"<-- "a:Adreça"
+deactivate "a:Adreça"
+
+
+":Motorent" -> "u:Usuari": setDireccio(a)
+activate "u:Usuari"
+"u:Usuari"->"u:Usuari" : my_direccio = a
+":Motorent"<-- "u:Usuari"
+deactivate "u:Usuari"
+
+
+create "cc:ComptaCorrent"
+":Motorent"-> "cc:ComptaCorrent" :create
+activate "cc:ComptaCorrent"
+":Motorent"<--"cc:ComptaCorrent": 
+deactivate "cc:ComptaCorrent"
+
+":Motorent"->":Vista": numcc = demanarNumCC()
+activate ":Vista"
+":Vista"->":Vista": llegirInt()
+":Motorent"<--":Vista" :numcc
+deactivate ":Vista"
+":Motorent" -> "cc:ComptaCorrent": setNumCC(numcc)
+activate "cc:ComptaCorrent"
+"cc:ComptaCorrent"->"cc:ComptaCorrent" : my_numcc = numcc
+":Motorent"<-- "cc:ComptaCorrent"
+deactivate "cc:ComptaCorrent"
+
+":Motorent" -> "u:Usuari": setComptaCorrent(cc)
+activate "u:Usuari"
+"u:Usuari"->"u:Usuari" : my_comptacorrent = cc
+":Motorent"<-- "u:Usuari"
+deactivate "u:Usuari"
+<--":Motorent"
+deactivate ":Motorent"
+@enduml
+

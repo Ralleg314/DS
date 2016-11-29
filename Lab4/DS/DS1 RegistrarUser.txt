@@ -8,57 +8,54 @@ end legend
 actor Usuari_No_Registrat as usuari
 activate usuari
 
+participant ":Menu" as menu
 participant ":TotSeries" as TS
-participant "us:Usuari" as us
-participant ":Vista" as menu
+participant ":Dades" as dades
+participant ":Usuari_registrat" as us 
 
-usuari -> TS: ID= intentaRegistrar(nom)
-note right
-    ID: String
-    exiteix: boolean
-end note
-activate TS
-
-loop (us in lst_usuari) and (not existeix)
-TS -> us: existeix:= existeixUsuari(ID):boolean
-activate us
-us -> us: check ID == my_ID
-us --> TS: check
-deactivate us
-end
-
-opt existeix = false
-note over TS
-    nom: String
-    password: String
-    nacionalitat: String
-    naixement: Date
-end note
-
-TS -> us: create
-activate us
-us -> menu: escriu(s:String): nom, nacionalitat, password
+usuari -> menu
 activate menu
-
-
-menu -> menu: nom=llegeixString(nom)
-menu -> menu: nacionalitat=llegeixString(nacionalitat)
-menu -> menu: password=llegeixString(password)
-menu -> menu: naixement=llegeixDateSistema()
-menu --> us
-deactivate menu
-
-TS <- us: registrarUsuari(nom,nacionalitat,naixement,password)
-us --> TS: Registre finalitzat
-deactivate us
-TS --> usuari: Registrat
-
-else existeix = true 
-
-TS --> usuari: Err: Already registered
-deactivate TS
-deactivate usuari
+menu -> menu: op=llegeixInt()
+opt op==1
+    |||
+    menu -> menu: nom=llegeixString(nom)
+    menu -> menu: nom=llegeixString(id)
+    menu -> menu: nacionalitat=llegeixString(nacionalitat)
+    menu -> menu: password=llegeixString(password)
+    menu -> menu: naixement=llegeixDateSistema()
+    menu -> TS: registrarUsuari(nom,id, nacionalitat, naixament, password)
+    activate TS
+    
+    TS -> dades : existeixUsuari(id)
+    dades ---> TS : existeix
+    
+    
+    
+    opt existeix == False
+    
+    TS -> dades : registrarUsuari(nom,id, nacionalitat, naixament, password)
+    activate dades
+    dades -> us : usuari_registrat(nom,id, nacionalitat, naixament, password)
+    activate us
+    us ---> dades : Usuari_registrat
+    deactivate us
+    dades ---> TS
+    deactivate dades
+    TS ---> menu
+    deactivate TS
+    menu ---> usuari
+    
+    else
+    
+    activate TS
+    TS ---> menu
+    deactivate TS
+    menu -> menu : escriu("L'usuari ja existeix")
+    menu ---> usuari
+    deactivate menu
+    deactivate usuari
+    end
+    |||
 end
-
 @enduml
 

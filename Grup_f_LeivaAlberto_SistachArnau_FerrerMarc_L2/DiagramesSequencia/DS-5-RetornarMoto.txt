@@ -1,0 +1,84 @@
+@startuml
+hide footbox
+title Diagrama de sequencia del cas d'us 5: Retornar la moto al local desti
+actor Gerent as user
+activate user 
+user->":Motorent": RetornarMoto()
+activate ":Motorent"
+note right
+	c:Int
+	r:Reserva
+	m:Moto
+	desp:boolean
+end note
+":Motorent"->":Vista": c = DemanarCodi()
+activate ":Vista"
+":Vista"->":Vista": llegirInt()
+":Motorent"<--":Vista": int
+deactivate ":Vista"
+":Motorent"-> "l:Local": r = ComprovarCodi(c)
+activate "l:Local"
+note right
+	checkcodi:boolean
+	res:Reserva
+	trobat:boolean
+	trobat = False
+end note
+loop re in lst_reserva && trobat = False
+"l:Local"->"re:Reserva": checkcodi = comprovarcodi(c):boolean
+activate "re:Reserva"
+"re:Reserva"->"re:Reserva": check = my_codi == c
+"l:Local"<-- "re:Reserva": check
+deactivate "re:Reserva"
+opt check == True
+"l:Local" -> "l:Local": res = re && trobat = True
+end
+end loop
+":Motorent"<--"l:Local": res
+deactivate "l:Local"
+":Motorent"-> "l:Local": m = getMoto(r)
+activate "l:Local"
+"l:Local"-> "r:Reserva": m = getMoto(r)
+activate "r:Reserva"
+"r:Reserva"->"r:Reserva": return my_moto
+"l:Local"<-- "r:Reserva": my_moto
+deactivate "r:Reserva"
+":Motorent"<--"l:Local": m
+deactivate "l:Local"
+":Motorent"-> "l:Local": addMoto(m)
+activate "l:Local"
+"l:Local"->"l:Local": add(m)
+":Motorent"<--"l:Local"
+deactivate "l:Local"
+":Motorent"->":Motorent": desp = comprovarDesperfectes(m):boolean
+note right
+    DS 5.1
+end note
+":Motorent"->":Motorent" :comprovarRetard(r)
+note right
+    DS 5.2
+end note
+opt desp == True
+":Motorent"-> "r:Reserva" : apuntarfalta(r)
+activate "r:Reserva"
+"r:Reserva"->"cl:Client": apuntarfalta()
+activate "cl:Client"
+"cl:Client"->"cl:Client": faltes += 1
+"r:Reserva"<--"cl:Client"
+deactivate "cl:Client"
+":Motorent"<--"r:Reserva"
+deactivate "r:Reserva"
+end
+":Motorent"->"l:Local": setDisponibilitat(m)
+activate "l:Local"
+"l:Local"-> "m:Moto": setDisponibilitat(m)
+activate "m:Moto"
+"m:Moto"->"m:Moto": my_disponible = True
+"l:Local"<--"m:Moto"
+deactivate "m:Moto"
+":Motorent"<--"l:Local"
+deactivate "l:Local"
+user <--":Motorent"
+deactivate ":Motorent"
+deactivate user
+@enduml
