@@ -21,4 +21,26 @@ public class Serie {
         this.num_temp=temporades;
         this.descripcio=descripcio;
     }
+    
+    public String toString(){
+        return titol;
+    }
+
+    public void visualitzarTemporades() {
+        for(Temporada t : temporades){
+            System.out.println(t.toString());
+        }
+    }
+
+    public void visualitzarEpisodis(int t) {
+        temporades.get(t).visualitzarEpisodis();
+    }
+
+    public void reproduirEpisodi(int t, int ep) {
+        temporades.get(t).reproduirEpisodi(ep);
+    }
+
+    void valorarEpisodi(int t, int ep, int val) {
+        temporades.get(t).valorarEpisodi(ep,val);
+    }
 }

@@ -7,6 +7,15 @@ end legend
 
 actor Usuari_No_Registrat as usuari
 activate usuari
+rnote over usuari
+    Int op 
+    String nom
+    String id 
+    String nacionalitat 
+    String password 
+    Date naixament 
+    bool existeix
+end rnote
 
 participant ":Menu" as menu
 participant ":TotSeries" as TS
@@ -15,19 +24,19 @@ participant ":Usuari_registrat" as us
 
 usuari -> menu
 activate menu
-menu -> menu: op=llegeixInt()
+menu -> menu: op:=llegeixInt()
 opt op==1
     |||
-    menu -> menu: nom=llegeixString(nom)
-    menu -> menu: nom=llegeixString(id)
-    menu -> menu: nacionalitat=llegeixString(nacionalitat)
-    menu -> menu: password=llegeixString(password)
-    menu -> menu: naixement=llegeixDateSistema()
+    menu -> menu: nom:=llegeixString(nom)
+    menu -> menu: nom:=llegeixString(id)
+    menu -> menu: nacionalitat:=llegeixString(nacionalitat)
+    menu -> menu: password:=llegeixString(password)
+    menu -> menu: naixement:=llegeixDateSistema()
     menu -> TS: registrarUsuari(nom,id, nacionalitat, naixament, password)
     activate TS
     
-    TS -> dades : existeixUsuari(id)
-    dades ---> TS : existeix
+    TS -> dades : existeix:=existeixUsuari(id)
+    dades ---> TS
     
     
     
@@ -35,7 +44,7 @@ opt op==1
     
     TS -> dades : registrarUsuari(nom,id, nacionalitat, naixament, password)
     activate dades
-    dades -> us : usuari_registrat(nom,id, nacionalitat, naixament, password)
+    dades -> us : create(nom,id, nacionalitat, naixament, password)
     activate us
     us ---> dades : Usuari_registrat
     deactivate us

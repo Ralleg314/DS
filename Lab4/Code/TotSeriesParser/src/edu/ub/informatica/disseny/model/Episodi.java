@@ -5,6 +5,7 @@
  */
 package edu.ub.informatica.disseny.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -14,6 +15,7 @@ import java.util.Date;
 public class Episodi {
     private String nom,idioma,descripcio;
     private float duracio, valoracio;
+    private ArrayList<Integer> val;
     private Date emisio;
     private Estat_episodi estat;
     
@@ -22,12 +24,26 @@ public class Episodi {
         this.idioma=idioma;
         this.descripcio=descripcio;
         this.duracio=duracio;
+        this.val=new ArrayList<>();
         this.valoracio=valoracio;
         emisio=new Date();
         
     }
     
     public void reproduirEpisodi(){
-        
+        if(estat.PENDENT){
+            reproduir();
+            //To make everything easier, we will consider that state changes to SEEN ones reproduir() ends
+            estat.VIST=true;
+        }
+    }
+
+    private void reproduir() {
+    }
+
+    void valorarEpisodi(int val) {
+        this.val.add(val);
+        valoracio+=val;
+        valoracio/=this.val.size();
     }
 }

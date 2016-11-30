@@ -12,15 +12,25 @@ import java.util.Date;
  * @author ralleg
  */
 public class Usuari_registrat extends Usuari{
-    private String nom,usuari,nacionalitat,contrasenya;
-    private boolean VIP, visualitzat;
+    private String nom,id,nacionalitat,contrasenya;
+    private boolean VIP;
     private Date naixement;
     
-    public void visualitzarEpisodi(Episodi e){
-        
+    public Usuari_registrat(String nom,String id,String nacionalitat, Date naixament,String contrasenya){
+        this.nom=nom;
+        this.id=id;
+        this.nacionalitat=nacionalitat;
+        this.contrasenya=contrasenya;
+        this.VIP=false;
+        this.naixement=naixament;
     }
-    public void valorarEpisodi(int valoracio){
-        
+    
+    public String getId(){
+        return id;
+    }
+    
+    public boolean equals(Usuari_registrat usuari){
+        return this.id.equals(usuari.getId());
     }
     
 }

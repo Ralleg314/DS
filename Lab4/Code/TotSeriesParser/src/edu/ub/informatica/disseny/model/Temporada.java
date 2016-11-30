@@ -20,4 +20,18 @@ public class Temporada {
         this.episodis=episodis;
         eps=new ArrayList<>(0);
     }
+
+    public void visualitzarEpisodis() {
+        for(Episodi ep : eps){
+            System.out.println(ep.toString());
+        }
+    }
+
+    void reproduirEpisodi(int ep) {
+        eps.get(ep).reproduirEpisodi();
+    }
+
+    void valorarEpisodi(int ep, int val) {
+        eps.get(ep).valorarEpisodi(val);
+    }
 }

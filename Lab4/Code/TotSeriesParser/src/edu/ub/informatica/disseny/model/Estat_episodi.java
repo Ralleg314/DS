@@ -13,4 +13,10 @@ public class Estat_episodi {
     boolean VIST;
     boolean REPRODUINT;
     boolean PENDENT;
+    
+    public Estat_episodi(){
+        VIST=false;
+        REPRODUINT=false;
+        PENDENT=true;
+    }
 }
