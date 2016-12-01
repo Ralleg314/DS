@@ -11,9 +11,10 @@ package edu.ub.informatica.disseny.model;
  */
 public class Administrador {
     private Afegir add;
-    private String nom,usuari,contrasenya;
+    private String id,nom,usuari,contrasenya;
     
-    public Administrador(String nom, String usuari, String contrasenya){
+    public Administrador(String id,String nom, String usuari, String contrasenya){
+        this.id=id;
         this.nom=nom;
         this.usuari=usuari;
         this.contrasenya=contrasenya;

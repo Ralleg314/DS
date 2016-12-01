@@ -18,11 +18,27 @@ public class Serie {
     private ArrayList<Artista> artistes;
     private Productora productora;
     
+    public Serie(){
+        temporades=new ArrayList<>();
+        artistes=new ArrayList<>();
+    }
+    
     public Serie(String id, String titol, String descripcio){
         this.id=id;
         this.titol=titol;
         this.num_temp=0;
         this.descripcio=descripcio;
+        temporades=new ArrayList<>();
+        artistes=new ArrayList<>();
+    }
+    
+    public void afegirTemporada(Temporada temp){
+        this.temporades.add(temp);
+        num_temp++;
+    }
+
+    void afegirEpisodi(Episodi temp, int j) {
+        this.temporades.get(j).afefirEpisodi(temp);
     }
     
     public String toString(){

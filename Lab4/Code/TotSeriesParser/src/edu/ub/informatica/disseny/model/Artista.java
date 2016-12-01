@@ -10,6 +10,13 @@ package edu.ub.informatica.disseny.model;
  * @author ralleg
  */
 public abstract class Artista {
+    private String id;
     private String nom;
     private String nacionalitat;
+    
+    public Artista(String id, String nom, String nacionalitat){
+        this.id=id;
+        this.nom=nom;
+        this.nacionalitat=nacionalitat;
+    }
 }

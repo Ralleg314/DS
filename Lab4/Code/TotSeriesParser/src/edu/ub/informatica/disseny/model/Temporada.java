@@ -34,4 +34,9 @@ public class Temporada {
     void valorarEpisodi(int ep, int val) {
         eps.get(ep).valorarEpisodi(val);
     }
+
+    void afefirEpisodi(Episodi temp) {
+        this.eps.add(temp);
+        episodis++;
+    }
 }

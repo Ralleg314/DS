@@ -10,5 +10,7 @@ package edu.ub.informatica.disseny.model;
  * @author ralleg
  */
 public class Director extends Artista{
-    
+    public Director(String id, String nom, String nacionalitat){
+        super(id,nom,nacionalitat);
+    }
 }

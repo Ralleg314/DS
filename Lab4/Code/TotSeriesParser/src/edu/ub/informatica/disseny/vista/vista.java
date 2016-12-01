@@ -5,10 +5,16 @@
  */
 package edu.ub.informatica.disseny.vista;
 
+import edu.ub.informatica.disseny.totseries.TotSeriesDataManager;
+
 /**
  *
  * @author ralleg
  */
 public class vista {
-    
+    public static void main(String[] args) {
+        TotSeriesDataManager dataManager = new TotSeriesDataManager();
+        dataManager.obtenirDades("data/TotSeries.xml");
+        
+    }
 }

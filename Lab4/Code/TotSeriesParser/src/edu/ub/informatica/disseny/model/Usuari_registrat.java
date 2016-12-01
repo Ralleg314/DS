@@ -16,13 +16,13 @@ public class Usuari_registrat extends Usuari{
     private boolean VIP;
     private Date naixement;
     
-    public Usuari_registrat(String nom,String id,String nacionalitat, Date naixament,String contrasenya){
+    public Usuari_registrat(String nom,String id,String nacionalitat,String contrasenya){
         this.nom=nom;
         this.id=id;
         this.nacionalitat=nacionalitat;
         this.contrasenya=contrasenya;
         this.VIP=false;
-        this.naixement=naixament;
+        this.naixement=new Date();
     }
     
     public String getId(){

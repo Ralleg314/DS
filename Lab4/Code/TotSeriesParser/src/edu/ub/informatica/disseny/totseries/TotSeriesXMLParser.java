@@ -99,7 +99,7 @@ public class TotSeriesXMLParser {
 				this.obtenirArtistes(eSerie, id);
                                 
                                 // Obtenim informacio de les temporades
-                                this.obtenirTemporades(eSerie, id);
+                                this.obtenirTemporades(eSerie, id, i);
 			}
 		}
 	}
@@ -156,14 +156,14 @@ public class TotSeriesXMLParser {
 	 * @param eSerie serie on buscar les temporades
 	 * @param idSerie id de la serie
 	 */
-	private void obtenirTemporades(Element eSerie, String idSerie) {
+	private void obtenirTemporades(Element eSerie, String idSerie, int i) {
 		NodeList temporades = eSerie.getElementsByTagName("temporada");
 		String numTemporada, numEpisodis;
 		int numTemporades = temporades.getLength();
 
 		// Parsejo tots els elements artist
-		for(int i=0; i<numTemporades; i++) {
-			Node temporada = temporades.item(i);
+		for(int j=0; j<numTemporades; j++) {
+			Node temporada = temporades.item(j);
 
 			if(temporada.getNodeType() == Node.ELEMENT_NODE){
                             
@@ -177,9 +177,9 @@ public class TotSeriesXMLParser {
                             Element eeEpisodi = (Element)nEpisodi.item(0);
                             numEpisodis = eeEpisodi.getTextContent();
                             
-                            dataManager.crearTemporada(numTemporada, numEpisodis);
+                            dataManager.crearTemporada(numTemporada, numEpisodis,i);
                             
-                            obtenirEpisodis(eTemporada, idSerie );
+                            obtenirEpisodis(eTemporada, idSerie,i,j);
 			}			
 		}
 	}
@@ -190,14 +190,14 @@ public class TotSeriesXMLParser {
 	 * @param eSerie serie on buscar les temporades
 	 * @param idSerie id de la serie
 	 */
-	private void obtenirEpisodis(Element eTemporada, String idSerie) {
+	private void obtenirEpisodis(Element eTemporada, String idSerie, int i, int j) {
 		NodeList episodis = eTemporada.getElementsByTagName("episodi");
 		String title,  duration,  idioma,  description,  data;
 		int numEpisodis = episodis.getLength();
 
 		// Parsejo tots els elements episodi
-		for(int i=0; i<numEpisodis; i++) {
-			Node episodi = episodis.item(i);
+		for(int k=0; k<numEpisodis; k++) {
+			Node episodi = episodis.item(k);
 
 			if(episodi.getNodeType() == Node.ELEMENT_NODE){
                             
@@ -223,7 +223,7 @@ public class TotSeriesXMLParser {
                             Element eeData = (Element)nData.item(0);
                             data = eeData.getTextContent();
                             
-                            dataManager.crearEpisodi(title,duration,idioma,description,data);
+                            dataManager.crearEpisodi(title,duration,idioma,description,data, i, j);
 			}			
 		}
 	}

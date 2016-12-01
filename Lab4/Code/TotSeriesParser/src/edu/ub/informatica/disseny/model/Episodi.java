@@ -13,20 +13,25 @@ import java.util.Date;
  * @author ralleg
  */
 public class Episodi {
-    private String nom,idioma,descripcio;
-    private float duracio, valoracio;
+    private String nom,idioma,descripcio,duracio;
+    private float valoracio;
     private ArrayList<Integer> val;
     private Date emisio;
     private Estat_episodi estat;
     
-    public Episodi(String nom, String idioma, String descripcio, float duracio, float valoracio){
+    public Episodi(){
+        this.val=new ArrayList<>();
+        this.valoracio=0;        
+    }
+    
+    public Episodi(String nom, String idioma, String descripcio, String duracio, Date data){
         this.nom=nom;
         this.idioma=idioma;
         this.descripcio=descripcio;
         this.duracio=duracio;
         this.val=new ArrayList<>();
-        this.valoracio=valoracio;
-        emisio=new Date();
+        this.valoracio=0;
+        emisio=data;
         
     }
     

@@ -5,8 +5,12 @@
  */
 package edu.ub.informatica.disseny.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +21,17 @@ public class Dades {
     ArrayList<Administrador> administradors;
     ArrayList<Serie> series;
     ArrayList<Episodi> valorats;
+    ArrayList<Productora> productores;
+    ArrayList<Artista> artistes;
+    
+    public Dades(){
+        usuaris=new ArrayList<>();
+        administradors=new ArrayList<>();
+        series=new ArrayList<>();
+        valorats=new ArrayList<>();
+        productores=new ArrayList<>();
+        artistes=new ArrayList<>();
+    }
     
     public boolean existeixUsuari(String id){
         for(Usuari_registrat us:usuaris){
@@ -27,8 +42,8 @@ public class Dades {
         return false;
     }
     
-    public void registrarUsuari(String nom, String id, String nacionalitat, Date naixament, String password){
-        usuaris.add(new Usuari_registrat( nom,  id, nacionalitat,  naixament,  password));
+    public void registrarUsuari(String nom, String id, String nacionalitat, String password){
+        usuaris.add(new Usuari_registrat( nom,  id, nacionalitat,  password));
     }
     
     public void visualitzarCataleg(){
@@ -55,5 +70,38 @@ public class Dades {
 
     public void crearSerie(String id, String title, String desc) {
         series.add(new Serie(id,title, desc));
+    }
+
+    public void crearTemporada(String numTemporada, String numEpisodis, int i) {
+        Temporada temp=new Temporada(Integer.parseInt(numTemporada),Integer.parseInt(numEpisodis));
+        series.get(i).afegirTemporada(temp);
+    }
+
+    public void crearEpisodi(String title, String duration, String idioma, String description, String data, int i, int j) {
+        
+        Date date;
+        try {
+            date = (new SimpleDateFormat("dd/mm/yyyy")).parse(data);
+            Episodi temp=new Episodi(title,idioma,description,duration,date);
+            this.series.get(i).afegirEpisodi(temp,j);
+        } catch (ParseException ex) {
+            Logger.getLogger(Dades.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void afegirAdmin(String id, String nom, String usuari, String password) {
+        this.administradors.add(new Administrador(id,nom,usuari,password));
+    }
+
+    public void afegirArtista(String tipus, String id, String nom, String idSerie, String nacionalitat) {
+        if(tipus.equals("Actor")){
+            this.artistes.add(new Actor(id,nom,nacionalitat));
+        }else{
+            this.artistes.add(new Director(id,nom,nacionalitat));
+        }
+    }
+
+    public void afegirProductora(String id, String nom, String idSerie) {
+        this.productores.add(new Productora(id,nom));
     }
 }
