@@ -12,13 +12,16 @@ import java.util.ArrayList;
  * @author ralleg
  */
 public class Serie {
-    private String titol, descripcio;
+    private String id, titol, descripcio;
     private int num_temp;
     private ArrayList<Temporada> temporades;
+    private ArrayList<Artista> artistes;
+    private Productora productora;
     
-    public Serie(String titol, int temporades, String descripcio){
+    public Serie(String id, String titol, String descripcio){
+        this.id=id;
         this.titol=titol;
-        this.num_temp=temporades;
+        this.num_temp=0;
         this.descripcio=descripcio;
     }
     

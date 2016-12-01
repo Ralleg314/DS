@@ -52,4 +52,8 @@ public class Dades {
     public void valorarEpisodi(int s, int t, int ep, int val){
         series.get(s).valorarEpisodi(t, ep, val);
     }
+
+    public void crearSerie(String id, String title, String desc) {
+        series.add(new Serie(id,title, desc));
+    }
 }

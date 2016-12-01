@@ -1,12 +1,15 @@
 package edu.ub.informatica.disseny.totseries;
 
+import edu.ub.informatica.disseny.model.Dades;
+
 /**
  * Data manager per TotSeries. Crea les estructures de dades necessàries 
  * per a manegar l'aplicació de gestió de TotSeries.
  * 
  */
 public class TotSeriesDataManager {
-
+        
+        Dades data;
 	/* -------------------------------------------------------------------
 	 * Metodes a implementar per vosaltres. En aquests metodes creareu els
 	 * vostres objectes a partir de la informacio obtinguda del fitxer XML
@@ -40,11 +43,7 @@ public class TotSeriesDataManager {
 		/*  TODO: A partir d'aqui creeu el vostre objecte que contingui la informacio
 		 *  d'una nova serie.
 		 */
-
-		System.out.println("\nSerie amb ID: " + id);
-		System.out.println("--------------------------------------------------");
-		System.out.println("Titol: " + title);
-		System.out.println("Descripció: " + desc);
+                data.crearSerie(id,title,desc);
 	}
         
         /**
@@ -60,7 +59,7 @@ public class TotSeriesDataManager {
 		/*  TODO: A partir d'aqui creeu el vostre objecte que contingui la informacio
 		 *  d'una nova temporada.
 		 */
-
+                data.crearTemporada();
 		System.out.println("Temporada: " + numTemporada + " Numero Episodis: "+ numEpisodis);
                 System.out.println("--------------------------------------------------");
 

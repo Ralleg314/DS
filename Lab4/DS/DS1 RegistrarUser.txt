@@ -27,17 +27,18 @@ activate menu
 menu -> menu: op:=llegeixInt()
 opt op==1
     |||
-    menu -> menu: nom:=llegeixString(nom)
-    menu -> menu: nom:=llegeixString(id)
-    menu -> menu: nacionalitat:=llegeixString(nacionalitat)
-    menu -> menu: password:=llegeixString(password)
+    menu -> menu: nom:=llegeixString()
+    menu -> menu: id:=llegeixString()
+    menu -> menu: nacionalitat:=llegeixString()
+    menu -> menu: password:=llegeixString()
     menu -> menu: naixement:=llegeixDateSistema()
     menu -> TS: registrarUsuari(nom,id, nacionalitat, naixament, password)
     activate TS
     
     TS -> dades : existeix:=existeixUsuari(id)
+    activate dades
     dades ---> TS
-    
+    deactivate dades
     
     
     opt existeix == False
