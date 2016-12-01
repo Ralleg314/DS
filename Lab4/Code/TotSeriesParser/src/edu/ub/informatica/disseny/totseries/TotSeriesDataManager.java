@@ -171,7 +171,7 @@ public class TotSeriesDataManager {
 
     }
 
-    void mostratCataleg() {
+    public void mostratCataleg() {
         data.visualitzarCataleg();
     }
 }
