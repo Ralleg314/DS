@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package edu.ub.informatica.disseny.vista;
+import edu.ub.informatica.disseny.totseries.Consola;
 import java.util.Scanner;
 import edu.ub.informatica.disseny.totseries.TotSeriesDataManager;
 
@@ -18,7 +19,6 @@ public class vista {
     public static void main(String[] args) {
         TotSeriesDataManager dataManager = new TotSeriesDataManager();
         dataManager.obtenirDades("data/TotSeries.xml");
-        Scanner sc=new Scanner(System.in);
         int op, op2;
         
         do{
@@ -31,21 +31,23 @@ public class vista {
             System.out.println("[5] Sortir");
             System.out.println("-----------------------");
             System.out.println("Selection: "); 
-            op=sc.nextInt();
+            op=Consola.llegeixInt();
         
             switch (op){
 
                case 1:System.out.println("Registrar-se:");
                     System.out.println("Nickname: "); 
-                    String id=sc.next();
+                    String id=Consola.llegeixString();
                     System.out.println("Nom: ");
-                    String nom= sc.next();
+                    String nom=Consola.llegeixString();
                     System.out.println("Adreça: ");
-                    String adreca= sc.next();
+                    String adreca=Consola.llegeixString();
+                    System.out.println("DNI: ");
+                    String dni=Consola.llegeixString();
                     System.out.println("Contrasenya: ");
-                    String contra= sc.next();
+                    String contra=Consola.llegeixString();
                     //obviamente esto no esta bien.
-                    dataManager.crearClient(id, nom, nom, adreca, contra, contra, id);
+                    dataManager.crearClient(nom, dni, adreca, id, contra);
                     break;
 
                 case 2:System.out.println("Visualitzar Catàleg");
@@ -54,7 +56,10 @@ public class vista {
                 
                 case 3: 
                     System.out.println("Visualitzar Episodi ");
-                    
+                    dataManager.mostratCataleg();
+                    System.out.println("Serie: ");
+                    int s=Consola.llegeixInt()-1;
+                    dataManager.mostratTemporades(s);
                     break;
                 
                 case 4:

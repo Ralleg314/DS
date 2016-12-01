@@ -167,11 +167,23 @@ public class TotSeriesDataManager {
 
             /* TODO: Creeu aqui el vostre client
              */
-            data.registrarUsuari(nom, id, usuari, password);
+            data.registrarUsuari(nom, dni, adreca,usuari, password, vip);
+
+    }
+    
+    public void crearClient(String nom, String dni, String adreca, String usuari, String password) {
+
+            /* TODO: Creeu aqui el vostre client
+             */
+            data.registrarUsuari(nom, dni, adreca,usuari, password);
 
     }
 
     public void mostratCataleg() {
         data.visualitzarCataleg();
+    }
+    
+    public void mostratTemporades(int s) {
+        data.visualitzarTemporades(s);
     }
 }

@@ -5,6 +5,7 @@
  */
 package edu.ub.informatica.disseny.model;
 
+import edu.ub.informatica.disseny.totseries.Consola;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,21 +43,36 @@ public class Dades {
         return false;
     }
     
-    public void registrarUsuari(String nom, String id, String nacionalitat, String password){
-        usuaris.add(new Usuari_registrat( nom,  id, nacionalitat,  password));
-    }
-    
     public void visualitzarCataleg(){
+        int i=1;
         for(Serie ser : series){
-            System.out.println(ser.toString());
+            System.out.println("["+i+"] "+ser.toString());
+            i++;
         }
     }
     
     public void visualitzarTemporades(int s){
-        series.get(s).visualitzarTemporades();
+        if(0<=s && s<series.size()){
+            series.get(s).visualitzarTemporades();
+            System.out.println("Temporada: ");
+            int t=Consola.llegeixInt()-1;
+            this.visualitzarEpisodis(s, t);
+        }else{
+            System.out.println("Serie no existent");
+        }
     }
     
     public void visualitzarEpisodis(int s, int t){
+        if(0<=t && t<series.get(s).getTemporades()){
+            series.get(s).visualitzarTemporades();
+            System.out.println("Episodi: ");
+            int ep=Consola.llegeixInt()-1;
+            if(0<=ep && ep<series.get(s).getTemp(t).getEpisodis()){
+                this.reproduirEpisodi(s, t, ep);
+            }
+        }else{
+            System.out.println("Temporada no existent");
+        }
         series.get(s).visualitzarEpisodis(t);
     }
     
@@ -103,5 +119,17 @@ public class Dades {
 
     public void afegirProductora(String id, String nom, String idSerie) {
         this.productores.add(new Productora(id,nom));
+    }
+
+    public void registrarUsuari(String nom, String dni, String adreca, String usuari, String password, String vip) {
+        if(!this.existeixUsuari(usuari)){
+            this.usuaris.add(new Usuari_registrat(nom,dni,adreca,usuari,password,Boolean.valueOf(vip)));
+        }
+    }
+
+    public void registrarUsuari(String nom, String dni, String adreca, String usuari, String password) {
+        if(!this.existeixUsuari(usuari)){
+            this.usuaris.add(new Usuari_registrat(nom,dni,adreca,usuari,password));
+        }
     }
 }

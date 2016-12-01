@@ -36,6 +36,14 @@ public class Serie {
         this.temporades.add(temp);
         num_temp++;
     }
+    
+    public int getTemporades(){
+        return this.num_temp;
+    }
+    
+    public Temporada getTemp(int t){
+        return this.temporades.get(t);
+    }
 
     void afegirEpisodi(Episodi temp, int j) {
         this.temporades.get(j).afefirEpisodi(temp);
@@ -46,8 +54,10 @@ public class Serie {
     }
 
     public void visualitzarTemporades() {
+        int i=1;
         for(Temporada t : temporades){
-            System.out.println(t.toString());
+            System.out.println("["+i+"] "+t.toString());
+            i++;
         }
     }
 

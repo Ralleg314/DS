@@ -12,15 +12,22 @@ import java.util.Date;
  * @author ralleg
  */
 public class Usuari_registrat extends Usuari{
-    private String nom,id,nacionalitat,contrasenya;
+    private String nom,id,contrasenya;
     private boolean VIP;
     private Date naixement;
-    
-    public Usuari_registrat(String nom,String id,String nacionalitat,String contrasenya){
+
+    Usuari_registrat(String nom, String dni, String adreca, String usuari, String password, boolean vip) {
         this.nom=nom;
-        this.id=id;
-        this.nacionalitat=nacionalitat;
-        this.contrasenya=contrasenya;
+        this.id=usuari;
+        this.contrasenya=password;
+        this.VIP=vip;
+        this.naixement=new Date();
+    }
+
+    Usuari_registrat(String nom, String dni, String adreca, String usuari, String password) {
+        this.nom=nom;
+        this.id=usuari;
+        this.contrasenya=password;
         this.VIP=false;
         this.naixement=new Date();
     }

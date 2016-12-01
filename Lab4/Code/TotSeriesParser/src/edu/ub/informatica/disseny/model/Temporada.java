@@ -22,8 +22,10 @@ public class Temporada {
     }
 
     public void visualitzarEpisodis() {
+        int i=1;
         for(Episodi ep : eps){
-            System.out.println(ep.toString());
+            System.out.println("["+i+"] "+ep.toString());
+            i++;
         }
     }
 
@@ -38,5 +40,17 @@ public class Temporada {
     void afefirEpisodi(Episodi temp) {
         this.eps.add(temp);
         episodis++;
+    }
+    
+    public int getEpisodis(){
+        return this.episodis;
+    }
+    
+    public Episodi getEp(int ep){
+        return this.eps.get(ep);
+    }
+    
+    public String toString(){
+        return Integer.toString(this.numero);
     }
 }

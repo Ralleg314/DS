@@ -5,6 +5,7 @@
  */
 package edu.ub.informatica.disseny.model;
 
+import edu.ub.informatica.disseny.totseries.Consola;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -32,7 +33,7 @@ public class Episodi {
         this.val=new ArrayList<>();
         this.valoracio=0;
         emisio=data;
-        
+        this.estat=new Estat_episodi();
     }
     
     public void reproduirEpisodi(){
@@ -44,11 +45,18 @@ public class Episodi {
     }
 
     private void reproduir() {
+        Consola.escriu("Reproduint"+this.nom);
     }
 
     void valorarEpisodi(int val) {
         this.val.add(val);
         valoracio+=val;
         valoracio/=this.val.size();
+    }
+    
+    
+    
+    public String toString(){
+        return this.nom;
     }
 }
