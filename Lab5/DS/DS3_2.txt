@@ -1,0 +1,59 @@
+
+@startuml
+
+legend top 
+    DS3 Visualitzar Episodi
+end legend
+
+actor Usuari_registrat as usuari
+activate usuari
+
+participant "Menu" as menu
+participant ":TotSeries" as TS
+participant ":Dades" as dades
+participant ":Serie" as serie
+participant ":Temporada" as temp
+participant ":Episodi" as episodi
+
+usuari -> menu
+activate menu
+menu -> menu : op=llegeixInt()
+opt op==3
+    |||
+    menu->menu : val=llegeixInt()
+    opt 0<val && val<5
+        |||
+        menu->TS : valorarEpisodi(s,t,ep,val)
+        activate TS
+        TS->dades: valorarEpisodi(s,t,ep,val)
+        activate dades
+        dades->serie: valorarEpisodi(t,ep,val)
+        activate serie
+        serie->temp: valorarEpisodi(ep,val)
+        activate temp
+        temp->episodi: valorarEpisodi(val)
+        activate episodi
+        
+        episodi--->temp
+        deactivate episodi
+        temp--->serie
+        deactivate temp
+        serie--->dades
+        deactivate serie
+        dades--->TS
+        deactivate dades
+        TS--->menu
+        deactivate TS
+        menu--->usuari
+        |||
+    else
+        |||
+        menu->menu: escriu("Valoracio no valida")
+        deactivate menu
+        |||
+    end
+    |||
+    deactivate usuari
+end
+
+@enduml

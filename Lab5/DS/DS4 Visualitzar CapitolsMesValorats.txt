@@ -1,0 +1,45 @@
+
+@startuml
+
+legend top 
+    DS4 Visualitzar CapitolsMesValorats
+end legend
+
+actor Usuari as usuari
+activate usuari
+rnote over usuari
+    Int op
+    List<Episodi> valorats
+end rnote
+
+participant ":Menu" as menu
+participant ":TotSeries" as TS
+participant "ep:Episodi" as episodi
+
+usuari -> menu
+activate menu
+menu -> menu : op:=llegeixInt()
+opt op==4
+    |||
+    menu -> TS: valorats:=veureCapitolsMesValorats()
+    activate TS
+    loop ep in episodi
+        |||
+        TS -> episodi : val:=getValoracio()
+        activate episodi
+        episodi ---> TS
+        deactivate episodi
+        |||
+    end
+    TS --> menu
+    deactivate TS
+    loop ep in valorats
+        |||
+        menu -> menu : escriu
+        |||
+    end
+    |||
+end
+deactivate usuari
+
+@enduml

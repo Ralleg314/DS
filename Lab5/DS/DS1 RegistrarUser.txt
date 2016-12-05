@@ -1,0 +1,71 @@
+
+@startuml
+
+legend top 
+    DS1 Registrar Usuari
+end legend
+
+actor Usuari_No_Registrat as usuari
+activate usuari
+rnote over usuari
+    Int op 
+    String nom
+    String id 
+    String nacionalitat 
+    String password 
+    Date naixament 
+    bool existeix
+end rnote
+
+participant ":Menu" as menu
+participant ":TotSeries" as TS
+participant ":Dades" as dades
+participant ":Usuari_registrat" as us 
+
+usuari -> menu
+activate menu
+menu -> menu: op:=llegeixInt()
+opt op==1
+    |||
+    menu -> menu: nom:=llegeixString()
+    menu -> menu: id:=llegeixString()
+    menu -> menu: nacionalitat:=llegeixString()
+    menu -> menu: password:=llegeixString()
+    menu -> menu: naixement:=llegeixDateSistema()
+    menu -> TS: registrarUsuari(nom,id, nacionalitat, naixament, password)
+    activate TS
+    
+    TS -> dades : existeix:=existeixUsuari(id)
+    activate dades
+    dades ---> TS
+    deactivate dades
+    
+    
+    opt existeix == False
+    
+    TS -> dades : registrarUsuari(nom,id, nacionalitat, naixament, password)
+    activate dades
+    dades -> us : create(nom,id, nacionalitat, naixament, password)
+    activate us
+    us ---> dades : Usuari_registrat
+    deactivate us
+    dades ---> TS
+    deactivate dades
+    TS ---> menu
+    deactivate TS
+    menu ---> usuari
+    
+    else
+    
+    activate TS
+    TS ---> menu
+    deactivate TS
+    menu -> menu : escriu("L'usuari ja existeix")
+    menu ---> usuari
+    deactivate menu
+    deactivate usuari
+    end
+    |||
+end
+@enduml
+

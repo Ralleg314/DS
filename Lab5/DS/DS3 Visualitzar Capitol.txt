@@ -1,0 +1,68 @@
+
+@startuml
+
+legend top 
+    DS3 Visualitzar Episodi
+end legend
+
+actor Usuari as usuari
+activate usuari
+
+participant ":TotSeries" as TS
+participant ":Dades" as dades
+participant ":Serie" as serie
+participant ":Temporada" as temp
+participant ":Episodi" as cap
+participant ":Estat" as estat
+participant ":Vista" as vista
+
+usuari ->TS: visualitzarEpisodi()
+activate TS
+TS -> dades: visualitzarCataleg()
+activate dades
+dades --> TS : Cataleg
+TS -> serie: escollirSerie(serie : Serie, temporada : Temporada, episodi : Episodi)
+activate serie
+serie->temp: escollirTemporada(temporada : Temporada, episodi : Episodi)
+activate temp
+temp->cap: escollirEpisodi(episodi : Episodi)
+activate cap
+cap -> estat: getEstatEpisodi(): estatEpisodi
+estat --> cap: estatEpisodi
+activate estat
+
+loop estatEpisodi != PENDENT
+    cap->cap: visualitzarEpisodi(cap)
+    cap -> estat: getEstatEpisodi(): estatEpisodi
+    estat --> cap: estatEpisodi
+    deactivate estat
+end 
+cap --> usuari: ReproduirEpisodi()
+deactivate cap
+opt estatEpisodi == Vist
+note over TS
+    episodi: Episodi
+    valoracio: Int
+end note
+
+usuari ->TS: ValorarEpisodi()
+TS -> vista: escriu(int: i): valoracio
+activate vista
+vista -> vista: Valoracio=llegeixInt(valoracio)
+vista --> TS: Valoracio
+deactivate vista
+TS -> cap: Episodi=getEpisodi()
+activate cap
+cap --> TS: Episodi
+deactivate cap
+TS --> TS: ValorarEpisodi(Episodi,Valoracio): EpisodiValorat
+TS --> usuari: EpisodiValorat
+
+else estatEpisodi==noAcabat
+TS --> usuari: Err: Impossible valorar.
+end
+deactivate dades
+deactivate TS
+deactivate usuari
+
+@enduml

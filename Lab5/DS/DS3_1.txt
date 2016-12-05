@@ -1,0 +1,72 @@
+
+@startuml
+
+legend top 
+    DS3 Visualitzar Episodi
+end legend
+
+actor Usuari_registrat as usuari
+activate usuari
+
+participant "Menu" as menu
+participant ":TotSeries" as TS
+participant ":Dades" as dades
+participant ":Serie" as serie
+participant ":Temporada" as temp
+participant ":Episodi" as episodi
+participant ":Estat" as estat
+
+usuari -> menu
+activate menu
+menu -> menu : op=llegeixInt()
+opt op==3
+    |||
+    menu -> menu : ep=llegeixInt()
+    opt ep>0 && ep<episodis
+        |||
+        menu ->TS :reproduirEpisodi(s,t,ep)
+        TS -> serie: reproduirEpisodi(s,t,ep)
+        activate serie
+        serie->temp: reproduirEpisodi(t,ep)
+        activate temp
+        temp->episodi: reproduirEpisodi(ep)
+        activate episodi
+        episodi -> estat: getEstatEpisodi(): estatEpisodi
+        activate estat
+        estat --> episodi: estatEpisodi
+        deactivate estat
+        opt estat==PENDENT
+            |||
+            episodi ->episodi: reproduir()
+            |||
+        end
+        loop estat!=VIST
+            |||
+            episodi -> estat: getEstatEpisodi(): estatEpisodi
+            activate estat
+            estat --> episodi: estatEpisodi
+            deactivate estat
+            |||
+        end
+        episodi --->temp :estatEpisodi
+        deactivate episodi
+        temp ---> serie :estatEpisodi
+        deactivate temp
+        serie---> dades :estatEpisodi
+        deactivate serie
+        dades---> TS :estatEpisodi
+        deactivate dades
+        TS ---> menu :estatEpisodi
+        deactivate TS
+        
+        |||
+    else
+        |||
+        menu->menu: escriu("Episodi no valid")
+        menu--->usuari
+        |||
+    end
+
+end
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+
+hide footbox
+skinparam sequenceParticipant underline
+skinparam  noteBackgroundColor aqua
+
+legend top left
+    DSS4.1 Registrar empleat a jornada completa
+end legend
+
+actor ":Usuari" as usuari
+participant ":Kanguros" as kanguros
+
+usuari  -> kanguros : identificacioDeMajorEdat(bool) 
+
+usuari  -> kanguros : donarTitolUniversitari(string)
+usuari  -> kanguros : identificarUsuari(DNI) : bool
+note right : Comprovem que\nno existeix
+usuari <-- kanguros: noDuplicat
+ 
+|||
+
+opt noDuplicat
+    |||
+    usuari  -> kanguros : introduirNom(nom) 
+    usuari  -> kanguros : introduirEdat(edat) 
+    usuari  -> kanguros : introduirDireccio(direccio) 
+    usuari  -> kanguros : introduirPoblacio(poblacio) 
+    usuari  -> kanguros : introduirJornal(diners) : InfoEmpleatJornadaCompleta
+    usuari <-- kanguros : infoEmpleatJornadaCompleta
+    |||
+end
+
+@enduml

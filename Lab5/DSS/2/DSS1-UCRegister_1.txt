@@ -1,0 +1,22 @@
+ 
+@startuml
+hide footbox
+skinparam sequenceParticipant underline
+skinparam  noteBackgroundColor aqua
+
+legend top left
+    DSS1 Registrar Usuari
+end legend
+
+actor ":Usuari_No_Registrat" as usuari
+participant ":Sistema" as sistema
+
+loop registrat==false
+    |||
+    usuari -> sistema : registrar(String:nom, String: nacionalitat, Date: Naixament, String: password): registrat
+    sistema --> usuari : registrat
+    note right: UC1
+    |||
+end
+
+@enduml

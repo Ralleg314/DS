@@ -1,0 +1,44 @@
+@startuml
+
+hide footbox
+skinparam sequenceParticipant underline
+skinparam  noteBackgroundColor aqua
+
+legend top left
+    DSS2 Visualitzar catàleg
+end legend
+
+actor ":Usuari" as usuari
+participant ":Sistema" as sistema
+
+usuari  -> sistema : identificarUsuari(nom): bool
+note right : Comprovem si\n està registrat
+usuari  <--- sistema : bool
+|||
+usuari  <- sistema : mostrarSeries()
+usuari  <- sistema : mostrarEpisodiMesValorat() 
+usuari  <- sistema : mostrarPreferenciesDelsUsuaris()
+ 
+|||
+
+opt tipus!=noRegistrat
+    |||
+    usuari  -> sistema : AccesACapitolMesValorat(): Capitol
+    usuari  <--- sistema : Capitol
+    note right: DCU 2.2
+    usuari  -> sistema : AccesAPreferenciesDelsUsuaris(): Preferencia
+    usuari  <--- sistema : Preferencia
+    note right: DCU 2.1
+    usuari  -> sistema : AccesASeries(): Serie
+    usuari  <--- sistema : Serie
+    note right: DCU 2.3
+    |||
+else tipus==noRegistrat
+    |||
+    usuari -> sistema: registrarUsuari(): Registre
+    note right: Si l'usuari no esta registrat \nllavors s'haurà de registrar.
+    usuari <--- sistema: Registre
+    note right: DSS1 Registre d'usuari
+end
+
+@enduml

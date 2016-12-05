@@ -1,0 +1,15 @@
+@startuml
+
+title Message Style - Sequence Diagram
+
+Usuari_no_registrat -> Sistema : intentaRegistrar() : boolean
+Sistema --> Usuari_no_registrat : boolean
+
+opt noIniciat
+    |||
+    Usuari_no_registrat -> Sistema : registrar(String:nom, String: nacionalitat, Date: Naixament, String: password): boolean
+    Sistema --> Usuari_no_registrat : boolean
+    |||
+end
+
+@enduml

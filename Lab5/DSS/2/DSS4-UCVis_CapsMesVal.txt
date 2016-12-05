@@ -1,0 +1,19 @@
+@startuml
+
+hide footbox
+skinparam sequenceParticipant underline
+skinparam  noteBackgroundColor aqua
+
+legend top left
+    DSS4 Visualitzar capítols més valorats
+end legend
+
+actor ":Usuari" as usuari
+participant ":Sistema" as sistema
+
+usuari  -> sistema : mostrarLlistaCapitolsMesValorats(): llista
+usuari  <--- sistema : llista
+note right : UC2.2
+
+
+@enduml
