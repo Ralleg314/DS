@@ -16,7 +16,7 @@ import java.util.Date;
 public class Episodi {
     private String nom,idioma,descripcio,duracio;
     private float valoracio;
-    private ArrayList<Integer> val;
+    private ArrayList<Valoracio> val;
     private Date emisio;
     private Estat_episodi estat;
     
@@ -62,9 +62,8 @@ public class Episodi {
         Consola.escriu("Reproduint: "+this.nom+"\n");
     }
 
-    void valorarEpisodi(int val) {
+    void valorarEpisodi(Valoracio val) {
         this.val.add(val);
-        valoracio+=val;
         valoracio/=this.val.size();
     }
     

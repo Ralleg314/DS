@@ -152,7 +152,6 @@ public class TotSeriesDataManager {
     /**
      * Crea un nou client a partir de la informacio obtinguda del fitxer XML
      * 
-     * @param id id del client
      * @param nom nom del client
      * @param dni dni del client
      * @param adreca adreça del client
@@ -161,7 +160,7 @@ public class TotSeriesDataManager {
      * @param vip true si el client es vip. false si no
       */
 
-    public void crearClient(String id, String nom, String dni, String adreca, String usuari, String password, String vip) {
+    public void crearClient(String nom, String dni, String adreca, String usuari, String password, String vip) {
 
             /* TODO: Creeu aqui el vostre client
              */

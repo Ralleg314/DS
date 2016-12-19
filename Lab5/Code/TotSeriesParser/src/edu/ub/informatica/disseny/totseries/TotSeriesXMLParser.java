@@ -299,7 +299,7 @@ public class TotSeriesXMLParser {
 	 */
 	private void obtenirClients(Document doc) {
 		NodeList clients = doc.getElementsByTagName("client");
-		String id, nom, usuari, password, vip, dni, adreca;
+		String nom, usuari, password, vip, dni, adreca;
 		int numClients = clients.getLength();
 
 		// Parsejo tots els elements client
@@ -307,7 +307,6 @@ public class TotSeriesXMLParser {
 			Node client = clients.item(i);
 
 			if(client.getNodeType() == Node.ELEMENT_NODE){
-				id = client.getAttributes().getNamedItem("id").getTextContent();
 				vip = client.getAttributes().getNamedItem("vip").getTextContent();
 				Element eClient = (Element)client;
 
@@ -332,7 +331,7 @@ public class TotSeriesXMLParser {
 				password = ePassword.getTextContent();
 
 				// Creem el client
-				dataManager.crearClient(id, nom, dni, adreca, usuari, password, vip);
+				dataManager.crearClient(nom, dni, adreca, usuari, password, vip);
 			}
 		}
 	}
