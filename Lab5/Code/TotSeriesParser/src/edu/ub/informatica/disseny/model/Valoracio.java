@@ -5,10 +5,14 @@
  */
 package edu.ub.informatica.disseny.model;
 
+import java.util.Date;
+
 /**
  *
  * @author abergaye8.alumnes
  */
 public class Valoracio {
-    
+    private String id;
+    private float valoracio;
+    private Date dada;
 }

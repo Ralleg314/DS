@@ -17,7 +17,7 @@ public class TotSeries extends javax.swing.JFrame {
      * Creates new form TotSeries2
      */
     public TotSeries() {
-        this.getContentPane().setBackground( Color.BLACK );
+        this.getContentPane().setBackground(Color.BLACK);
         initComponents();
     }
 
@@ -147,7 +147,7 @@ public class TotSeries extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void up_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_buttonActionPerformed
-        RegisterInterface temp=new RegisterInterface();
+        RegisterInterface temp = new RegisterInterface();
         temp.setVisible(true);
     }//GEN-LAST:event_up_buttonActionPerformed
 

@@ -152,6 +152,7 @@ public class TotSeriesDataManager {
     /**
      * Crea un nou client a partir de la informacio obtinguda del fitxer XML
      * 
+     * @param id id del client
      * @param nom nom del client
      * @param dni dni del client
      * @param adreca adreça del client
