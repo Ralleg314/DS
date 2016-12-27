@@ -5,6 +5,7 @@
  */
 package edu.ub.informatica.disseny.vista;
 
+import edu.ub.informatica.disseny.model.Dades;
 import java.awt.Color;
 
 /**
@@ -12,13 +13,15 @@ import java.awt.Color;
  * @author abergaye8.alumnes
  */
 public class TotSeries extends javax.swing.JFrame {
-
+    Dades dades;
     /**
      * Creates new form TotSeries2
      */
     public TotSeries() {
         this.getContentPane().setBackground(Color.BLACK);
         initComponents();
+        Login.setEnabled(true);
+        Register.setEnabled(true);
     }
 
     /**
@@ -60,6 +63,11 @@ public class TotSeries extends javax.swing.JFrame {
 
         jList2.setBackground(new java.awt.Color(55, 55, 55));
         jList2.setForeground(new java.awt.Color(238, 238, 238));
+        jList2.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jList2ComponentAdded(evt);
+            }
+        });
         jScrollPane2.setViewportView(jList2);
 
         jList3.setBackground(new java.awt.Color(55, 55, 55));
@@ -84,6 +92,11 @@ public class TotSeries extends javax.swing.JFrame {
         Login.setBackground(new java.awt.Color(55, 55, 55));
         Login.setForeground(new java.awt.Color(255, 255, 255));
         Login.setText("Login");
+        Login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,22 +115,21 @@ public class TotSeries extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                                .addGap(62, 62, 62))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(258, 258, 258)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)))
+                        .addComponent(jLabel3)
+                        .addGap(258, 258, 258))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                        .addGap(62, 62, 62)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(Login)
                         .addGap(18, 18, 18)
-                        .addComponent(Register)))
+                        .addComponent(Register))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -146,8 +158,18 @@ public class TotSeries extends javax.swing.JFrame {
 
     private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed
         new RegisterDialog(this,true).setVisible(true);
-        
+        Register.setEnabled(false);
     }//GEN-LAST:event_RegisterActionPerformed
+
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+        new LoginDialog(this,true).setVisible(true);
+        Login.setEnabled(false);
+        Register.setEnabled(false);
+    }//GEN-LAST:event_LoginActionPerformed
+
+    private void jList2ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jList2ComponentAdded
+       
+    }//GEN-LAST:event_jList2ComponentAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

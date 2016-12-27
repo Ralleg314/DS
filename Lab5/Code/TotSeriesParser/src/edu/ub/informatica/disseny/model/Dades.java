@@ -37,6 +37,16 @@ public class Dades {
         artistes=new ArrayList<>();
     }
     
+    
+    public ArrayList getSeries(){
+        return series;
+    }
+    public ArrayList getValorats(){
+        return valorats;
+    }
+    public ArrayList getVists(){
+        return series;
+    }
     /**
      *
      * @param id
@@ -208,7 +218,8 @@ public class Dades {
      * @param vip
      */
     public void registrarUsuari(String nom, String dni, String adreca, String usuari, String password, String vip) {
-        if(!this.existeixUsuari(usuari)){
+        Usuari_registrat temp=new Usuari_registrat(nom,dni,adreca,usuari,password);
+        if(!this.existeixUsuari(temp.getId())){
             this.usuaris.add(new Usuari_registrat(nom,dni,adreca,usuari,password,Boolean.valueOf(vip)));
         }
     }
@@ -222,7 +233,8 @@ public class Dades {
      * @param password
      */
     public void registrarUsuari(String nom, String dni, String adreca, String usuari, String password) {
-        if(!this.existeixUsuari(usuari)){
+        Usuari_registrat temp=new Usuari_registrat(nom,dni,adreca,usuari,password);
+        if(!this.existeixUsuari(temp.getId())){
             this.usuaris.add(new Usuari_registrat(nom,dni,adreca,usuari,password));
         }
     }
