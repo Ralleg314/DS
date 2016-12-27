@@ -114,7 +114,7 @@ public class Dades {
      * @param ep
      * @param val
      */
-    public void valorarEpisodi(int s, int t, int ep, int val){
+    public void valorarEpisodi(int s, int t, int ep, Valoracio val){
         series.get(s).valorarEpisodi(t, ep, val);
     }
 

@@ -41,7 +41,7 @@ public class Temporada {
         eps.get(ep).reproduirEpisodi();
     }
 
-    void valorarEpisodi(int ep, int val) {
+    void valorarEpisodi(int ep, Valoracio val) {
         eps.get(ep).valorarEpisodi(val);
     }
 

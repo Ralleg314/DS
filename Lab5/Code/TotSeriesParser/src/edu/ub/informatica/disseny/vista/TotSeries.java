@@ -40,18 +40,18 @@ public class TotSeries extends javax.swing.JFrame {
         jList3 = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        up_button = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Register = new javax.swing.JButton();
+        Login = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(934, 617));
 
-        jLabel1.setForeground(new java.awt.Color(238, 238, 238));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("TotSeries");
 
-        jLabel2.setForeground(new java.awt.Color(238, 238, 238));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cataleg");
 
         jList1.setBackground(new java.awt.Color(55, 55, 55));
@@ -66,24 +66,24 @@ public class TotSeries extends javax.swing.JFrame {
         jList3.setForeground(new java.awt.Color(238, 238, 238));
         jScrollPane3.setViewportView(jList3);
 
-        jLabel3.setForeground(new java.awt.Color(238, 238, 238));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Més vists");
 
-        jLabel4.setForeground(new java.awt.Color(238, 238, 238));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Millor Valorats");
 
-        up_button.setBackground(new java.awt.Color(55, 55, 55));
-        up_button.setForeground(new java.awt.Color(238, 238, 238));
-        up_button.setText("Sign up");
-        up_button.addActionListener(new java.awt.event.ActionListener() {
+        Register.setBackground(new java.awt.Color(55, 55, 55));
+        Register.setForeground(new java.awt.Color(255, 255, 255));
+        Register.setText("Register");
+        Register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                up_buttonActionPerformed(evt);
+                RegisterActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(55, 55, 55));
-        jButton2.setForeground(new java.awt.Color(238, 238, 238));
-        jButton2.setText("Sign in");
+        Login.setBackground(new java.awt.Color(55, 55, 55));
+        Login.setForeground(new java.awt.Color(255, 255, 255));
+        Login.setText("Login");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,21 +92,19 @@ public class TotSeries extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane2)
-                            .addGap(62, 62, 62))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(256, 256, 256)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(256, 256, 256)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                        .addGap(62, 62, 62))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                                 .addGap(62, 62, 62))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -115,11 +113,11 @@ public class TotSeries extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(Login)
                         .addGap(18, 18, 18)
-                        .addComponent(up_button)))
+                        .addComponent(Register)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -127,17 +125,17 @@ public class TotSeries extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(up_button)
-                    .addComponent(jButton2))
-                .addGap(26, 26, 26)
+                    .addComponent(Register)
+                    .addComponent(Login)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -146,14 +144,15 @@ public class TotSeries extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void up_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_buttonActionPerformed
-        RegisterInterface temp = new RegisterInterface();
-        temp.setVisible(true);
-    }//GEN-LAST:event_up_buttonActionPerformed
+    private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed
+        new RegisterDialog(this,true).setVisible(true);
+        
+    }//GEN-LAST:event_RegisterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Login;
+    private javax.swing.JButton Register;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -164,6 +163,5 @@ public class TotSeries extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton up_button;
     // End of variables declaration//GEN-END:variables
 }

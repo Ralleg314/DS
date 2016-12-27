@@ -107,7 +107,7 @@ public class Serie {
         temporades.get(t).reproduirEpisodi(ep);
     }
 
-    void valorarEpisodi(int t, int ep, int val) {
+    void valorarEpisodi(int t, int ep, Valoracio val) {
         temporades.get(t).valorarEpisodi(ep,val);
     }
 }
