@@ -19,10 +19,11 @@ public class TotSeries extends javax.swing.JFrame {
     private static TotSeries instance = null;
     Dades dades;
     TotSeriesDataManager cont;
-    int place;
-    int serie;
-    int temporada;
-    int episodi;
+    private int place;
+    private int serie;
+    private int temporada;
+    private int episodi;
+    private int last=-1;
     /**
      * Creates new form TotSeries2
      */
@@ -211,7 +212,7 @@ public class TotSeries extends javax.swing.JFrame {
     private void catalegValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_catalegValueChanged
         // TODO add your handling code here:
         int pos=cataleg.getSelectedIndex();
-        if(pos!=-1){
+        if(pos!=-1 && last!=pos){
             switch (place) {
                 case 0:
                     serie=pos;
@@ -237,6 +238,7 @@ public class TotSeries extends javax.swing.JFrame {
                     }   break;
             }
         }
+        last=pos;
     }//GEN-LAST:event_catalegValueChanged
 
     public void actualitzaLlista(ArrayList<String> llista){
