@@ -10,16 +10,24 @@ package edu.ub.informatica.disseny.model;
  * @author ralleg
  */
 public class Estat_episodi {
-    boolean VIST;
-    boolean REPRODUINT;
-    boolean PENDENT;
+    int estat;
     
     /**
      *
      */
     public Estat_episodi(){
-        VIST=false;
-        REPRODUINT=false;
-        PENDENT=true;
+        estat=0;
+    }
+    
+    public String getState(){
+        switch(estat){
+            case 0:
+                return "PENDENT";
+            case 1:
+                return "PENDENT";
+            case 2:
+                return "PENDENT";
+        }
+        return "";
     }
 }
