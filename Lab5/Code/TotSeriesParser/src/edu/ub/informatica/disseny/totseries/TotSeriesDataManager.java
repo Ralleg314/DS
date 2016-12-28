@@ -196,6 +196,10 @@ public class TotSeriesDataManager {
             data.registrarUsuari(nom, dni, adreca,usuari, password);
 
     }
+    
+    public void reproduirEpisodi(int s, int t, int ep){
+        this.data.reproduirEpisodi(s, t, ep);
+    }
 
     /**
      *

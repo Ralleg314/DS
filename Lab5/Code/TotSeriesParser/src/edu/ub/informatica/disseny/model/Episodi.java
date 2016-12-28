@@ -8,6 +8,8 @@ package edu.ub.informatica.disseny.model;
 import edu.ub.informatica.disseny.totseries.Consola;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -60,6 +62,11 @@ public class Episodi {
 
     private void reproduir() {
         Consola.escriu("Reproduint: "+this.nom+"\n");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Episodi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     void valorarEpisodi(Valoracio val) {

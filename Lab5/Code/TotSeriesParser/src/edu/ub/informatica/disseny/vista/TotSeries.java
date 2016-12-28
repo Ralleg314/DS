@@ -227,12 +227,13 @@ public class TotSeries extends javax.swing.JFrame {
                         this.actualitzaLlista(cont.mostratEpisodis(serie,temporada));
                         place=2;
                     }   break;
-                default:
+                case 2:
                     if(pos==0){
                         this.actualitzaLlista(cont.mostratTemporades(serie));
                         place=1;
                     }else{
                         episodi=pos-1;
+                        cont.reproduirEpisodi(serie, temporada, episodi);
                     }   break;
             }
         }
