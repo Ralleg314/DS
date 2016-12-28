@@ -13,12 +13,15 @@ import edu.ub.informatica.disseny.model.Dades;
  */
 public class RegisterDialog extends javax.swing.JDialog{
     Dades data;
+    TotSeries parentFrame;
     /**
      * Creates new form RegisterDialog
      */
     public RegisterDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        parentFrame = TotSeries.getInstance();
+        data=Dades.getInstance();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -141,47 +144,11 @@ public class RegisterDialog extends javax.swing.JDialog{
         String nacional=Nacio.getText();
         String datanaix=Naix.getText();
         String DNI = dni.getText();
-        data.registrarUsuari(nom,DNI,datanaix,nacional,id,contra);
-        this.dispose();
-    }//GEN-LAST:event_endActionPerformed
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        if(!data.existeixUsuari(id)){
+            data.registrarUsuari(nom,DNI,datanaix,nacional,id,contra);
+            this.dispose();
         }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                RegisterDialog dialog = new RegisterDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    }//GEN-LAST:event_endActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Nacio;

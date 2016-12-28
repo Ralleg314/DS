@@ -16,6 +16,7 @@ import javax.swing.DefaultListModel;
  * @author abergaye8.alumnes
  */
 public class TotSeries extends javax.swing.JFrame {
+    private static TotSeries instance = null;
     Dades dades;
     TotSeriesDataManager cont;
     int place;
@@ -25,7 +26,7 @@ public class TotSeries extends javax.swing.JFrame {
     /**
      * Creates new form TotSeries2
      */
-    public TotSeries() {
+    private TotSeries() {
         place=0;
         serie=-1;
         temporada=-1;
@@ -41,6 +42,13 @@ public class TotSeries extends javax.swing.JFrame {
         }
         cataleg.setModel(temp);
         //cataleg.setModel((ListModel<String>) cont.mostratCataleg());
+    }
+    
+    public static TotSeries getInstance(){
+        if(instance==null){
+            instance=new TotSeries();
+        }
+        return instance;
     }
 
     /**
@@ -182,15 +190,20 @@ public class TotSeries extends javax.swing.JFrame {
 
     private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed
         new RegisterDialog(this,true).setVisible(true);
-        Register.setEnabled(false);
     }//GEN-LAST:event_RegisterActionPerformed
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         new LoginDialog(this,true).setVisible(true);
-        Login.setEnabled(false);
-        Register.setEnabled(false);
     }//GEN-LAST:event_LoginActionPerformed
 
+    public void turnOffLogin(){
+        Login.setEnabled(false);
+    }
+    
+    public void turnOffRegister(){
+        Register.setEnabled(false);
+    }
+    
     private void catalegComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_catalegComponentAdded
         
     }//GEN-LAST:event_catalegComponentAdded

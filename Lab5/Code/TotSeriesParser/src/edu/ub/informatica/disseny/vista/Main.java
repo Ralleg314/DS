@@ -15,7 +15,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        TotSeries vista=new TotSeries();
+        TotSeries vista=TotSeries.getInstance();
         vista.setVisible(true);
     }
     

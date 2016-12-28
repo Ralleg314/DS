@@ -48,5 +48,9 @@ public class Usuari_registrat extends Usuari{
     public boolean equals(Usuari_registrat usuari){
         return this.id.equals(usuari.getId());
     }
+
+    public String getPassword() {
+        return this.contrasenya;
+    }
     
 }

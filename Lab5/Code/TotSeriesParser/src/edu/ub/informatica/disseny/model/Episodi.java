@@ -51,10 +51,10 @@ public class Episodi {
      *
      */
     public void reproduirEpisodi(){
-        if(estat.PENDENT){
+        if("PENDENT".equals(estat.getState())){
             reproduir();
             //To make everything easier, we will consider that state changes to SEEN ones reproduir() ends
-            estat.VIST=true;
+            estat.setState("VIST");
         }
     }
 

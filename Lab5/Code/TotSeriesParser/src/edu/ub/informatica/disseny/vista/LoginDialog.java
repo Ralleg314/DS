@@ -13,12 +13,17 @@ import edu.ub.informatica.disseny.model.Dades;
  */
 public class LoginDialog extends javax.swing.JDialog {
     Dades data;
+    TotSeries parentFrame;
     /**
      * Creates new form LoginDialog
+     * @param parent
+     * @param modal
      */
     public LoginDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        parentFrame = TotSeries.getInstance();
+        data=Dades.getInstance();
     }
 
     /**
@@ -108,12 +113,19 @@ public class LoginDialog extends javax.swing.JDialog {
 
     private void LoginbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginbuttonActionPerformed
         String user=LoginUser.getText();
-        String contasenya=String.valueOf(LoginContra.getPassword());
+        String contrasenya=String.valueOf(LoginContra.getPassword());
+        int pos=data.posUsuari(user);
+        if(pos!=-1){
+            if(data.comprovarPassword(pos, contrasenya)){
+                data.setLogedUser(user);
+                parentFrame.turnOffLogin();
+                parentFrame.turnOffRegister();
+                this.dispose();
+            }
+        }else{
+            System.out.println("no existeix cap usuari amb aquest nom");
+        }
         
-        if(data.existeixUsuari(user)==true){
-            this.dispose();
-        }else{ System.out.println("no existeix cap usuari amb aquest nom");}
-       
     }//GEN-LAST:event_LoginbuttonActionPerformed
 
     private void CancelbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelbuttonActionPerformed

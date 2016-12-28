@@ -5,7 +5,6 @@
  */
 package edu.ub.informatica.disseny.model;
 
-import edu.ub.informatica.disseny.totseries.Consola;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ public class Dades {
     ArrayList<Episodi> valorats;
     ArrayList<Productora> productores;
     ArrayList<Artista> artistes;
+    String logedUser;
     
     /**
      *
@@ -66,6 +66,25 @@ public class Dades {
             }
         }
         return false;
+    }
+    
+    public int posUsuari(String id){
+        int i=0;
+        for(Usuari_registrat us:usuaris){
+            if (us.getId().equals(id)){
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+    
+    public void setLogedUser(String us){
+        this.logedUser=us;
+    }
+    
+    public boolean comprovarPassword(int pos, String pass){
+        return this.usuaris.get(pos).getPassword().equals(pass);
     }
     
     /**

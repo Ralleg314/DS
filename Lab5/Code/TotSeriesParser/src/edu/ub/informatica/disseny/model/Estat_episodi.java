@@ -24,9 +24,24 @@ public class Estat_episodi {
             case 0:
                 return "PENDENT";
             case 1:
-                return "PENDENT";
+                return "REPRODUINT";
             case 2:
-                return "PENDENT";
+                return "VIST";
+        }
+        return "";
+    }
+    
+    public String setState(String estat){
+        switch(estat){
+            case "PENDENT":
+                this.estat=0;
+                break;
+            case "REPRODUINT":
+                this.estat=0;
+                break;
+            case "VIST":
+                this.estat=0;
+                break;
         }
         return "";
     }
