@@ -7,43 +7,40 @@ end legend
 actor Usuari as usuari
 activate usuari
 
-rnote over usuari
-    Int op
-end rnote
-
 participant ":Menu" as menu
 participant ":TotSeries" as TS
 participant ":Dades" as dades
 participant "ser:Serie" as serie
+participant ":Consola" as consola
 
 usuari -> menu
 activate menu
-menu ->menu : op:=llegeixInt()
-opt op==2
+
+
+menu ->TS: visualitzarCataleg()
+activate TS
+
+TS -> dades: visualitzarCataleg()
+activate dades
+loop ser in series
     |||
-    menu ->TS: visualitzarCataleg()
-    activate TS
-    
-    TS -> dades: visualitzarCataleg()
-    activate dades
-    loop ser in series
-        |||
-        dades ->serie : name:=toString() 
-        activate serie
-        serie --> dades
-        deactivate serie
-        dades -> menu : escriu(name)
-        menu ---> dades 
-        |||
-    end
-    dades --> TS
-    deactivate dades
-    TS ---> menu 
-    deactivate TS
-    menu --> usuari
-    deactivate menu
-    deactivate usuari
+    dades ->serie : name:=toString()
+    activate serie
+    serie --> dades
+    deactivate serie
+    dades -> consola : escriu(name)
+    activate consola
+    consola ---> dades 
+    deactivate consola
     |||
 end
+dades --> TS
+deactivate dades
+TS ---> menu 
+deactivate TS
+menu --> usuari
+deactivate menu
+deactivate usuari
+
 
 @enduml

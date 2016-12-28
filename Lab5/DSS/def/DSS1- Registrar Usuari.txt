@@ -1,0 +1,31 @@
+@startuml
+hide footbox
+skinparam sequenceParticipant underline
+skinparam  noteBackgroundColor aqua
+
+legend top left
+    DSS1 Registrar Usuari
+end legend
+
+actor ":Usuari_No_Registrat" as usuari
+participant ":Sistema" as sistema
+
+loop existeix
+    |||
+    usuari -> sistema : existeixUsuari(String : nom)
+    sistema --> usuari :existeix
+    |||
+end
+
+loop valida
+    |||
+    usuari -> sistema : validPassword(String : password)
+    sistema --> usuari :valida
+    |||
+end
+
+usuari -> sistema : registrarUsuari(String:nom, String: nacionalitat, Date: Naixament, String: password): registrat
+sistema --> usuari : registrat
+
+
+@enduml

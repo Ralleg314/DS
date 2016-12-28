@@ -13,16 +13,18 @@ participant ":Sistema" as sistema
 
 
 
-loop estatCapitol!=PENDENT
-    usuari  -> sistema : visualitzarEpisodi(episodi): Estat_episodi
+loop Estat_episodi!=PENDENT
+    usuari  -> sistema : visualitzarEpisodi(int:serie,int:temporada,int:episodi)
     usuari <--- sistema : Estat_episodi
+    note right : "Estat_episodi sera un\ndels següents strings:\n'PENDENT', 'REPRODUINT' o 'VIST'
 end
 
-usuari <--- sistema : reproduirEpisodi()
+usuari -> sistema : reproduirEpisodi()
+sistema --> usuari
 
 |||
 opt Estat_episodi==VIST
-    usuari  -> sistema : valorarEpisodi(episodi,valoracio): bool
+    usuari  -> sistema : valorarEpisodi(int:serie,int:temporada,int:episodi,int:valoracio): bool
     usuari <--- sistema : bool
 else estatCapitol==noAcabat
     usuari <--- sistema : missatge d'error
