@@ -6,7 +6,9 @@
 package edu.ub.informatica.disseny.vista;
 
 import edu.ub.informatica.disseny.model.Dades;
+import edu.ub.informatica.disseny.totseries.TotSeriesDataManager;
 import java.awt.Color;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -14,14 +16,23 @@ import java.awt.Color;
  */
 public class TotSeries extends javax.swing.JFrame {
     Dades dades;
+    TotSeriesDataManager cont;
     /**
      * Creates new form TotSeries2
      */
     public TotSeries() {
+        cont=TotSeriesDataManager.getInstance();
         this.getContentPane().setBackground(Color.BLACK);
         initComponents();
         Login.setEnabled(true);
         Register.setEnabled(true);
+        DefaultListModel temp = new DefaultListModel();
+        for(String s : cont.mostratCataleg()){
+           temp.addElement(s);
+           System.out.println(s);
+        }
+        cataleg.setModel(temp);
+        //cataleg.setModel((ListModel<String>) cont.mostratCataleg());
     }
 
     /**
@@ -38,7 +49,7 @@ public class TotSeries extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        cataleg = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
@@ -61,14 +72,14 @@ public class TotSeries extends javax.swing.JFrame {
         jList1.setForeground(new java.awt.Color(238, 238, 238));
         jScrollPane1.setViewportView(jList1);
 
-        jList2.setBackground(new java.awt.Color(55, 55, 55));
-        jList2.setForeground(new java.awt.Color(238, 238, 238));
-        jList2.addContainerListener(new java.awt.event.ContainerAdapter() {
+        cataleg.setBackground(new java.awt.Color(55, 55, 55));
+        cataleg.setForeground(new java.awt.Color(238, 238, 238));
+        cataleg.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
-                jList2ComponentAdded(evt);
+                catalegComponentAdded(evt);
             }
         });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(cataleg);
 
         jList3.setBackground(new java.awt.Color(55, 55, 55));
         jList3.setForeground(new java.awt.Color(238, 238, 238));
@@ -167,20 +178,20 @@ public class TotSeries extends javax.swing.JFrame {
         Register.setEnabled(false);
     }//GEN-LAST:event_LoginActionPerformed
 
-    private void jList2ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jList2ComponentAdded
+    private void catalegComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_catalegComponentAdded
        
-    }//GEN-LAST:event_jList2ComponentAdded
+    }//GEN-LAST:event_catalegComponentAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Login;
     private javax.swing.JButton Register;
+    private javax.swing.JList<String> cataleg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JList<String> jList3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

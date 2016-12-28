@@ -18,6 +18,7 @@ import java.util.logging.Logger;
  * @author EVA-00
  */
 public class Dades {
+    private static Dades instance = null;
     ArrayList<Usuari_registrat> usuaris;
     ArrayList<Administrador> administradors;
     ArrayList<Serie> series;
@@ -28,7 +29,7 @@ public class Dades {
     /**
      *
      */
-    public Dades(){
+    private Dades(){
         usuaris=new ArrayList<>();
         administradors=new ArrayList<>();
         series=new ArrayList<>();
@@ -37,6 +38,12 @@ public class Dades {
         artistes=new ArrayList<>();
     }
     
+    public static Dades getInstance(){
+        if(instance==null){
+            instance=new Dades();
+        }
+        return instance;
+    }
     
     public ArrayList getSeries(){
         return series;

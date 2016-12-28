@@ -9,8 +9,9 @@ import java.util.ArrayList;
  * 
  */
 public class TotSeriesDataManager {
-        
-    Dades data=new Dades();
+    
+    private static TotSeriesDataManager instance = null;
+    Dades data;
     /* -------------------------------------------------------------------
      * Metodes a implementar per vosaltres. En aquests metodes creareu els
      * vostres objectes a partir de la informacio obtinguda del fitxer XML
@@ -20,7 +21,18 @@ public class TotSeriesDataManager {
      * modificar-ho al gust, excepte les crides inicials que es fan.
      * -------------------------------------------------------------------
      */
-
+    
+    private TotSeriesDataManager(){
+        data=Dades.getInstance();
+        this.obtenirDades("data/TotSeries.xml");
+    }
+    
+    public static TotSeriesDataManager getInstance(){
+        if(instance==null){
+            instance=new TotSeriesDataManager();
+        }
+        return instance;
+    }
     /**
      * Obté les dades del fitxer XML passat per paràmetre
      * 
