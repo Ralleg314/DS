@@ -84,34 +84,18 @@ public class Dades {
      *
      * @param s
      */
-    public void visualitzarTemporades(int s){
-        if(0<=s && s<series.size()){
-            series.get(s).visualitzarTemporades();
-            System.out.println("Temporada: ");
-            int t=Consola.llegeixInt()-1;
-            this.visualitzarEpisodis(s, t);
-        }else{
-            System.out.println("Serie no existent");
-        }
+    public ArrayList<String> visualitzarTemporades(int s){
+        return series.get(s).visualitzarTemporades();
     }
     
     /**
      *
      * @param s
      * @param t
+     * @return 
      */
-    public void visualitzarEpisodis(int s, int t){
-        if(0<=t && t<series.get(s).getTemporades()){
-            series.get(s).visualitzarEpisodis(t);
-            System.out.println("Episodi: ");
-            int ep=Consola.llegeixInt()-1;
-            if(0<=ep && ep<series.get(s).getTemp(t).getEpisodis()){
-                this.reproduirEpisodi(s, t, ep);
-                
-            }
-        }else{
-            System.out.println("Temporada no existent");
-        }
+    public ArrayList<String> visualitzarEpisodis(int s, int t){
+        return series.get(s).getTemp(t).visualitzarEpisodis();
     }
     
     /**

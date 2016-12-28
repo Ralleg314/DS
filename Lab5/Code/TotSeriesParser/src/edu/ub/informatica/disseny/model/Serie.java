@@ -50,11 +50,15 @@ public class Serie {
         num_temp++;
     }
     
+    public ArrayList<Temporada> getTemporades(){
+        return this.temporades;
+    }
+    
     /**
      *
      * @return
      */
-    public int getTemporades(){
+    public int getNum_Temporades(){
         return this.num_temp;
     }
     
@@ -81,13 +85,15 @@ public class Serie {
 
     /**
      *
+     * @return 
      */
-    public void visualitzarTemporades() {
-        int i=1;
+    public ArrayList<String> visualitzarTemporades() {
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add("Back");
         for(Temporada t : temporades){
-            System.out.println("["+i+"] "+t.toString());
-            i++;
+            temp.add(t.toString());
         }
+        return temp;
     }
 
     /**

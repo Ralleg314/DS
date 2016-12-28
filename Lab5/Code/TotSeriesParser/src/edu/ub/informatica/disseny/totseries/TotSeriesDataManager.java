@@ -208,7 +208,11 @@ public class TotSeriesDataManager {
      *
      * @param s
      */
-    public void mostratTemporades(int s) {
-        data.visualitzarTemporades(s);
+    public ArrayList<String> mostratTemporades(int s) {
+        return data.visualitzarTemporades(s);
+    }
+    
+    public ArrayList<String> mostratEpisodis(int s, int t) {
+        return data.visualitzarEpisodis(s,t);
     }
 }

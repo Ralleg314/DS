@@ -29,12 +29,13 @@ public class Temporada {
     /**
      *
      */
-    public void visualitzarEpisodis() {
-        int i=1;
-        for(Episodi ep : eps){
-            System.out.println("["+i+"] "+ep.toString());
-            i++;
+    public ArrayList<String> visualitzarEpisodis() {
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add("Back");
+        for(Episodi t : eps){
+            temp.add(t.toString());
         }
+        return temp;
     }
 
     void reproduirEpisodi(int ep) {

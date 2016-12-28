@@ -8,6 +8,7 @@ package edu.ub.informatica.disseny.vista;
 import edu.ub.informatica.disseny.model.Dades;
 import edu.ub.informatica.disseny.totseries.TotSeriesDataManager;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
 /**
@@ -17,10 +18,18 @@ import javax.swing.DefaultListModel;
 public class TotSeries extends javax.swing.JFrame {
     Dades dades;
     TotSeriesDataManager cont;
+    int place;
+    int serie;
+    int temporada;
+    int episodi;
     /**
      * Creates new form TotSeries2
      */
     public TotSeries() {
+        place=0;
+        serie=-1;
+        temporada=-1;
+        episodi=-1;
         cont=TotSeriesDataManager.getInstance();
         this.getContentPane().setBackground(Color.BLACK);
         initComponents();
@@ -29,7 +38,6 @@ public class TotSeries extends javax.swing.JFrame {
         DefaultListModel temp = new DefaultListModel();
         for(String s : cont.mostratCataleg()){
            temp.addElement(s);
-           System.out.println(s);
         }
         cataleg.setModel(temp);
         //cataleg.setModel((ListModel<String>) cont.mostratCataleg());
@@ -77,6 +85,11 @@ public class TotSeries extends javax.swing.JFrame {
         cataleg.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 catalegComponentAdded(evt);
+            }
+        });
+        cataleg.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                catalegValueChanged(evt);
             }
         });
         jScrollPane2.setViewportView(cataleg);
@@ -179,9 +192,46 @@ public class TotSeries extends javax.swing.JFrame {
     }//GEN-LAST:event_LoginActionPerformed
 
     private void catalegComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_catalegComponentAdded
-       
+        
     }//GEN-LAST:event_catalegComponentAdded
 
+    private void catalegValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_catalegValueChanged
+        // TODO add your handling code here:
+        int pos=cataleg.getSelectedIndex();
+        if(pos!=-1){
+            switch (place) {
+                case 0:
+                    serie=pos;
+                    this.actualitzaLlista(cont.mostratTemporades(serie));
+                    place=1;
+                    break;
+                case 1:
+                    if(pos==0){
+                        this.actualitzaLlista(cont.mostratCataleg());
+                        place=0;
+                    }else{
+                        temporada=pos-1;
+                        this.actualitzaLlista(cont.mostratEpisodis(serie,temporada));
+                        place=2;
+                    }   break;
+                default:
+                    if(pos==0){
+                        this.actualitzaLlista(cont.mostratTemporades(serie));
+                        place=1;
+                    }else{
+                        episodi=pos-1;
+                    }   break;
+            }
+        }
+    }//GEN-LAST:event_catalegValueChanged
+
+    public void actualitzaLlista(ArrayList<String> llista){
+        DefaultListModel temp = new DefaultListModel();
+        for(String s : llista){
+           temp.addElement(s);
+        }
+        cataleg.setModel(temp);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Login;
