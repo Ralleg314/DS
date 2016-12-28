@@ -201,10 +201,6 @@ public class TotSeries extends javax.swing.JFrame {
         Login.setEnabled(false);
     }
     
-    public void turnOffRegister(){
-        Register.setEnabled(false);
-    }
-    
     private void catalegComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_catalegComponentAdded
         
     }//GEN-LAST:event_catalegComponentAdded
