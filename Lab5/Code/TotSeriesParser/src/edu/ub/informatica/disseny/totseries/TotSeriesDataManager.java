@@ -260,7 +260,12 @@ public class TotSeriesDataManager {
     public ArrayList<String> mostratEpisodis(int s, int t) {
         return data.visualitzarEpisodis(s,t);
     }
-
+    public ArrayList<String> mostrarValorats(){
+        return data.visualitzarValorats();
+    }
+    public ArrayList<String> mostrarVists(){
+        return data.visualitzarVists();
+    }
     /**
      *
      * @return

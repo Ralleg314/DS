@@ -48,7 +48,7 @@ public class Temporada {
         eps.get(ep).valorarEpisodi(val);
     }
 
-    void afefirEpisodi(Episodi temp) {
+    void afegirEpisodi(Episodi temp) {
         this.eps.add(temp);
         episodis++;
     }
@@ -61,6 +61,9 @@ public class Temporada {
         return this.episodis;
     }
     
+    public ArrayList<Episodi> getEps(){
+        return this.eps;
+    }
     /**
      *
      * @param ep

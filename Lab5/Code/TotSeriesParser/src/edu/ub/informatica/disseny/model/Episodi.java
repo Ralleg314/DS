@@ -58,7 +58,7 @@ public class Episodi {
         if("PENDENT".equals(estat.getState())){
             reproduir();
             //To make everything easier, we will consider that state changes to SEEN ones reproduir() ends
-            estat.setState("VIST");
+            estat.setState("PENDENT");
         }
     }
 
@@ -86,7 +86,9 @@ public class Episodi {
         this.val.add(val);
         valoracio/=this.val.size();
     }
-    
+    public float getVal(){
+        return this.valoracio;
+    }
     /**
      *
      * @return

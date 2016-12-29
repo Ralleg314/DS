@@ -8,6 +8,7 @@ package edu.ub.informatica.disseny.model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,7 @@ public class Dades {
     ArrayList<Usuari_registrat> usuaris;
     ArrayList<Administrador> administradors;
     ArrayList<Serie> series;
-    ArrayList<Episodi> valorats;
+    ArrayList<Episodi> valorats,vists;
     ArrayList<Productora> productores;
     ArrayList<Artista> artistes;
     String logedUser;
@@ -34,6 +35,7 @@ public class Dades {
         administradors=new ArrayList<>();
         series=new ArrayList<>();
         valorats=new ArrayList<>();
+        vists= new ArrayList<>();
         productores=new ArrayList<>();
         artistes=new ArrayList<>();
         logedUser="";
@@ -140,7 +142,58 @@ public class Dades {
         }
         return temp;
     }
-    
+    public void omplirValorats(){
+        ArrayList<Episodi> temp=new ArrayList<>();
+        for (Serie s: series){
+            for(Temporada t: s.getTemporades()){
+                for(Episodi e: t.getEps()){
+                    temp.add(e);
+                };
+            } 
+        }
+        
+        for (Episodi e: temp){
+            float max=0,valAct=e.getVal();
+            if (valAct>max){
+                max=valAct;
+                valorats.add(e);
+            }
+        } 
+    }
+    public ArrayList<String> visualitzarValorats(){
+        ArrayList<String> temp=new ArrayList<>();
+        omplirValorats();
+        for(Episodi ep : valorats){
+            temp.add(ep.toString());
+        }
+        return temp;
+    }
+    public void omplirVists(){
+        ArrayList<Episodi> temp=new ArrayList<>();
+        for (Serie s: series){
+            for(Temporada t: s.getTemporades()){
+                for(Episodi e: t.getEps()){
+                    temp.add(e);
+                };
+            } 
+        }        
+        for (Episodi e: temp){
+            float max=0,valAct=e.getReproduccions();
+            if (valAct>max){
+                max=valAct;
+                if (!vists.contains(e)){
+                    vists.add(e);
+                }
+            }
+        }        
+    }
+    public ArrayList<String> visualitzarVists(){
+        ArrayList<String> temp= new ArrayList<>();
+        omplirVists();
+        for (Episodi ep: vists){
+            temp.add(ep.toString());
+        }return temp;
+    }
     /**
      *
      * @param s

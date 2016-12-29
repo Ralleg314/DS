@@ -54,11 +54,20 @@ public class TotSeries extends javax.swing.JFrame {
         initComponents();
         Login.setEnabled(true);
         Register.setEnabled(true);
-        DefaultListModel temp = new DefaultListModel();
+        DefaultListModel temp1 = new DefaultListModel();
+        //cataleg
         for(String s : cont.mostratCataleg()){
-           temp.addElement(s);
+           temp1.addElement(s);
         }
-        cataleg.setModel(temp);
+        cataleg.setModel(temp1);
+        //millorValorats
+        DefaultListModel temp2= new DefaultListModel();
+        for(String s : cont.mostrarValorats()){
+           temp2.addElement(s);
+        }
+        valorats.setModel(temp2);
+        //mesVists
+       
     }
     
     /**
@@ -84,11 +93,11 @@ public class TotSeries extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        vists = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         cataleg = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        valorats = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         Register = new javax.swing.JButton();
@@ -105,9 +114,9 @@ public class TotSeries extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cataleg");
 
-        jList1.setBackground(new java.awt.Color(55, 55, 55));
-        jList1.setForeground(new java.awt.Color(238, 238, 238));
-        jScrollPane1.setViewportView(jList1);
+        vists.setBackground(new java.awt.Color(55, 55, 55));
+        vists.setForeground(new java.awt.Color(238, 238, 238));
+        jScrollPane1.setViewportView(vists);
 
         cataleg.setBackground(new java.awt.Color(55, 55, 55));
         cataleg.setForeground(new java.awt.Color(238, 238, 238));
@@ -123,9 +132,14 @@ public class TotSeries extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(cataleg);
 
-        jList3.setBackground(new java.awt.Color(55, 55, 55));
-        jList3.setForeground(new java.awt.Color(238, 238, 238));
-        jScrollPane3.setViewportView(jList3);
+        valorats.setBackground(new java.awt.Color(55, 55, 55));
+        valorats.setForeground(new java.awt.Color(238, 238, 238));
+        valorats.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                valoratsValueChanged(evt);
+            }
+        });
+        jScrollPane3.setViewportView(valorats);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Més vists");
@@ -266,11 +280,13 @@ public class TotSeries extends javax.swing.JFrame {
                         case 1:
                             if(cont.userIsLoged()){
                                 cont.reproduirEpisodi(serie, temporada, episodi);
+                                this.actualitzaVists();
                             }
                             break;
                         case 2:
                             if(cont.userIsLoged() && cont.getEstat(serie, temporada, episodi).equals("VIST")){
                                 new ValorarDialog(this,true).setVisible(true);
+                                this.actualitzaValorats();
                             }
                             break;
                     }
@@ -278,6 +294,10 @@ public class TotSeries extends javax.swing.JFrame {
         }
         last=pos;
     }//GEN-LAST:event_catalegValueChanged
+
+    private void valoratsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_valoratsValueChanged
+       
+    }//GEN-LAST:event_valoratsValueChanged
 
     /**
      *
@@ -291,6 +311,23 @@ public class TotSeries extends javax.swing.JFrame {
         cataleg.setModel(temp);
     }
     
+    public void actualitzaValorats(){
+        valorats.removeAll();
+        DefaultListModel temp = new DefaultListModel();
+        for(String s : cont.mostrarValorats()){
+           temp.addElement(s);
+        }
+        valorats.setModel(temp);
+    }
+    
+    public void actualitzaVists(){
+        vists.removeAll();
+        DefaultListModel temp= new DefaultListModel();
+        temp.clear();
+        for (String s : cont.mostrarVists()){
+            temp.addElement(s);
+        } vists.setModel(temp);
+    }
     /**
      *
      * @param id
@@ -307,10 +344,10 @@ public class TotSeries extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JList<String> valorats;
+    private javax.swing.JList<String> vists;
     // End of variables declaration//GEN-END:variables
 }
