@@ -6,6 +6,7 @@
 package edu.ub.informatica.disseny.vista;
 
 import edu.ub.informatica.disseny.model.Dades;
+import java.awt.Color;
 
 /**
  *
@@ -147,6 +148,8 @@ public class RegisterDialog extends javax.swing.JDialog{
         if(!data.existeixUsuari(id)){
             data.registrarUsuari(nom,DNI,datanaix,nacional,id,contra);
             this.dispose();
+        }else{
+            this.Nick.setBackground(Color.RED);
         }
     }//GEN-LAST:event_endActionPerformed
 
