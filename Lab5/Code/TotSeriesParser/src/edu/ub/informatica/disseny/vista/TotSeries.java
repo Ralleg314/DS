@@ -17,8 +17,9 @@ import javax.swing.DefaultListModel;
  */
 public class TotSeries extends javax.swing.JFrame {
     private static TotSeries instance = null;
-    Dades dades;
-    TotSeriesDataManager cont;
+    private Dades dades;
+    private TotSeriesDataManager cont;
+    private ArrayList<String> opt;
     private int place;
     private int serie;
     private int temporada;
@@ -33,6 +34,10 @@ public class TotSeries extends javax.swing.JFrame {
         temporada=-1;
         episodi=-1;
         cont=TotSeriesDataManager.getInstance();
+        opt=new ArrayList<>();
+        opt.add("Back");
+        opt.add("Reproduir");
+        opt.add("Valorar");
         this.getContentPane().setBackground(Color.BLACK);
         initComponents();
         Login.setEnabled(true);
@@ -42,7 +47,6 @@ public class TotSeries extends javax.swing.JFrame {
            temp.addElement(s);
         }
         cataleg.setModel(temp);
-        //cataleg.setModel((ListModel<String>) cont.mostratCataleg());
     }
     
     public static TotSeries getInstance(){
@@ -209,6 +213,7 @@ public class TotSeries extends javax.swing.JFrame {
         // TODO add your handling code here:
         int pos=cataleg.getSelectedIndex();
         if(pos!=-1 && last!=pos){
+            OUTER:
             switch (place) {
                 case 0:
                     serie=pos;
@@ -230,8 +235,23 @@ public class TotSeries extends javax.swing.JFrame {
                         place=1;
                     }else{
                         episodi=pos-1;
-                        cont.reproduirEpisodi(serie, temporada, episodi);
+                        place=3;
+                        this.actualitzaLlista(opt);
                     }   break;
+                case 3:
+                    switch (pos) {
+                        case 0:
+                            this.actualitzaLlista(cont.mostratEpisodis(serie,temporada));
+                            place=2;
+                            break;
+                        case 1:
+                            cont.reproduirEpisodi(serie, temporada, episodi);
+                            break;
+                        case 2:
+                            int valoracio=5;
+                            cont.valorarEpisodi(serie, temporada, episodi, valoracio);
+                            break;
+                    }
             }
         }
         last=pos;
@@ -243,6 +263,10 @@ public class TotSeries extends javax.swing.JFrame {
            temp.addElement(s);
         }
         cataleg.setModel(temp);
+    }
+    
+    public void changeLogin(String id){
+        this.Login.setText(id);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

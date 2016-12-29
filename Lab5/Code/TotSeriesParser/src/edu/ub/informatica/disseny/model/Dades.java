@@ -79,6 +79,10 @@ public class Dades {
         return -1;
     }
     
+    public String getLogedUser(){
+        return this.logedUser;
+    }
+    
     public void setLogedUser(String us){
         this.logedUser=us;
     }
@@ -134,8 +138,8 @@ public class Dades {
      * @param ep
      * @param val
      */
-    public void valorarEpisodi(int s, int t, int ep, Valoracio val){
-        series.get(s).valorarEpisodi(t, ep, val);
+    public void valorarEpisodi(int s, int t, int ep, int val){
+        series.get(s).valorarEpisodi(t, ep, new Valoracio(this.logedUser,val));
     }
 
     /**

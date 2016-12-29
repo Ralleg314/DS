@@ -13,6 +13,12 @@ import java.util.Date;
  */
 public class Valoracio {
     private String id;
-    private float valoracio;
+    private int valoracio;
     private Date dada;
+
+    Valoracio(String logedUser, int val) {
+        this.id=logedUser;
+        this.valoracio=val;
+        dada=new Date();
+    }
 }

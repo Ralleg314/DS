@@ -119,6 +119,7 @@ public class LoginDialog extends javax.swing.JDialog {
             if(data.comprovarPassword(pos, contrasenya)){
                 data.setLogedUser(user);
                 parentFrame.turnOffLogin();
+                parentFrame.changeLogin(data.getLogedUser());
                 this.dispose();
             }
         }else{

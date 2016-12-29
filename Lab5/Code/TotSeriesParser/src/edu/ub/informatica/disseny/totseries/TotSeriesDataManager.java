@@ -200,6 +200,12 @@ public class TotSeriesDataManager {
     public void reproduirEpisodi(int s, int t, int ep){
         this.data.reproduirEpisodi(s, t, ep);
     }
+    
+    
+
+    public void valorarEpisodi(int serie, int temporada, int episodi, int valoracio) {
+        this.data.valorarEpisodi(serie, temporada, episodi, valoracio);
+    }
 
     /**
      *
