@@ -21,9 +21,9 @@ public class TotSeries extends javax.swing.JFrame {
     private TotSeriesDataManager cont;
     private ArrayList<String> opt;
     private int place;
-    private int serie;
-    private int temporada;
-    private int episodi;
+    protected int serie;
+    protected int temporada;
+    protected int episodi;
     private int last=-1;
     /**
      * Creates new form TotSeries2
@@ -245,11 +245,14 @@ public class TotSeries extends javax.swing.JFrame {
                             place=2;
                             break;
                         case 1:
-                            cont.reproduirEpisodi(serie, temporada, episodi);
+                            if(cont.userIsLoged()){
+                                cont.reproduirEpisodi(serie, temporada, episodi);
+                            }
                             break;
                         case 2:
-                            int valoracio=5;
-                            cont.valorarEpisodi(serie, temporada, episodi, valoracio);
+                            if(cont.userIsLoged() && cont.getEstat(serie, temporada, episodi).equals("VIST")){
+                                new ValorarDialog(this,true).setVisible(true);
+                            }
                             break;
                     }
             }

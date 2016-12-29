@@ -198,13 +198,17 @@ public class TotSeriesDataManager {
     }
     
     public void reproduirEpisodi(int s, int t, int ep){
-        this.data.reproduirEpisodi(s, t, ep);
+        if("PENDENT".equals(data.getEstat(s, t, ep))){
+            this.data.reproduirEpisodi(s, t, ep);
+        }
     }
-    
-    
 
     public void valorarEpisodi(int serie, int temporada, int episodi, int valoracio) {
         this.data.valorarEpisodi(serie, temporada, episodi, valoracio);
+    }
+
+    public String getEstat(int serie, int temporada, int episodi) {
+        return data.getEstat(serie, temporada, episodi);
     }
 
     /**
@@ -224,5 +228,9 @@ public class TotSeriesDataManager {
     
     public ArrayList<String> mostratEpisodis(int s, int t) {
         return data.visualitzarEpisodis(s,t);
+    }
+
+    public boolean userIsLoged() {
+        return data.getLogedUser()!="";
     }
 }

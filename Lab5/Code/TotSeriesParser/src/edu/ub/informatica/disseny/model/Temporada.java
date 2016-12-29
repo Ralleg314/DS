@@ -75,4 +75,8 @@ public class Temporada {
     public String toString(){
         return Integer.toString(this.numero);
     }
+
+    String getEstat(int ep) {
+        return this.eps.get(ep).getEstat();
+    }
 }

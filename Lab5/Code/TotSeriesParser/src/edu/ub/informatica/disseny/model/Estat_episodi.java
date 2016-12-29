@@ -37,10 +37,10 @@ public class Estat_episodi {
                 this.estat=0;
                 break;
             case "REPRODUINT":
-                this.estat=0;
+                this.estat=1;
                 break;
             case "VIST":
-                this.estat=0;
+                this.estat=2;
                 break;
         }
         return "";

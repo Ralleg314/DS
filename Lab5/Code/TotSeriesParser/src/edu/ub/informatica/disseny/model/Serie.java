@@ -116,4 +116,8 @@ public class Serie {
     void valorarEpisodi(int t, int ep, Valoracio val) {
         temporades.get(t).valorarEpisodi(ep,val);
     }
+
+    String getEstat(int t, int ep) {
+        return temporades.get(t).getEstat(ep);
+    }
 }

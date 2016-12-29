@@ -36,6 +36,7 @@ public class Dades {
         valorats=new ArrayList<>();
         productores=new ArrayList<>();
         artistes=new ArrayList<>();
+        logedUser="";
     }
     
     public static Dades getInstance(){
@@ -139,7 +140,13 @@ public class Dades {
      * @param val
      */
     public void valorarEpisodi(int s, int t, int ep, int val){
-        series.get(s).valorarEpisodi(t, ep, new Valoracio(this.logedUser,val));
+        if(this.getEstat(s,t,ep)=="VIST"){
+            series.get(s).valorarEpisodi(t, ep, new Valoracio(this.logedUser,val));
+        }
+    }
+    
+    public String getEstat(int s, int t, int ep) {
+        return series.get(s).getEstat(t, ep);
     }
 
     /**

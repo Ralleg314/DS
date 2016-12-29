@@ -65,11 +65,13 @@ public class Episodi {
     private void reproduir() {
         this.reproduccions++;
         Consola.escriu("Reproduint: "+this.nom+"\n");
+        this.estat.setState("REPRODUINT");
         try {
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Episodi.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.estat.setState("VIST");
     }
     
     public int getReproduccions(){
@@ -87,5 +89,13 @@ public class Episodi {
      */
     public String toString(){
         return this.nom;
+    }
+
+    public String getEstat() {
+        return this.estat.getState();
+    }
+    
+    public void setEstat(String estat) {
+        this.estat.setState(estat);
     }
 }
