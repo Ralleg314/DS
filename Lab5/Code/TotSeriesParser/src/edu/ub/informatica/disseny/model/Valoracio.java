@@ -22,6 +22,10 @@ public class Valoracio {
         dada=new Date();
     }
     
+    /**
+     *
+     * @return
+     */
     public int getValoracio(){
         return valoracio;
     }

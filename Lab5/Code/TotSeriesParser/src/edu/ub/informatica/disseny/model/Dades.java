@@ -142,6 +142,9 @@ public class Dades {
         return temp;
     }
     
+    /**
+     *
+     */
     @SuppressWarnings("empty-statement")
     public void omplirEpisodis(){
         for (Serie s: series){
@@ -153,6 +156,9 @@ public class Dades {
         }
     }
     
+    /**
+     *
+     */
     public void omplirValorats(){
         ArrayList<Serie> temp=new ArrayList<>(series);
         valorats = new ArrayList<>();
@@ -175,6 +181,10 @@ public class Dades {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList<String> visualitzarValorats(){
         ArrayList<String> temp= new ArrayList<>();
         omplirValorats();
@@ -183,7 +193,9 @@ public class Dades {
         }return temp;
     }
     
-    
+    /**
+     *
+     */
     public void omplirVists(){
         ArrayList<Serie> temp=new ArrayList<>(series);
         vists = new ArrayList<>();
@@ -205,6 +217,10 @@ public class Dades {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList<String> visualitzarVists(){
         ArrayList<String> temp= new ArrayList<>();
         omplirVists();

@@ -81,6 +81,10 @@ public class Episodi {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public float getVal(){
         return this.valoracio;
     }

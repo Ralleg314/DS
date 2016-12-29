@@ -303,6 +303,9 @@ public class TotSeries extends javax.swing.JFrame {
         cataleg.setModel(temp);
     }
     
+    /**
+     *
+     */
     public void actualitzaValorats(){
         DefaultListModel temp= new DefaultListModel();
         int i=0;
@@ -317,6 +320,9 @@ public class TotSeries extends javax.swing.JFrame {
         valorats.setModel(temp);
     }
     
+    /**
+     *
+     */
     public void actualitzaVists(){
         vists.removeAll();
         DefaultListModel temp= new DefaultListModel();

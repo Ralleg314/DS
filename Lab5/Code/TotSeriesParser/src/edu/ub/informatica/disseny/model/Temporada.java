@@ -28,7 +28,6 @@ public class Temporada {
 
     /**
      *
-     * @return 
      * @return  
      */
     public ArrayList<String> visualitzarEpisodis() {
@@ -61,6 +60,10 @@ public class Temporada {
         return this.episodis;
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList<Episodi> getEps(){
         return this.eps;
     }

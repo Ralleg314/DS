@@ -128,10 +128,18 @@ public class Serie {
         return temporades.get(t).getEstat(ep);
     }
     
+    /**
+     *
+     * @return
+     */
     public int getReproduccions(){
         return this.reproduccions;
     }
     
+    /**
+     *
+     * @return
+     */
     public float getVal(){
         float val=0;
         int cont=0;
