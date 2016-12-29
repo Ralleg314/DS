@@ -84,8 +84,15 @@ public class Episodi {
 
     void valorarEpisodi(Valoracio val) {
         this.val.add(val);
-        valoracio/=this.val.size();
+        updateValoracio();
     }
+    
+    void updateValoracio(){
+        for(Valoracio v:val){
+            valoracio+=((float)v.getValoracio())/val.size();
+        }
+    }
+    
     public float getVal(){
         return this.valoracio;
     }

@@ -60,14 +60,30 @@ public class TotSeries extends javax.swing.JFrame {
            temp1.addElement(s);
         }
         cataleg.setModel(temp1);
-        //millorValorats
+        //millorVists
         DefaultListModel temp2= new DefaultListModel();
-        for(String s : cont.mostrarValorats()){
-           temp2.addElement(s);
+        int i=0;
+        for(String s : cont.mostrarVists()){
+            if(i<10){
+                temp2.addElement(s);
+            }else{
+                break;
+            }
+            i++;
         }
-        valorats.setModel(temp2);
-        //mesVists
-       
+        vists.setModel(temp2);
+        //mesValorats
+        DefaultListModel temp3= new DefaultListModel();
+        i=0;
+        for(String s : cont.mostrarValorats()){
+            if(i<10){
+                temp3.addElement(s);
+            }else{
+                break;
+            }
+            i++;
+        }
+        valorats.setModel(temp3);
     }
     
     /**
@@ -312,21 +328,32 @@ public class TotSeries extends javax.swing.JFrame {
     }
     
     public void actualitzaValorats(){
-        valorats.removeAll();
-        DefaultListModel temp = new DefaultListModel();
+        DefaultListModel temp3= new DefaultListModel();
+        int i=0;
         for(String s : cont.mostrarValorats()){
-           temp.addElement(s);
+            if(i<10){
+                temp3.addElement(s);
+            }else{
+                break;
+            }
+            i++;
         }
-        valorats.setModel(temp);
+        valorats.setModel(temp3);
     }
     
     public void actualitzaVists(){
         vists.removeAll();
-        DefaultListModel temp= new DefaultListModel();
-        temp.clear();
-        for (String s : cont.mostrarVists()){
-            temp.addElement(s);
-        } vists.setModel(temp);
+        DefaultListModel temp2= new DefaultListModel();
+        int i=0;
+        for(String s : cont.mostrarVists()){
+            if(i<10){
+                temp2.addElement(s);
+            }else{
+                break;
+            }
+            i++;
+        }
+        vists.setModel(temp2);
     }
     /**
      *

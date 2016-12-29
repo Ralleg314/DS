@@ -8,7 +8,6 @@ package edu.ub.informatica.disseny.model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +21,7 @@ public class Dades {
     ArrayList<Usuari_registrat> usuaris;
     ArrayList<Administrador> administradors;
     ArrayList<Serie> series;
-    ArrayList<Episodi> valorats,vists;
+    ArrayList<Episodi> episodis,valorats,vists;
     ArrayList<Productora> productores;
     ArrayList<Artista> artistes;
     String logedUser;
@@ -34,8 +33,8 @@ public class Dades {
         usuaris=new ArrayList<>();
         administradors=new ArrayList<>();
         series=new ArrayList<>();
+        episodis=new ArrayList<>();
         valorats=new ArrayList<>();
-        vists= new ArrayList<>();
         productores=new ArrayList<>();
         artistes=new ArrayList<>();
         logedUser="";
@@ -142,58 +141,78 @@ public class Dades {
         }
         return temp;
     }
+    
+    @SuppressWarnings("empty-statement")
+    public void omplirEpisodis(){
+        for (Serie s: series){
+            for(Temporada t: s.getTemporades()){
+                for(Episodi e: t.getEps()){
+                    episodis.add(e);
+                };
+            } 
+        }
+    }
+    
     public void omplirValorats(){
-        ArrayList<Episodi> temp=new ArrayList<>();
-        for (Serie s: series){
-            for(Temporada t: s.getTemporades()){
-                for(Episodi e: t.getEps()){
-                    temp.add(e);
-                };
-            } 
-        }
-        
-        for (Episodi e: temp){
-            float max=0,valAct=e.getVal();
-            if (valAct>max){
-                max=valAct;
-                valorats.add(e);
-            }
-        } 
-    }
-    public ArrayList<String> visualitzarValorats(){
-        ArrayList<String> temp=new ArrayList<>();
-        omplirValorats();
-        for(Episodi ep : valorats){
-            temp.add(ep.toString());
-        }
-        return temp;
-    }
-    public void omplirVists(){
-        ArrayList<Episodi> temp=new ArrayList<>();
-        for (Serie s: series){
-            for(Temporada t: s.getTemporades()){
-                for(Episodi e: t.getEps()){
-                    temp.add(e);
-                };
-            } 
-        }        
-        for (Episodi e: temp){
-            float max=0,valAct=e.getReproduccions();
-            if (valAct>max){
-                max=valAct;
-                if (!vists.contains(e)){
-                    vists.add(e);
+        ArrayList<Episodi> temp=new ArrayList<>(episodis);
+        valorats = new ArrayList<>();
+        int i,pos;
+        float valAct,max;
+        while(!temp.isEmpty()){
+            i=0;
+            pos=0;
+            max=-1;
+            for (Episodi e: temp){
+                valAct=e.getVal();
+                if (valAct>max){
+                    max=valAct;
+                    pos=i;
                 }
+                i++;
             }
-        }        
+            valorats.add(temp.get(pos));
+            temp.remove(pos);
+        }
     }
+    
+    public ArrayList<String> visualitzarValorats(){
+        ArrayList<String> temp= new ArrayList<>();
+        omplirValorats();
+        for (Episodi ep: valorats){
+            temp.add(ep.getVal()+"    "+ep.toString());
+        }return temp;
+    }
+    
+    
+    public void omplirVists(){
+        ArrayList<Episodi> temp=new ArrayList<>(episodis);
+        vists = new ArrayList<>();
+        int i,pos,max, valAct;
+        while(!temp.isEmpty()){
+            i=0;
+            pos=0;
+            max=-1;
+            for (Episodi e: temp){
+                valAct=e.getReproduccions();
+                if (valAct>max){
+                    max=valAct;
+                    pos=i;
+                }
+                i++;
+            }
+            vists.add(temp.get(pos));
+            temp.remove(pos);
+        }
+    }
+    
     public ArrayList<String> visualitzarVists(){
         ArrayList<String> temp= new ArrayList<>();
         omplirVists();
         for (Episodi ep: vists){
-            temp.add(ep.toString());
+            temp.add(ep.getReproduccions()+"    "+ep.toString());
         }return temp;
     }
+    
     /**
      *
      * @param s
@@ -285,6 +304,7 @@ public class Dades {
             date = (new SimpleDateFormat("dd/mm/yyyy")).parse(data);
             Episodi temp=new Episodi(title,idioma,description,duration,date);
             this.series.get(i).afegirEpisodi(temp,j);
+            this.episodis.add(temp);
         } catch (ParseException ex) {
             Logger.getLogger(Dades.class.getName()).log(Level.SEVERE, null, ex);
         }

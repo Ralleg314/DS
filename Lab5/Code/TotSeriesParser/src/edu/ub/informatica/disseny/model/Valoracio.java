@@ -21,4 +21,8 @@ public class Valoracio {
         this.valoracio=val;
         dada=new Date();
     }
+    
+    public int getValoracio(){
+        return valoracio;
+    }
 }
