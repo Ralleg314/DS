@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 public class Episodi {
     private String nom,idioma,descripcio,duracio;
     private float valoracio;
+    private int reproduccions;
     private ArrayList<Valoracio> val;
     private Date emisio;
     private Estat_episodi estat;
@@ -47,6 +48,7 @@ public class Episodi {
         this.valoracio=0;
         emisio=data;
         this.estat=new Estat_episodi();
+        this.reproduccions=0;
     }
     
     /**
@@ -61,12 +63,17 @@ public class Episodi {
     }
 
     private void reproduir() {
+        this.reproduccions++;
         Consola.escriu("Reproduint: "+this.nom+"\n");
         try {
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Episodi.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public int getReproduccions(){
+        return this.reproduccions;
     }
 
     void valorarEpisodi(Valoracio val) {
