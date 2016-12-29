@@ -21,8 +21,20 @@ public class TotSeries extends javax.swing.JFrame {
     private TotSeriesDataManager cont;
     private ArrayList<String> opt;
     private int place;
+
+    /**
+     *
+     */
     protected int serie;
+
+    /**
+     *
+     */
     protected int temporada;
+
+    /**
+     *
+     */
     protected int episodi;
     private int last=-1;
     /**
@@ -49,6 +61,10 @@ public class TotSeries extends javax.swing.JFrame {
         cataleg.setModel(temp);
     }
     
+    /**
+     *
+     * @return
+     */
     public static TotSeries getInstance(){
         if(instance==null){
             instance=new TotSeries();
@@ -201,6 +217,9 @@ public class TotSeries extends javax.swing.JFrame {
         new LoginDialog(this,true).setVisible(true);
     }//GEN-LAST:event_LoginActionPerformed
 
+    /**
+     *
+     */
     public void turnOffLogin(){
         Login.setEnabled(false);
     }
@@ -260,6 +279,10 @@ public class TotSeries extends javax.swing.JFrame {
         last=pos;
     }//GEN-LAST:event_catalegValueChanged
 
+    /**
+     *
+     * @param llista
+     */
     public void actualitzaLlista(ArrayList<String> llista){
         DefaultListModel temp = new DefaultListModel();
         for(String s : llista){
@@ -268,6 +291,10 @@ public class TotSeries extends javax.swing.JFrame {
         cataleg.setModel(temp);
     }
     
+    /**
+     *
+     * @param id
+     */
     public void changeLogin(String id){
         this.Login.setText(id);
     }

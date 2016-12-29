@@ -27,6 +27,10 @@ public class TotSeriesDataManager {
         this.obtenirDades("data/TotSeries.xml");
     }
     
+    /**
+     *
+     * @return
+     */
     public static TotSeriesDataManager getInstance(){
         if(instance==null){
             instance=new TotSeriesDataManager();
@@ -164,7 +168,6 @@ public class TotSeriesDataManager {
     /**
      * Crea un nou client a partir de la informacio obtinguda del fitxer XML
      * 
-     * @param id id del client
      * @param nom nom del client
      * @param dni dni del client
      * @param adreca adreça del client
@@ -197,22 +200,43 @@ public class TotSeriesDataManager {
 
     }
     
+    /**
+     *
+     * @param s
+     * @param t
+     * @param ep
+     */
     public void reproduirEpisodi(int s, int t, int ep){
         if("PENDENT".equals(data.getEstat(s, t, ep))){
             this.data.reproduirEpisodi(s, t, ep);
         }
     }
 
+    /**
+     *
+     * @param serie
+     * @param temporada
+     * @param episodi
+     * @param valoracio
+     */
     public void valorarEpisodi(int serie, int temporada, int episodi, int valoracio) {
         this.data.valorarEpisodi(serie, temporada, episodi, valoracio);
     }
 
+    /**
+     *
+     * @param serie
+     * @param temporada
+     * @param episodi
+     * @return
+     */
     public String getEstat(int serie, int temporada, int episodi) {
         return data.getEstat(serie, temporada, episodi);
     }
 
     /**
      *
+     * @return 
      */
     public ArrayList<String> mostratCataleg() {
         return data.visualitzarCataleg();
@@ -221,15 +245,26 @@ public class TotSeriesDataManager {
     /**
      *
      * @param s
+     * @return 
      */
     public ArrayList<String> mostratTemporades(int s) {
         return data.visualitzarTemporades(s);
     }
     
+    /**
+     *
+     * @param s
+     * @param t
+     * @return
+     */
     public ArrayList<String> mostratEpisodis(int s, int t) {
         return data.visualitzarEpisodis(s,t);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean userIsLoged() {
         return data.getLogedUser()!="";
     }

@@ -17,6 +17,8 @@ public class RegisterDialog extends javax.swing.JDialog{
     TotSeries parentFrame;
     /**
      * Creates new form RegisterDialog
+     * @param parent
+     * @param modal
      */
     public RegisterDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

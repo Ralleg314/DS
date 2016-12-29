@@ -28,6 +28,8 @@ public class Temporada {
 
     /**
      *
+     * @return 
+     * @return  
      */
     public ArrayList<String> visualitzarEpisodis() {
         ArrayList<String> temp = new ArrayList<>();

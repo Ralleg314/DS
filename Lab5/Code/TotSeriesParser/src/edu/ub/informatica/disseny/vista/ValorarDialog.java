@@ -16,6 +16,8 @@ public class ValorarDialog extends javax.swing.JDialog {
     TotSeries parentFrame;
     /**
      * Creates new form ValorarDialog
+     * @param parent
+     * @param modal
      */
     public ValorarDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

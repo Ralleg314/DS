@@ -39,6 +39,10 @@ public class Dades {
         logedUser="";
     }
     
+    /**
+     *
+     * @return
+     */
     public static Dades getInstance(){
         if(instance==null){
             instance=new Dades();
@@ -46,12 +50,26 @@ public class Dades {
         return instance;
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList getSeries(){
         return series;
     }
+
+    /**
+     *
+     * @return
+     */
     public ArrayList getValorats(){
         return valorats;
     }
+
+    /**
+     *
+     * @return
+     */
     public ArrayList getVists(){
         return series;
     }
@@ -69,6 +87,11 @@ public class Dades {
         return false;
     }
     
+    /**
+     *
+     * @param id
+     * @return
+     */
     public int posUsuari(String id){
         int i=0;
         for(Usuari_registrat us:usuaris){
@@ -80,14 +103,28 @@ public class Dades {
         return -1;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getLogedUser(){
         return this.logedUser;
     }
     
+    /**
+     *
+     * @param us
+     */
     public void setLogedUser(String us){
         this.logedUser=us;
     }
     
+    /**
+     *
+     * @param pos
+     * @param pass
+     * @return
+     */
     public boolean comprovarPassword(int pos, String pass){
         return this.usuaris.get(pos).getPassword().equals(pass);
     }
@@ -107,6 +144,7 @@ public class Dades {
     /**
      *
      * @param s
+     * @return 
      */
     public ArrayList<String> visualitzarTemporades(int s){
         return series.get(s).visualitzarTemporades();
@@ -145,6 +183,13 @@ public class Dades {
         }
     }
     
+    /**
+     *
+     * @param s
+     * @param t
+     * @param ep
+     * @return
+     */
     public String getEstat(int s, int t, int ep) {
         return series.get(s).getEstat(t, ep);
     }

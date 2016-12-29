@@ -19,6 +19,10 @@ public class Estat_episodi {
         estat=0;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getState(){
         switch(estat){
             case 0:
@@ -31,6 +35,11 @@ public class Estat_episodi {
         return "";
     }
     
+    /**
+     *
+     * @param estat
+     * @return
+     */
     public String setState(String estat){
         switch(estat){
             case "PENDENT":

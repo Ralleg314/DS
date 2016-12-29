@@ -49,6 +49,10 @@ public class Usuari_registrat extends Usuari{
         return this.id.equals(usuari.getId());
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return this.contrasenya;
     }

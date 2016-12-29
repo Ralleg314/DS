@@ -74,6 +74,10 @@ public class Episodi {
         this.estat.setState("VIST");
     }
     
+    /**
+     *
+     * @return
+     */
     public int getReproduccions(){
         return this.reproduccions;
     }
@@ -91,10 +95,18 @@ public class Episodi {
         return this.nom;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEstat() {
         return this.estat.getState();
     }
     
+    /**
+     *
+     * @param estat
+     */
     public void setEstat(String estat) {
         this.estat.setState(estat);
     }

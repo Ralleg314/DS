@@ -50,6 +50,10 @@ public class Serie {
         num_temp++;
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList<Temporada> getTemporades(){
         return this.temporades;
     }
