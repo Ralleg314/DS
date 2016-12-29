@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 public class Episodi {
     private String nom,idioma,descripcio,duracio;
     private float valoracio;
-    private int reproduccions;
     private ArrayList<Valoracio> val;
     private Date emisio;
     private Estat_episodi estat;
@@ -48,7 +47,6 @@ public class Episodi {
         this.valoracio=0;
         emisio=data;
         this.estat=new Estat_episodi();
-        this.reproduccions=0;
     }
     
     /**
@@ -61,7 +59,6 @@ public class Episodi {
     }
 
     private void reproduir() {
-        this.reproduccions++;
         Consola.escriu("Reproduint: "+this.nom+"\n");
         this.estat.setState("REPRODUINT");
         try {
@@ -71,14 +68,6 @@ public class Episodi {
         }
         this.estat.setState("VIST");
     }
-    
-    /**
-     *
-     * @return
-     */
-    public int getReproduccions(){
-        return this.reproduccions;
-    }
 
     void valorarEpisodi(Valoracio val) {
         this.val.add(val);
@@ -86,6 +75,7 @@ public class Episodi {
     }
     
     void updateValoracio(){
+        valoracio=0;
         for(Valoracio v:val){
             valoracio+=((float)v.getValoracio())/val.size();
         }

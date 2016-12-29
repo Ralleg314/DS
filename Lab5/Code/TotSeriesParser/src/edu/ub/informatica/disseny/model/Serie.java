@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Serie {
     private String id, titol, descripcio;
     private int num_temp;
+    private int reproduccions;
     private ArrayList<Temporada> temporades;
     private ArrayList<Artista> artistes;
     private Productora productora;
@@ -39,6 +40,7 @@ public class Serie {
         this.descripcio=descripcio;
         temporades=new ArrayList<>();
         artistes=new ArrayList<>();
+        reproduccions=0;
     }
     
     /**
@@ -114,6 +116,7 @@ public class Serie {
      * @param ep
      */
     public void reproduirEpisodi(int t, int ep) {
+        this.reproduccions++;
         temporades.get(t).reproduirEpisodi(ep);
     }
 
@@ -123,5 +126,27 @@ public class Serie {
 
     String getEstat(int t, int ep) {
         return temporades.get(t).getEstat(ep);
+    }
+    
+    public int getReproduccions(){
+        return this.reproduccions;
+    }
+    
+    public float getVal(){
+        float val=0;
+        int cont=0;
+        for(Temporada t:temporades){
+            for(Episodi ep: t.getEps()){
+                if(ep.getVal()!=0){
+                    val+=ep.getVal();
+                    cont++;
+                }
+            }
+        }
+        if(cont!=0){
+            return val/cont;
+        }else{
+            return 0;
+        }
     }
 }

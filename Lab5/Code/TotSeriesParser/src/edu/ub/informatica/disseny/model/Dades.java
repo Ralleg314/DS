@@ -20,8 +20,8 @@ public class Dades {
     private static Dades instance = null;
     ArrayList<Usuari_registrat> usuaris;
     ArrayList<Administrador> administradors;
-    ArrayList<Serie> series;
-    ArrayList<Episodi> episodis,valorats,vists;
+    ArrayList<Serie> series,valorats,vists;
+    ArrayList<Episodi> episodis;
     ArrayList<Productora> productores;
     ArrayList<Artista> artistes;
     String logedUser;
@@ -154,7 +154,7 @@ public class Dades {
     }
     
     public void omplirValorats(){
-        ArrayList<Episodi> temp=new ArrayList<>(episodis);
+        ArrayList<Serie> temp=new ArrayList<>(series);
         valorats = new ArrayList<>();
         int i,pos;
         float valAct,max;
@@ -162,8 +162,8 @@ public class Dades {
             i=0;
             pos=0;
             max=-1;
-            for (Episodi e: temp){
-                valAct=e.getVal();
+            for (Serie s: temp){
+                valAct=s.getVal();
                 if (valAct>max){
                     max=valAct;
                     pos=i;
@@ -178,22 +178,22 @@ public class Dades {
     public ArrayList<String> visualitzarValorats(){
         ArrayList<String> temp= new ArrayList<>();
         omplirValorats();
-        for (Episodi ep: valorats){
+        for (Serie ep: valorats){
             temp.add(ep.getVal()+"    "+ep.toString());
         }return temp;
     }
     
     
     public void omplirVists(){
-        ArrayList<Episodi> temp=new ArrayList<>(episodis);
+        ArrayList<Serie> temp=new ArrayList<>(series);
         vists = new ArrayList<>();
         int i,pos,max, valAct;
         while(!temp.isEmpty()){
             i=0;
             pos=0;
             max=-1;
-            for (Episodi e: temp){
-                valAct=e.getReproduccions();
+            for (Serie s: temp){
+                valAct=s.getReproduccions();
                 if (valAct>max){
                     max=valAct;
                     pos=i;
@@ -208,8 +208,8 @@ public class Dades {
     public ArrayList<String> visualitzarVists(){
         ArrayList<String> temp= new ArrayList<>();
         omplirVists();
-        for (Episodi ep: vists){
-            temp.add(ep.getReproduccions()+"    "+ep.toString());
+        for (Serie s: vists){
+            temp.add(s.getReproduccions()+"    "+s.toString());
         }return temp;
     }
     

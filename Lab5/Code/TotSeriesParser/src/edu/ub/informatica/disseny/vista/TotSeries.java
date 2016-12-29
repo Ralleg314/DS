@@ -54,36 +54,12 @@ public class TotSeries extends javax.swing.JFrame {
         initComponents();
         Login.setEnabled(true);
         Register.setEnabled(true);
-        DefaultListModel temp1 = new DefaultListModel();
         //cataleg
-        for(String s : cont.mostratCataleg()){
-           temp1.addElement(s);
-        }
-        cataleg.setModel(temp1);
-        //millorVists
-        DefaultListModel temp2= new DefaultListModel();
-        int i=0;
-        for(String s : cont.mostrarVists()){
-            if(i<10){
-                temp2.addElement(s);
-            }else{
-                break;
-            }
-            i++;
-        }
-        vists.setModel(temp2);
-        //mesValorats
-        DefaultListModel temp3= new DefaultListModel();
-        i=0;
-        for(String s : cont.mostrarValorats()){
-            if(i<10){
-                temp3.addElement(s);
-            }else{
-                break;
-            }
-            i++;
-        }
-        valorats.setModel(temp3);
+        this.actualitzaLlista(cont.mostratCataleg());
+        //millorValorats
+        this.actualitzaValorats();
+        //mesVists
+        this.actualitzaVists();
     }
     
     /**
@@ -328,32 +304,32 @@ public class TotSeries extends javax.swing.JFrame {
     }
     
     public void actualitzaValorats(){
-        DefaultListModel temp3= new DefaultListModel();
+        DefaultListModel temp= new DefaultListModel();
         int i=0;
         for(String s : cont.mostrarValorats()){
             if(i<10){
-                temp3.addElement(s);
+                temp.addElement(s);
             }else{
                 break;
             }
             i++;
         }
-        valorats.setModel(temp3);
+        valorats.setModel(temp);
     }
     
     public void actualitzaVists(){
         vists.removeAll();
-        DefaultListModel temp2= new DefaultListModel();
+        DefaultListModel temp= new DefaultListModel();
         int i=0;
         for(String s : cont.mostrarVists()){
             if(i<10){
-                temp2.addElement(s);
+                temp.addElement(s);
             }else{
                 break;
             }
             i++;
         }
-        vists.setModel(temp2);
+        vists.setModel(temp);
     }
     /**
      *
