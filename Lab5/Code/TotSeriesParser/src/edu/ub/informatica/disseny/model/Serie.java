@@ -145,7 +145,7 @@ public class Serie {
         int cont=0;
         for(Temporada t:temporades){
             for(Episodi ep: t.getEps()){
-                if(ep.getVal()!=0){
+                if(ep.getVal()!=-1){
                     val+=ep.getVal();
                     cont++;
                 }

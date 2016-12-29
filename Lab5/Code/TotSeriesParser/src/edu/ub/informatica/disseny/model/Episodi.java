@@ -44,7 +44,7 @@ public class Episodi {
         this.descripcio=descripcio;
         this.duracio=duracio;
         this.val=new ArrayList<>();
-        this.valoracio=0;
+        this.valoracio=-1;
         emisio=data;
         this.estat=new Estat_episodi();
     }
@@ -71,6 +71,7 @@ public class Episodi {
 
     void valorarEpisodi(Valoracio val) {
         this.val.add(val);
+        this.setEstat("VALORAT");
         updateValoracio();
     }
     

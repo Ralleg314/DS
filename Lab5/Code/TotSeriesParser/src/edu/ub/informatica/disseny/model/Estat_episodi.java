@@ -31,6 +31,8 @@ public class Estat_episodi {
                 return "REPRODUINT";
             case 2:
                 return "VIST";
+            case 3:
+                return "VALORAT";
         }
         return "";
     }
@@ -50,6 +52,9 @@ public class Estat_episodi {
                 break;
             case "VIST":
                 this.estat=2;
+                break;
+            case "VALORAT":
+                this.estat=3;
                 break;
         }
         return "";

@@ -324,7 +324,6 @@ public class TotSeries extends javax.swing.JFrame {
      *
      */
     public void actualitzaVists(){
-        vists.removeAll();
         DefaultListModel temp= new DefaultListModel();
         int i=0;
         for(String s : cont.mostrarVists()){
