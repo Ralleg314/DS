@@ -1,0 +1,105 @@
+@startuml
+
+title TotSeries - Model de domini
+
+object TotSeries{
+    +Controlador
+}
+
+object Cataleg{
+}
+
+object Usuaris{
+}
+
+object Temps{
+}
+
+object Serie {
+  +Titol
+  +Descripció
+  +Número de temporades
+  +Valoració
+}
+
+object Usuari_registrat {
+  +Nom
+  +Nacionalitat
+  +Data de naixament
+  +Contrasenya
+  +Capitols_visualitzats
+  +VIP
+}
+
+object Usuari_no_registrat {
+}
+
+object Artista{
+    +Nom
+    +Nacionalitat
+}
+
+object Director{
+}
+
+object Actor{
+}
+
+object Productora{
+    +Nom
+    +ID
+    +Any de creació
+}
+
+object Temporada{
+    +Número de temporada
+    +Número de episodis
+}
+
+object Episodi{
+    +Nom
+    +Duració
+    +Idioma
+    +Descripció
+    +Data d'emisió
+}
+
+object Estat_episodi{
+    +estat
+}
+
+object Administrador{
+}
+
+TotSeries "1" -down- "1" Cataleg: té
+TotSeries "1" -down- "1...*" Usuaris: té
+TotSeries "1" -down- "1...*" Administrador: té
+
+Cataleg "1" *-down- "1...*" Serie: té
+
+Usuaris "1" <|-down- "1...*" Usuari_registrat: té
+Usuaris "1" <|-down- "1...*" Usuari_no_registrat: té
+
+Serie "1" -down- "1...*" Artista: té
+Serie "1" -down- "1" Productora: té
+Serie "1" -down- "1...*" Temporada: té
+
+Artista <|-down- Actor
+Artista <|-down- Director
+
+Temporada "1" *-down- "1...*" Episodi: té
+
+Usuari_registrat "1" -down- "1" Episodi: veu
+Usuaris "1" -down- "1" Cataleg: veu
+Usuari_registrat "1" -down- "1...*" Episodi: valora
+
+Administrador "1" -down- "1...*" Serie: afegeix
+Administrador "1" -down- "1...*" Usuari_registrat: dona VIP
+Administrador "1" -down- "1...*" Serie: elimina
+Administrador "1" -down- "1...*" Usuari_registrat: treu VIP
+
+Episodi "1" -down- "1" Estat_episodi: té
+
+Temps "1" -down- "1...*" Usuari_registrat: cobra
+
+@enduml
