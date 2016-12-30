@@ -1,0 +1,68 @@
+
+@startuml
+
+legend top 
+    DS4 Visualitzar CapitolsMesValorats
+end legend
+
+actor Usuari as usuari
+activate usuari
+rnote over usuari
+    List<String> valorats
+    float val
+    int cont
+end rnote
+
+participant ":Menu" as menu
+participant ":TotSeries" as TS
+participant ":Dades" as dades
+participant "s:Serie" as serie
+participant "t:Temporada" as temporada
+participant "ep:Episodi" as episodi
+
+usuari -> menu
+activate menu
+
+menu -> menu : actualitzaValorats()
+menu->TS : valorats:=mostraValorats()
+activate TS
+TS -> dades : visualitzaValorats()
+activate dades
+loop s in serie
+    rnote over serie
+        val=0
+        cont=0
+    end rnote
+    |||
+    dades -> serie : val:=getVal()
+    activate serie
+    loop t in temporada
+        |||
+        serie->temporada: eps:=getEps()
+        activate temporada
+        temporada --> serie
+        deactivate temporada
+        loop ep in eps
+            |||
+            serie -> episodi : temp_val:=getVal()
+            activate episodi
+            episodi --> serie
+            deactivate episodi
+            |||
+        end
+        |||
+    end
+    serie ---> dades
+    deactivate serie
+    |||
+end
+dades -->TS : valorats
+deactivate dades
+TS --> menu
+deactivate TS
+menu --> usuari
+deactivate menu
+
+deactivate usuari
+
+@enduml

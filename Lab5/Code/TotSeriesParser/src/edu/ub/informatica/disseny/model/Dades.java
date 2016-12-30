@@ -185,15 +185,15 @@ public class Dades {
     public ArrayList<String> visualitzarVists(){
         ArrayList<Serie> temp=new ArrayList<>(series);
         ArrayList<Serie> vists = new ArrayList<>();
-        int i,pos,max, valAct;
+        int i,pos,max,rep;
         while(!temp.isEmpty()){
             i=0;
             pos=0;
             max=-1;
             for (Serie s: temp){
-                valAct=s.getReproduccions();
-                if (valAct>max){
-                    max=valAct;
+                rep=s.getReproduccions();
+                if (rep>max){
+                    max=rep;
                     pos=i;
                 }
                 i++;

@@ -1,0 +1,45 @@
+
+@startuml
+
+legend top 
+    DS4 Visualitzar CapitolsMesVists
+end legend
+
+actor Usuari as usuari
+activate usuari
+rnote over usuari
+    List<String> vists
+    int rep
+end rnote
+
+participant ":Menu" as menu
+participant ":TotSeries" as TS
+participant ":Dades" as dades
+participant "s:Serie" as serie
+
+usuari -> menu
+activate menu
+
+menu -> menu : actualitzaVists()
+menu->TS : valorats:=mostraVists()
+activate TS
+TS -> dades : visualitzaVists()
+activate dades
+loop s in serie
+    |||
+    dades -> serie : rep:=getReproduccions()
+    activate serie
+    serie ---> dades
+    deactivate serie
+    |||
+end
+dades -->TS : valorats
+deactivate dades
+TS --> menu
+deactivate TS
+menu --> usuari
+deactivate menu
+
+deactivate usuari
+
+@enduml
