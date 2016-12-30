@@ -1,4 +1,3 @@
-
 @startuml
 
 legend top 
@@ -7,66 +6,83 @@ end legend
 
 actor Usuari_registrat as usuari
 activate usuari
+rnote over usuari
+    int serie
+    int temporada
+    int episodi
+    boolean isLoged
+    ArrayList<String> cataleg
+end rnote
 
-participant "Menu" as menu
-participant ":TotSeries" as TS
+participant "TotSeries" as menu
+participant ":TotSeriesDataManager" as TS
 participant ":Dades" as dades
 participant ":Serie" as serie
-participant ":Temporada" as temp
-participant ":Episodi" as episodi
+participant "t:Temporada" as temp
+participant "ep:Episodi" as episodi
 participant ":Estat" as estat
 
 usuari -> menu
 activate menu
-menu -> menu : op=llegeixInt()
-opt op==3
-    |||
-    menu -> menu : ep=llegeixInt()
-    opt ep>0 && ep<episodis
-        |||
-        menu ->TS :reproduirEpisodi(s,t,ep)
-        TS -> serie: reproduirEpisodi(s,t,ep)
-        activate serie
-        serie->temp: reproduirEpisodi(t,ep)
-        activate temp
-        temp->episodi: reproduirEpisodi(ep)
-        activate episodi
-        episodi -> estat: getEstatEpisodi(): estatEpisodi
-        activate estat
-        estat --> episodi: estatEpisodi
-        deactivate estat
-        opt estat==PENDENT
-            |||
-            episodi ->episodi: reproduir()
-            |||
-        end
-        loop estat!=VIST
-            |||
-            episodi -> estat: getEstatEpisodi(): estatEpisodi
-            activate estat
-            estat --> episodi: estatEpisodi
-            deactivate estat
-            |||
-        end
-        episodi --->temp :estatEpisodi
-        deactivate episodi
-        temp ---> serie :estatEpisodi
-        deactivate temp
-        serie---> dades :estatEpisodi
-        deactivate serie
-        dades---> TS :estatEpisodi
-        deactivate dades
-        TS ---> menu :estatEpisodi
-        deactivate TS
-        
-        |||
-    else
-        |||
-        menu->menu: escriu("Episodi no valid")
-        menu--->usuari
-        |||
-    end
 
+menu -> menu: serie:=getSelectedIndex()
+menu -> TS : cataleg:=mostratTemporades(serie)
+activate TS
+TS -> dades: visualitzaTemporades(serie)
+activate dades
+dades -> serie : visualitzarTemporades()
+activate serie
+rnote over serie
+    String nom
+end rnote
+loop t in series
+    |||
+    serie->temp : nom:=toString()
+    activate temp
+    temp --> serie
+    deactivate temp
+    serie -> serie: add(nom)
+    |||
 end
+serie --> dades
+deactivate serie
+dades -->TS
+deactivate dades
+TS-->menu
+deactivate TS
+menu -> menu:actualitzaLlista(cataleg)
+
+menu -> menu: temporada:=getSelectedIndex()
+menu -> TS : cataleg:=mostratEpisodis(serie,temporada)
+activate TS
+TS -> dades: visualitzarEpisodis(serie,temporada)
+activate dades
+dades -> serie : visualitzarEpisodis(temporada)
+activate serie
+serie->temp:visualitzarEpisodis()
+activate temp
+rnote over temp
+    String nom
+end rnote
+loop ep in temp
+    |||
+    temp->episodi : nom:=toString()
+    activate episodi
+    episodi --> temp
+    deactivate episodi
+    temp -> temp: add(nom)
+    |||
+end
+temp --> serie
+deactivate temp
+serie --> dades
+deactivate serie
+dades -->TS
+deactivate dades
+TS-->menu
+deactivate TS
+menu -> menu:actualitzaLlista(cataleg)
+
+menu -> menu: episodi:=getSelectedIndex()
 
 @enduml

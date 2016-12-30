@@ -12,8 +12,9 @@ rnote over usuari
     int temporada
     int episodi
     boolean isLoged
-    ArrayList<String> cataleg
     String estatEpisodi
+    int punt
+    Valoracio val
 end rnote
 
 participant "TotSeries" as menu
@@ -23,6 +24,7 @@ participant ":Serie" as serie
 participant "t:Temporada" as temp
 participant "ep:Episodi" as episodi
 participant ":Estat" as estat
+participant ":Valoracio" as val
 
 activate menu
 usuari -> menu
@@ -33,23 +35,27 @@ TS-->menu
 deactivate TS
 opt isLoged
     |||
-    menu ->TS :reproduirEpisodi(serie,temporada,episodi)
+    menu ->TS :valorarEpisodi(serie,temporada,episodi)
     activate TS
-    TS->dades:reproduirEpisodi(serie,temporada,episodi)
+    TS->dades:valorarEpisodi(serie,temporada,episodi)
     activate dades
-    dades -> serie: reproduirEpisodi(s,t,ep)
+    dades -> val: val:= create(id,punt)
+    activate val
+    val --> dades
+    deactivate val
+    dades -> serie: valorarEpisodi(s,t,ep,val)
     activate serie
-    serie->temp: reproduirEpisodi(t,ep)
+    serie->temp: valorarEpisodi(t,ep,val)
     activate temp
-    temp->episodi: reproduirEpisodi(ep)
+    temp->episodi: valorarEpisodi(ep,val)
     activate episodi
     episodi -> estat: estatEpisodi:=getEstatEpisodi(): estatEpisodi
     activate estat
     estat --> episodi
     deactivate estat
-    opt estatEpisodi==PENDENT
+    opt estatEpisodi==VIST
         |||
-        episodi ->episodi: reproduir()
+        episodi ->episodi: add(val)
         |||
     end
     episodi --->temp 
@@ -62,11 +68,11 @@ opt isLoged
     deactivate dades
     TS ---> menu 
     deactivate TS
-    menu -> menu : actualitzaVists()
+    menu -> menu : actualitzaValorats()
     rnote over menu
         "Aquesta part es
         mostra al DS de
-        VisualitzarCapitolsMesVists"
+        VisualitzarCapitolsMesValorats"
     end rnote
     |||
 end

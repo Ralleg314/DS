@@ -5,14 +5,14 @@
  */
 package edu.ub.informatica.disseny.vista;
 
-import edu.ub.informatica.disseny.model.Dades;
+import edu.ub.informatica.disseny.totseries.TotSeriesDataManager;
 
 /**
  *
  * @author EVA-00
  */
 public class ValorarDialog extends javax.swing.JDialog {
-    Dades data;
+    TotSeriesDataManager cont;
     TotSeries parentFrame;
     /**
      * Creates new form ValorarDialog
@@ -22,7 +22,7 @@ public class ValorarDialog extends javax.swing.JDialog {
     public ValorarDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         parentFrame = TotSeries.getInstance();
-        data=Dades.getInstance();
+        cont=TotSeriesDataManager.getInstance();
         initComponents();
         this.valorSlider.setMajorTickSpacing(0);
         this.valorSlider.setMajorTickSpacing(5);
@@ -94,7 +94,7 @@ public class ValorarDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        data.valorarEpisodi(this.parentFrame.serie, this.parentFrame.temporada, this.parentFrame.episodi, this.valorSlider.getValue());
+        cont.valorarEpisodi(this.parentFrame.serie, this.parentFrame.temporada, this.parentFrame.episodi, this.valorSlider.getValue());
         this.dispose();
     }//GEN-LAST:event_confirmButtonActionPerformed
 
