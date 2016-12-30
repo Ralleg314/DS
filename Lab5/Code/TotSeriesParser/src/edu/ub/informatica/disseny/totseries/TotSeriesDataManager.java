@@ -281,6 +281,6 @@ public class TotSeriesDataManager {
      * @return
      */
     public boolean userIsLoged() {
-        return data.getLogedUser()!="";
+        return !"".equals(data.getLogedUser());
     }
 }

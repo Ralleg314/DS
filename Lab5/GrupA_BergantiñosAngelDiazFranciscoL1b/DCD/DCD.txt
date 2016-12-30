@@ -8,7 +8,7 @@ namespace java.util {
 }
 
 namespace Vista {
-    class Menu {
+    class TotSeries {
         + escriu(s : String) : void
         + escriu(int : i) : void
         + escriu(float : f) : void
@@ -19,7 +19,7 @@ namespace Vista {
 }
 
 namespace Controlador {
-    class TotSeries {
+    class TotSeriesDataManager {
         + registrarUsuari(nom : String, nacionalitat : String, naixament : Date, contrassenya : String) : void
         +visualitzarCataleg()
         +visualitzarTemporades(s:Int) : list<String>
@@ -40,8 +40,6 @@ namespace Model {
     }
     
     abstract class Usuari{
-        +veureCataleg()
-        +veureCapitolValorat(valorats : list<Episodi>)
     }
     
     class Usuari_registrat {
@@ -159,10 +157,10 @@ namespace Model {
     Artista <|-- Director
 }
 
-Controlador.TotSeries "1" <->  Model.Dades : Consta
-Controlador.TotSeries "-ctrl 1" <-> "-menu 1" Vista.Menu : Veu 
-Model.Dades -> Vista.Menu : escriu
-java.util.Timer "1" <- "-timer 1" Controlador.TotSeries : Usa
+Controlador.TotSeriesDataManager "1" <->  Model.Dades : Consta
+Controlador.TotSeriesDataManager "-ctrl 1" <-> "-menu 1" Vista.TotSeries : Veu 
+Model.Dades -> Vista.TotSeries : escriu
+java.util.Timer "1" <- "-timer 1" Controlador.TotSeriesDataManager : Usa
 java.util.Timer "1" -> "-timer 1" Model.Usuari_registrat : Cobra
-java.util.Scanner "-sc 1" <- "1" Vista.Menu : Usa 
+java.util.Scanner "-sc 1" <- "1" Vista.TotSeries : Usa 
 @enduml 
