@@ -5,7 +5,6 @@
  */
 package edu.ub.informatica.disseny.model;
 
-import edu.ub.informatica.disseny.totseries.Consola;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -59,7 +58,6 @@ public class Episodi {
     }
 
     private void reproduir() {
-        Consola.escriu("Reproduint: "+this.nom+"\n");
         this.estat.setState("REPRODUINT");
         try {
             Thread.sleep(5000);

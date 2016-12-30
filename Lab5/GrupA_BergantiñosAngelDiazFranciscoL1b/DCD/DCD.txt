@@ -51,6 +51,21 @@ namespace Controlador {
         +mostrarVists():ArrayList<String> 
         +userIsLoged():boolean
     }
+    
+    class TotSeriesXMLParser{
+        -dataManager: TotSeriesDataManager
+        +parse(nomFitxer:String)
+        +obtenirSeries(doc:Document)
+        +obtenirProductora(eSerie:Element ,  idSerie:String)
+        +obtenirArtistes(eSerie:Element, idSerie:String)
+        +obtenirTemporades(eSerie:Element, idSerie:String, i:int)
+        +obtenirEpisodis( eTemporada:Element, idSerie:String, i:int, j:int)
+        +obtenirValoracions(doc:Document)
+        +obtenirAdministradors(doc:Document) 
+        +obtenirClients(doc:Document)
+    }
+    
+    TotSeriesDataManager <-> TotSeriesXMLParser
 }
 namespace Model {
 
@@ -161,15 +176,15 @@ namespace Model {
     class Actor{
     }
     
-    Dades *-- Serie
-    Serie *-- Productora
-    Serie *-- Temporada
-    Serie *-- Artista
-    Temporada *-- Episodi
-    Episodi <--> Estat_episodi
+    Dades "1"*--"1...*" Serie
+    Serie "1" *-- "1...*" Productora
+    Serie "1" *-- "1...*" Temporada
+    Serie "1" *-- "1...*" Artista
+    Temporada "1" *-- "1...*" Episodi
+    Episodi "1" <--> "1" Estat_episodi
     
-    Dades *-- Usuari
-    Dades *-- Administrador
+    Dades "1" *--"1...*" Usuari
+    Dades "1" *--"1...*" Administrador
     Usuari <|-- Usuari_registrat
     Usuari <|-- Usuari_no_registrat
     Administrador --> Usuari_registrat : dona VIP

@@ -21,7 +21,7 @@ public class TotSeriesXMLParser {
 	/**
 	 * Data manager
 	 */
-	TotSeriesDataManager dataManager;
+	private TotSeriesDataManager dataManager;
 
 	/**
 	 * Constructor
