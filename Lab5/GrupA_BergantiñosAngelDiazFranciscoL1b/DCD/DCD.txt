@@ -4,39 +4,77 @@ skinparam classAttributeIconSize 0
 
 namespace java.util {
     class Timer
-    class Scanner
 }
 
 namespace Vista {
     class TotSeries {
-        + escriu(s : String) : void
-        + escriu(int : i) : void
-        + escriu(float : f) : void
-        +llegeixInt() :Int
-        +llegeixString() : String
-        +llegeixDataSistema() : Date
+        -instance : TotSeries
+        -dades :Dades
+        -cont:TotSeriesDataManager
+        -opt : ArrayList<String>
+        -place : int
+        -serie:int
+        -temporada:int
+        -episodi:int
+        -last:int
+        +RegisterActionPerformed(ActionEvent)
+        +LoginActionPerformed(ActionEvent)
+        +turnOffLogin()
+        +catalegValueChanged(ActionEvent)
+        +actualitzaLlista(llista:ArrayList<String>)
+        +actualitzaValorats()
+        +actualitzaVists()
+        +changeLogin()
     }
 }
 
 namespace Controlador {
     class TotSeriesDataManager {
-        + registrarUsuari(nom : String, nacionalitat : String, naixament : Date, contrassenya : String) : void
-        +visualitzarCataleg()
-        +visualitzarTemporades(s:Int) : list<String>
-        +visualitzarEpisodis(s:Int, t:Int) : list<String>
-        +reproduirEpisodis(s:Int, t:Int, ep: Int)
+        -instance:TotSeriesDataManager
+        -data:Dades
+        +obtenirDades(nomFitxer:String)
+        +crearSerie(String:id, String: title, String: desc)
+        +crearTemporada(String: numTemporada, String: numEpisodis, int: i)
+        +crearEpisodi(String :title, String: duration, String :idioma, String :description, String :data, int :i, int: j)
+        +crearArtista(String id, String nom, String tipus, String idSerie, String nacionalitat)
+        +crearProductora (String id, String nom, String idSerie)
+        +crearValoracio(String id, String client, String episodi, String puntuacio, String data)
+        +crearAdmin(String id, String nom, String usuari, String password)
+        +crearClient(String nom, String dni, String adreca, String usuari, String password, String vip)
+        +crearClient(String nom, String dni, String adreca, String usuari, String password)
+        +reproduirEpisodi(int s, int t, int ep)
+        +valorarEpisodi(int serie, int temporada, int episodi, int valoracio)
+        +mostratCataleg():ArrayList<String> 
+        +mostratTemporades(int s):ArrayList<String> 
+        +mostratEpisodis(int s, int t):ArrayList<String> 
+        +mostrarValorats():ArrayList<String> 
+        +mostrarVists():ArrayList<String> 
+        +userIsLoged():boolean
     }
 }
 namespace Model {
 
     class Dades{
-        +existeixUsuari(id : String)
-        +registrarUsuari(nom :  id : String, nacionalitat : String, naixament : Date, password : String)
-        +visualitzarCataleg()
+        -instance:Dades
+        -logedUser:String
+        +existeixUsuari(id : String):boolean
+        +posUsuari(id : String):int
+        +comprovarPassword(pos:int, pass:Sting):boolean
+        +visualitzarCataleg():ArrayList<String>
         +visualitzarValorats() : list<String>
+        +visualitzarVists() : list<String>
         +visualitzarTemporades(s:Int) : list<String>
         +visualitzarEpisodis(s:Int, t:Int) : list<String>
-        +reproduirEpisodis(s:Int, t:Int, ep: Int)
+        +reproduirEpisodi(s:Int, t:Int, ep: Int)
+        +valorarEpisodi(s:int,t:int,ep:int,val:int)
+        +crearSerie(id:String,title:String,desc:String)
+        +crearTemporada(String numTemporada, String numEpisodis, int i)
+        +crearEpisodi(String title, String duration, String idioma, String description, String data, int i, int j)
+        +afegirAdmin(String id, String nom, String usuari, String password)
+        +afegirArtista(String tipus, String id, String nom, String idSerie, String nacionalitat)
+        +afegirProductora(String id, String nom, String idSerie)
+        +registrarUsuari(nom :  id : String, nacionalitat : String, naixament : Date, password : String)
+        +registrarUsuari(String nom, String dni, String adreca, String usuari, String password)
     }
     
     abstract class Usuari{
@@ -53,7 +91,6 @@ namespace Model {
     }
     
     class Usuari_no_registrat{
-        +intentaRegistrar(ID : String) : boolean
     }
     
     class Administrador{
@@ -61,23 +98,12 @@ namespace Model {
         -usuari : String
         -contrasenya :String
         +ferVip(usuari : Usuari_registrat) : bool
-        +afegir(tipus : Sting) : bool
     }
-    
-    enum Afegir{
-        +afegirSerie(serie : Serie) : bool
-        +afegirTemporada(temporada : Temporada) : bool
-        +afegirEpisodi(episodi : Episodi) : bool
-        +afegirArtista(artista : Artista) : bool
-        +afegirProductora(productora : Productora) : bool
-    }
-    
     
     enum Estat_episodi{
-        -VIST : bool
-        -REPRODUINT : bool
-        -PENDENT : bool
-        +getEstatEpisodi() : bool
+        -estat: int
+        +getEstatEpisodi() : String
+        -setEstatEpisodi(estat:String)
     }
     
     class Episodi{
@@ -90,6 +116,8 @@ namespace Model {
         +reproduirEpisodi()
         +toString() : String
         +reproduir()
+        +updateValoracio()
+        +valorarEpisodi(val:Valoracio)
     }
     
     class Temporada{
@@ -98,6 +126,8 @@ namespace Model {
         +toString() : String
         +visualitzarEpisodis() : list<String>
         +reproduirEpisodis(ep: Int)
+        +valorarEpisodi(ep:int,val:int)
+        +afegirEpisodi(temp:episodi
     }
     
     class Productora{
@@ -111,9 +141,12 @@ namespace Model {
         -descripcio : String
         -temporades : Inintt
         +toString() : String
+        +afegirTemporada(temp:Temproada)
+        +afegirEpisodi(temp:Episodi, pos:int)
         +visualitzarTemporades() : list<String>
         +visualitzarEpisodis( t:Int) : list<String>
-        +reproduirEpisodis(t:Int, ep: Int)
+        +reproduirEpisodi(t:Int, ep: Int)
+        +valorarEpisodi(t:int, ep:int, val:Valoracio)
     }
     
     
@@ -137,21 +170,13 @@ namespace Model {
     
     Dades *-- Usuari
     Dades *-- Administrador
-    Dades *-- Episodi : Episodis per valoracio
     Usuari <|-- Usuari_registrat
     Usuari <|-- Usuari_no_registrat
     Administrador --> Usuari_registrat : dona VIP
-    Administrador --> Afegir
     
     Usuari_registrat --> Episodi : valora
     Usuari_registrat --> Episodi : visualitza
     Usuari_registrat <-> Estat_episodi : modifica
-    
-    Afegir --> Dades : afegeix serie
-    Afegir --> Serie : afegeix temporada
-    Afegir --> Temporada : afegeix episodi
-    Afegir --> Artista : afegeix artista
-    Afegir --> Productora : afegeix productora
     
     Artista <|-- Actor
     Artista <|-- Director
@@ -162,5 +187,4 @@ Controlador.TotSeriesDataManager "-ctrl 1" <-> "-menu 1" Vista.TotSeries : Veu
 Model.Dades -> Vista.TotSeries : escriu
 java.util.Timer "1" <- "-timer 1" Controlador.TotSeriesDataManager : Usa
 java.util.Timer "1" -> "-timer 1" Model.Usuari_registrat : Cobra
-java.util.Scanner "-sc 1" <- "1" Vista.TotSeries : Usa 
 @enduml 

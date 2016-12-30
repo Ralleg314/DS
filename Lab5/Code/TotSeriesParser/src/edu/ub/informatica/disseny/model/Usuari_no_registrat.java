@@ -11,12 +11,5 @@ package edu.ub.informatica.disseny.model;
  */
 public class Usuari_no_registrat extends Usuari{
 
-    /**
-     *
-     * @param ID
-     * @return
-     */
-    public static boolean intentaRegistrar(String ID){
-        return false;
-    }
+    
 }

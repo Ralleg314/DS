@@ -21,7 +21,6 @@ public class Dades {
     ArrayList<Usuari_registrat> usuaris;
     ArrayList<Administrador> administradors;
     ArrayList<Serie> series;
-    ArrayList<Episodi> episodis;
     ArrayList<Productora> productores;
     ArrayList<Artista> artistes;
     String logedUser;
@@ -33,7 +32,6 @@ public class Dades {
         usuaris=new ArrayList<>();
         administradors=new ArrayList<>();
         series=new ArrayList<>();
-        episodis=new ArrayList<>();
         productores=new ArrayList<>();
         artistes=new ArrayList<>();
         logedUser="";
@@ -135,20 +133,6 @@ public class Dades {
     
     /**
      *
-     */
-    @SuppressWarnings("empty-statement")
-    public void omplirEpisodis(){
-        for (Serie s: series){
-            for(Temporada t: s.getTemporades()){
-                for(Episodi e: t.getEps()){
-                    episodis.add(e);
-                };
-            } 
-        }
-    }
-    
-    /**
-     *
      * @return
      */
     public ArrayList<String> visualitzarValorats(){
@@ -244,7 +228,7 @@ public class Dades {
      * @param val
      */
     public void valorarEpisodi(int s, int t, int ep, int val){
-        if(this.getEstat(s,t,ep)=="VIST"){
+        if("VIST".equals(this.getEstat(s,t,ep))){
             series.get(s).valorarEpisodi(t, ep, new Valoracio(this.logedUser,val));
         }
     }
@@ -298,7 +282,6 @@ public class Dades {
             date = (new SimpleDateFormat("dd/mm/yyyy")).parse(data);
             Episodi temp=new Episodi(title,idioma,description,duration,date);
             this.series.get(i).afegirEpisodi(temp,j);
-            this.episodis.add(temp);
         } catch (ParseException ex) {
             Logger.getLogger(Dades.class.getName()).log(Level.SEVERE, null, ex);
         }

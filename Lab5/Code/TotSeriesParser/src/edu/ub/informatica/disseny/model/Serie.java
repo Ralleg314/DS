@@ -77,8 +77,8 @@ public class Serie {
         return this.temporades.get(t);
     }
 
-    void afegirEpisodi(Episodi temp, int j) {
-        this.temporades.get(j).afegirEpisodi(temp);
+    void afegirEpisodi(Episodi temp, int pos) {
+        this.temporades.get(pos).afegirEpisodi(temp);
     }
     
     /**
