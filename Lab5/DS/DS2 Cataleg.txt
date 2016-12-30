@@ -6,21 +6,23 @@ end legend
 
 actor Usuari as usuari
 activate usuari
+rnote over usuari
+    ArrayList<String> cataleg;
+end rnote
 
-participant ":Menu" as menu
-participant ":TotSeries" as TS
+participant ":TotSeries" as menu
+participant ":TotSeriesDataManager" as TS
 participant ":Dades" as dades
 participant "ser:Serie" as serie
-participant ":Consola" as consola
 
 usuari -> menu
 activate menu
 
 
-menu ->TS: visualitzarCataleg()
+menu ->TS: cataleg:=mostrarCataleg()
 activate TS
 
-TS -> dades: visualitzarCataleg()
+TS -> dades: cataleg:=visualitzarCataleg()
 activate dades
 loop ser in series
     |||
@@ -28,16 +30,14 @@ loop ser in series
     activate serie
     serie --> dades
     deactivate serie
-    dades -> consola : escriu(name)
-    activate consola
-    consola ---> dades 
-    deactivate consola
+    dades -> dades: add(name)
     |||
 end
 dades --> TS
 deactivate dades
 TS ---> menu 
 deactivate TS
+menu -> menu :actualitzaLlista(cataleg)
 menu --> usuari
 deactivate menu
 deactivate usuari

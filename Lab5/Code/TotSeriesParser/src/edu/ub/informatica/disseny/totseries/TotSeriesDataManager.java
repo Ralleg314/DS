@@ -209,7 +209,6 @@ public class TotSeriesDataManager {
     public void reproduirEpisodi(int s, int t, int ep){
         if("PENDENT".equals(data.getEstat(s, t, ep))){
             this.data.reproduirEpisodi(s, t, ep);
-            data.omplirVists();
         }
     }
 
@@ -222,7 +221,6 @@ public class TotSeriesDataManager {
      */
     public void valorarEpisodi(int serie, int temporada, int episodi, int valoracio) {
         this.data.valorarEpisodi(serie, temporada, episodi, valoracio);
-        data.omplirValorats();
     }
 
     /**

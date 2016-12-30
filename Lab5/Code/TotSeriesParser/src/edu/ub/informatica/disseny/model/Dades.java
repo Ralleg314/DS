@@ -20,7 +20,7 @@ public class Dades {
     private static Dades instance = null;
     ArrayList<Usuari_registrat> usuaris;
     ArrayList<Administrador> administradors;
-    ArrayList<Serie> series,valorats,vists;
+    ArrayList<Serie> series;
     ArrayList<Episodi> episodis;
     ArrayList<Productora> productores;
     ArrayList<Artista> artistes;
@@ -34,7 +34,6 @@ public class Dades {
         administradors=new ArrayList<>();
         series=new ArrayList<>();
         episodis=new ArrayList<>();
-        valorats=new ArrayList<>();
         productores=new ArrayList<>();
         artistes=new ArrayList<>();
         logedUser="";
@@ -57,14 +56,6 @@ public class Dades {
      */
     public ArrayList getSeries(){
         return series;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public ArrayList getValorats(){
-        return valorats;
     }
 
     /**
@@ -158,10 +149,11 @@ public class Dades {
     
     /**
      *
+     * @return
      */
-    public void omplirValorats(){
+    public ArrayList<String> visualitzarValorats(){
         ArrayList<Serie> temp=new ArrayList<>(series);
-        valorats = new ArrayList<>();
+        ArrayList<Serie> valorats = new ArrayList<>();
         int i,pos;
         float valAct,max;
         while(!temp.isEmpty()){
@@ -179,26 +171,20 @@ public class Dades {
             valorats.add(temp.get(pos));
             temp.remove(pos);
         }
+        ArrayList<String> temp2= new ArrayList<>();
+        for (Serie ep: valorats){
+            temp2.add(ep.getVal()+"    "+ep.toString());
+        }
+        return temp2;
     }
     
     /**
      *
      * @return
      */
-    public ArrayList<String> visualitzarValorats(){
-        ArrayList<String> temp= new ArrayList<>();
-        omplirValorats();
-        for (Serie ep: valorats){
-            temp.add(ep.getVal()+"    "+ep.toString());
-        }return temp;
-    }
-    
-    /**
-     *
-     */
-    public void omplirVists(){
+    public ArrayList<String> visualitzarVists(){
         ArrayList<Serie> temp=new ArrayList<>(series);
-        vists = new ArrayList<>();
+        ArrayList<Serie> vists = new ArrayList<>();
         int i,pos,max, valAct;
         while(!temp.isEmpty()){
             i=0;
@@ -215,18 +201,10 @@ public class Dades {
             vists.add(temp.get(pos));
             temp.remove(pos);
         }
-    }
-    
-    /**
-     *
-     * @return
-     */
-    public ArrayList<String> visualitzarVists(){
-        ArrayList<String> temp= new ArrayList<>();
-        omplirVists();
+        ArrayList<String> temp2= new ArrayList<>();
         for (Serie s: vists){
-            temp.add(s.getReproduccions()+"    "+s.toString());
-        }return temp;
+            temp2.add(s.getReproduccions()+"    "+s.toString());
+        }return temp2;
     }
     
     /**

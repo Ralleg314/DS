@@ -15,12 +15,13 @@ rnote over usuari
     String password 
     Date naixament 
     bool existeix
+    bool igual
 end rnote
 
-participant ":Menu" as menu
-participant ":TotSeries" as TS
+participant ":TotSeries" as menu
+participant ":TotSeriesDataManager" as TS
 participant ":Dades" as dades
-participant ":Usuari_registrat" as us 
+participant "us:Usuari_registrat" as us 
 
 usuari -> menu
 activate menu
@@ -37,11 +38,19 @@ opt op==1
     
     TS -> dades : existeix:=existeixUsuari(id)
     activate dades
+    loop us in usuaris && !igual
+        |||
+        dades -> us: igual:=equals(id)
+        activate us
+        us -->dades
+        deactivate us
+        |||
+    end
     dades ---> TS
     deactivate dades
     
     
-    opt existeix == False
+    opt !existeix
     
     TS -> dades : registrarUsuari(nom,id, nacionalitat, naixament, password)
     activate dades
@@ -49,21 +58,12 @@ opt op==1
     activate us
     us ---> dades : Usuari_registrat
     deactivate us
+    dades -> dades : add(usuari_registrat)
     dades ---> TS
     deactivate dades
     TS ---> menu
     deactivate TS
     menu ---> usuari
-    
-    else
-    
-    activate TS
-    TS ---> menu
-    deactivate TS
-    menu -> menu : escriu("L'usuari ja existeix")
-    menu ---> usuari
-    deactivate menu
-    deactivate usuari
     end
     |||
 end
